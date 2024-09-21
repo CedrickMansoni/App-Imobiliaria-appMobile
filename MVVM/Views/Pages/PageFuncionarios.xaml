@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarios"
+             BackgroundColor="#f0f2f5"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel"
+             NavigationPage.HasNavigationBar="False">
+
+<ContentPage.BindingContext>
+    <vm:FuncionarioViewModel/>
+</ContentPage.BindingContext>
+
+<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cadastrar funcionário" IconImageSource="add" Order="Primary" Command="{Binding CadFuncCommand}"/>
+</ContentPage.ToolbarItems>
+
+<ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
+    <StackLayout>
+        <CollectionView ItemsSource="{Binding Model}"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="10"> 
+                        <Border StrokeShape="RoundRectangle 5"
+                            BackgroundColor="#fff"
+                            StrokeThickness="0"
+                            Padding="10">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Dados.Nome, StringFormat= 'Nome: {0}'}"
+                                        TextColor="#0c1b2c"
+                                        FontSize="18"
+                                        FontFamily="font06"/>
+                                    <Label Text="{Binding Dados.Telefone, StringFormat='Telefone: {0}'}"
+                                        TextColor="#0c1b2c"
+                                        FontSize="18"
+                                        FontFamily="font06"/>
+                                    <Label Text="{Binding UserType, StringFormat='Nível: {0}'}"
+                                        TextColor="#0c1b2c"
+                                        FontSize="18"
+                                        FontFamily="font06"/>
+                                    <Label Text="{Binding Mensagem, StringFormat='Província: {0}'}"
+                                        TextColor="#0c1b2c"
+                                        FontSize="18"
+                                        FontFamily="font06"/>
+                                    <Label Text="{Binding Estado, StringFormat='Estado: {0}'}"
+                                        TextColor="#0c1b2c"
+                                        FontSize="18"
+                                        FontFamily="font06"/>
+                                </StackLayout>
+                                <Border HorizontalOptions="End"
+                                    VerticalOptions="End"
+                                    BackgroundColor="#0c1b2c"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 45">
+                                    <Image Source="edit"
+                                        HeightRequest="25"
+                                        WidthRequest="25" 
+                                        VerticalOptions="EndAndExpand"
+                                        HorizontalOptions="End"
+                                        Margin="5">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Border>
+                            </StackLayout>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

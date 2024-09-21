@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageZonas"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ZonasViewModel"
+             BackgroundColor="#f0f2f5"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <vm:PaisViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cadastrar país" Order="Secondary" Command="{Binding CadastrarPaisCommand}"/>
+        <ToolbarItem Text="Cadastrar província" Order="Secondary" Command="{Binding CadastrarProvinciaCommand}"/>
+        <ToolbarItem Text="Cadastrar município" Order="Secondary" Command="{Binding CadastrarMunicipioCommand}"/>
+        <ToolbarItem Text="Cadastrar bairro" Order="Secondary" Command="{Binding CadastrarBairroCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Grid VerticalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding PaisLista}"
+                VerticalOptions="CenterAndExpand"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>                        
+                        <Grid HorizontalOptions="FillAndExpand"
+                            Padding="10"
+                            Margin="0,0" 
+                            VerticalOptions="Center"
+                            MaximumWidthRequest="360">
+                            <Border BackgroundColor="#fff"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="5"
+                                StrokeThickness="0">
+                               <StackLayout>
+                                <Label Text="{Binding Pais.NomePais}"
+                                    VerticalOptions="Start"
+                                    FontSize="19"
+                                    FontAttributes="Bold"
+                                    FontFamily="font06"
+                                    TextColor="#0c1b2c"/>
+                                <Border HeightRequest="1"
+                                    Stroke="#e6e6e6"
+                                    HorizontalOptions="FillAndExpand"/>
+                                <StackLayout VerticalOptions="CenterAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Províncias"
+                                        HorizontalOptions="StartAndExpand"
+                                        FontSize="19"
+                                        FontFamily="font03"
+                                        TextColor="#0c1b2c"
+                                        Margin="2"/>
+                                        
+                                        <Label Text="{Binding TotalProvincia}"
+                                            FontAttributes="Bold"
+                                            FontSize="20"
+                                            FontFamily="font06"
+                                            TextColor="#0c1b2c"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Municípios"
+                                            HorizontalOptions="StartAndExpand"
+                                            FontSize="19"
+                                            FontFamily="font03"
+                                            TextColor="#0c1b2c"
+                                            Margin="2"/>
+                                        
+                                        <Label Text="{Binding TotalMunicipio}"
+                                            FontAttributes="Bold"
+                                            FontSize="20"
+                                            FontFamily="font06"
+                                            TextColor="#0c1b2c"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Bairros"
+                                            HorizontalOptions="StartAndExpand"
+                                            FontSize="19"
+                                            FontFamily="font03"
+                                            TextColor="#0c1b2c"
+                                            Margin="2"/>
+                                        
+                                        <Label Text="{Binding TotalBairro}"
+                                            FontAttributes="Bold"
+                                            FontSize="20"
+                                            FontFamily="font06"
+                                            TextColor="#0c1b2c"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout> 
+                            </Border>                            
+                        </Grid>  
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                        <Image Source="carregar.gif"
+                            IsAnimationPlaying="True"
+                            WidthRequest="100"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>            
+        </Grid>
+    </StackLayout>
+</ContentPage>
+

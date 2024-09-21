@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarioCad"
+             NavigationPage.HasNavigationBar="True"
+             BackgroundColor="#f0f2f5"
+             Title="Novo funcionário">
+
+    <ContentPage.Resources>
+        <Style TargetType="Border">
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="FillAndExpand">
+        <ScrollView VerticalOptions="FillAndExpand">
+            <StackLayout>
+               <Grid VerticalOptions="Start">
+                    <Image Source="addemployee"/>
+                    <StackLayout BackgroundColor="#454545" Opacity=".4"/>
+                </Grid>
+                <StackLayout VerticalOptions="CenterAndExpand"
+                    TranslationY="-50">
+                    <StackLayout Padding="15"
+                        Spacing="10"
+                        VerticalOptions="FillAndExpand"
+                        MaximumWidthRequest="400">
+                        
+                        <Grid>                    
+                            <Border Padding="5, -15"
+                                Margin="5"
+                                StrokeShape="RoundRectangle 5">
+                                <Entry Placeholder="Nome do funcionário"
+                                    x:Name="txtNome"
+                                    TextChanged="Entry_TextChanged"
+                                    FontSize="18"
+                                    ClearButtonVisibility="WhileEditing"
+                                    HeightRequest="70"
+                                    Text="{Binding Funcionario_.Nome}"/>
+                            </Border>
+                            <Label Text="Nome"
+                                x:Name="lblNome"                        
+                                BackgroundColor="#f0f2f5"
+                                HeightRequest="20"
+                                WidthRequest="45"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                TranslationX="15"
+                                TranslationY="-5"/>
+                        </Grid>
+                        <Grid>                    
+                            <Border Padding="5, -15"
+                                Margin="5"
+                                StrokeShape="RoundRectangle 5">
+                                <Entry Placeholder="Telefone"
+                                    x:Name="txtTelefone"
+                                    TextChanged="Entry_TextChanged"
+                                    Keyboard="Numeric"
+                                    FontSize="18"
+                                    ClearButtonVisibility="WhileEditing"
+                                    HeightRequest="70"
+                                    Text="{Binding Funcionario_.Telefone}"/>
+                            </Border>
+                            <Label Text="Telefone"
+                                x:Name="lblTelefone"
+                                BackgroundColor="#f0f2f5"
+                                HeightRequest="20"
+                                WidthRequest="65"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                TranslationX="15"
+                                TranslationY="-5"/>
+                        </Grid>
+                        <Grid>                    
+                            <Border Padding="5, -15"
+                                Margin="5"
+                                StrokeShape="RoundRectangle 5">
+                                <Entry Placeholder="Email"
+                                    x:Name="txtEmail"
+                                    TextChanged="Entry_TextChanged"
+                                    ClearButtonVisibility="WhileEditing"
+                                    FontSize="18"
+                                    HeightRequest="70"
+                                    Text="{Binding Funcionario_.Email}"/>
+                            </Border>
+                            <Label Text="Email"
+                                x:Name="lblEmail"
+                                BackgroundColor="#f0f2f5"
+                                HeightRequest="20"
+                                WidthRequest="40"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                TranslationX="15"
+                                TranslationY="-5"/>
+                        </Grid>                
+                        <Grid>                    
+                            <Border Padding="5, -15"
+                                Margin="5"
+                                StrokeShape="RoundRectangle 5">
+                                <Picker Title="Nível de acesso"
+                                    FontSize="18"
+                                    HeightRequest="70"
+                                    ItemsSource="{Binding Niveis}"
+                                    ItemDisplayBinding="{Binding NivelAcesso}"
+                                    SelectedItem="{Binding NivelSelected}"/>
+                            </Border>
+                            <Label Text="Nível de acesso"
+                                BackgroundColor="#f0f2f5"
+                                HeightRequest="20"
+                                WidthRequest="105"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                TranslationX="15"
+                                TranslationY="-5"
+                                IsVisible="{Binding NivelVisibilidade}"/>
+                        </Grid>
+                        <Button 
+                            Text="Salvar"
+                            FontFamily="font03"
+                            FontSize="22"
+                            VerticalOptions="End"
+                            CornerRadius="5"
+                            BackgroundColor="#008000"
+                            HorizontalOptions="FillAndExpand" 
+                            Command="{Binding CadFuncCommand}"/>
+                    </StackLayout>
+                </StackLayout>   
+            </StackLayout>                      
+        </ScrollView>        
+    </StackLayout>
+</ContentPage>

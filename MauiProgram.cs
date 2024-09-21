@@ -27,8 +27,8 @@ public static class MauiProgram
 				fonts.AddFont("MIROLS.ttf",  "font06");
 				fonts.AddFont("Ruler Stencil Bold.ttf",  "font07");
 				fonts.AddFont("Ruler Stencil Light.ttf",  "font08");
-				fonts.AddFont("Ruler Stencil Regular.ttf",  "font09");
-				
+				fonts.AddFont("Ruler Stencil Regular.ttf",  "font09"); 
+				fonts.AddFont("StretchPro.otf",  "font10");
 			});
 
 #if DEBUG

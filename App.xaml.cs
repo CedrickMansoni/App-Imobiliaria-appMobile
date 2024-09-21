@@ -1,4 +1,12 @@
-﻿namespace App_Imobiliaria_appMobile;
+﻿using System;
+using System.Text;
+using System.Text.Json;
+using System.Collections.Generic;
+using System.Net.Http;
+using App_Imobiliaria_appMobile.MVVM.Views;
+using App_Imobiliaria_appMobile.MVVM.Views.ShellGerente;
+
+namespace App_Imobiliaria_appMobile;
 
 public partial class App : Application
 {
@@ -6,6 +14,8 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		MainPage = new ViewLogin();
+		//MainPage = new GerenteShell();
+		
 	}
 }
