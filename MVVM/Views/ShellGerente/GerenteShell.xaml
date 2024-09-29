@@ -23,23 +23,26 @@
 
     <ShellContent Title="Funcionários" Icon="employees" ContentTemplate="{DataTemplate pages:PageFuncionarios}" Route="funcionario"/>
 
+    <ShellContent Title="Leads" Icon="conexoes" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>
+
     <FlyoutItem Title="Imóveis" Icon="houses"
         Shell.TabBarTitleColor="#008000"
         Shell.TabBarForegroundColor = "#008000"
         Shell.TabBarUnselectedColor="#64ad9b"        
         Shell.TabBarBackgroundColor="#e6e6e6">
         
+        
+        <Tab Title="Cadastrar" Icon="cadastrar">
+            <ShellContent Title="Cadastrar imóvel" ContentTemplate="{DataTemplate pages:PageImovel}" Route="imovel"/>   
+        </Tab>          
+        <Tab Title="Fotos" Icon="dropbox">
+            <ShellContent Title="Fotos" ContentTemplate="{DataTemplate pages:PageTirarFoto}" Route="foto"/>   
+        </Tab>  
         <Tab Title="Publicar" Icon="upload">
             <ShellContent Title="Publicar imóvel" ContentTemplate="{DataTemplate pages:PublicarImovel}" Route="publicar"/>  
         </Tab>
-        <Tab Title="publicados" Icon="category">
-            <ShellContent Title="Imóveis publicados" ContentTemplate="{DataTemplate pages:TipoImovel}" Route="tipoimovel"/>   
-        </Tab>   
-        <Tab Title="Leads" Icon="leads">
-            <ShellContent Title="Leads" ContentTemplate="{DataTemplate pages:TipoImovel}" Route="tipoimovel"/>   
-        </Tab> 
-        <Tab Title="Clientes" Icon="clientes">
-            <ShellContent Title="Clientes" ContentTemplate="{DataTemplate pages:TipoImovel}" Route="tipoimovel"/>   
+        <Tab Title="Solicitações" Icon="correio">
+            <ShellContent Title="Solicitações de clientes" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
         </Tab>     
     </FlyoutItem>
 
@@ -53,11 +56,14 @@
             <ShellContent Title="Funcionário" ContentTemplate="{DataTemplate pages:PublicarImovel}" Route="publicar"/>  
         </Tab>
         <Tab Title="Clientes" Icon="clientes">
-            <ShellContent Title="Clientes" ContentTemplate="{DataTemplate pages:TipoImovel}" Route="tipoimovel"/>   
+            <ShellContent Title="Clientes" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
         </Tab>   
+        <Tab Title="Fotos" Icon="dropbox">
+            <ShellContent Title="Fotos" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
+        </Tab> 
         <Tab Title="Desenvolvedores" Icon="dev">
-            <ShellContent Title="Desenvolvedores" ContentTemplate="{DataTemplate pages:TipoImovel}" Route="tipoimovel"/>   
-        </Tab>              
+            <ShellContent Title="Desenvolvedores" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
+        </Tab>             
     </FlyoutItem>
 </Shell>
 

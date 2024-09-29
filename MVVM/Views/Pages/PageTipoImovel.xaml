@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageTipoImovel"
+             BackgroundColor="#f0f2f4"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel"
+             Title="Tipo de imóvel">
+    
+    <ContentPage.BindingContext>
+        <vm:TipoImovelViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Actualizar página" Command="{Binding ListarTiposCommand}"/>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding TipoImovel}"
+                x:Name="colecao"
+                VerticalOptions="CenterAndExpand"
+                SelectedItem="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding = "10,0"> 
+                            <Border StrokeShape="RoundRectangle 5"
+                                Padding="10"
+                                BackgroundColor="#fff"
+                                Margin="5">
+                                <StackLayout Orientation="Horizontal"
+                                    Spacing="10">
+                                    <Label Text="{Binding TipoImovelDesc}"
+                                        FontSize="22"
+                                        FontFamily="font03"
+                                        HorizontalOptions="StartAndExpand"
+                                        VerticalOptions="CenterAndExpand"/>
+                                    <Image Source="update" HeightRequest="30" Margin="5">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.ActualizarTipoCommand, Source={x:Reference Name = colecao}}" CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image Source="delete" HeightRequest="30" Margin="5">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.DeletarTipoCommand, Source={x:Reference Name = colecao}}" CommandParameter="{Binding .}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout HeightRequest="65"
+                Padding="15,0,0,0"
+                Orientation="Horizontal"
+                VerticalOptions="End"
+                BackgroundColor="#fff">
+                <Entry Placeholder="Tipo de imóvel"
+                    FontFamily="font03"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    FontSize="25"
+                    Text="{Binding _TipoImovel.TipoImovelDesc}"/>
+                <Button Text="Add"
+                    CornerRadius="0"
+                    WidthRequest="80"
+                    Command="{Binding CadastrarTipoImovel}"
+                    BackgroundColor="#008000"
+                    Margin="10,0,0,0"/>
+            </StackLayout>        
+        </StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0f0f0f" Opacity=".4" IsVisible="{Binding ActivityLoginPage}"/>
+        <Image Source="carregar" 
+            HeightRequest="100" 
+            IsAnimationPlaying="{Binding ActivityLoginPage}" 
+            IsVisible="{Binding ActivityLoginPage}"/>
+        
+    </Grid>
+    
+
+</ContentPage>

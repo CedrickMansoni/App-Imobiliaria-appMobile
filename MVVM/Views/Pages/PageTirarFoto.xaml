@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageTirarFoto"
+             xmlns:swipe="clr-namespace:Plugin.Maui.SwipeCardView;assembly=Plugin.Maui.SwipeCardView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="#f0f2f5">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding ActualizarToken}" Order="Secondary" Text="Actualizar Token"/>
+    </ContentPage.ToolbarItems>
+    
+    <Grid VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand" Padding="5" IsEnabled="{Binding ViewPage}">       
+            <Border VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" StrokeShape="RoundRectangle 2">
+                <CollectionView ItemsSource="{Binding Fotos}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0, 0,0,2" BackgroundColor="#f0f2f5">
+                                <Image Source="{Binding ImgSource}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <StackLayout VerticalOptions="Center">
+                            <Image Source="emptygalery"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Border>
+            <Border HorizontalOptions="CenterAndExpand" VerticalOptions="End" Margin="5" StrokeShape="RoundRectangle 5">
+                <StackLayout Orientation="Horizontal"
+                    Spacing="55">
+                    <Image Source="fotos" HeightRequest="50" Margin="10">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AbrirGaleriaCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="camera" HeightRequest="50" Margin="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AbrirCameraCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image Source="enviar" HeightRequest="50" Margin="10">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EnviarFotoCommand}"/>
+                        </Image.GestureRecognizers>    
+                    </Image> 
+                </StackLayout>
+            </Border>
+        </StackLayout>
+        <Image Source="carregar" IsAnimationPlaying="True" IsVisible="{Binding ProgressBar}" HeightRequest="200"/>
+    </Grid>
+    
+
+</ContentPage>

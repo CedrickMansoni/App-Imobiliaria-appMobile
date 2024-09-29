@@ -10,6 +10,7 @@ using App_Imobiliaria_appMobile.MVVM.Models;
 using App_Imobiliaria_appMobile.MVVM.Views.Pages;
 using App_Imobiliaria_appMobile.MVVM.Models.Usuarios;
 using App_Imobiliaria_appMobile.MVVM.Models.localizacao;
+using App_Imobiliaria_appMobile.MVVM.ViewModels.Hash;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel;
 
@@ -80,6 +81,7 @@ public class CadFuncViewModel : BindableObject
 
     public ICommand CadFuncCommand => new Command(async ()=> 
     {
+        
         try
         {
             List<string> nomePaises = new List<string>();
@@ -131,11 +133,10 @@ public class CadFuncViewModel : BindableObject
                         break;
                     }
                 }
-
+                ButtonClicked();
                 Funcionario_.Estado = "Activo";
-                Funcionario_.Senha = new Random().Next(1000, 9000).ToString();
-
-
+                string senha = new Random().Next(1000, 9000).ToString();
+                Funcionario_.Senha = new HashPassword().CriptografarSenha(senha);
 
                 var url = $"{UrlBase.UriBase.URI}cadastrar/funcionario";
                 string json = JsonSerializer.Serialize<Funcionario>(Funcionario_, option);
@@ -149,7 +150,7 @@ public class CadFuncViewModel : BindableObject
                         if (Sms.Default.IsComposeSupported)
                         {
                             string[] recipients = new[] { $"{Funcionario_.Telefone}" };
-                            string text = $"Olá {Funcionario_.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Funcionario_.Telefone}, Senha: {Funcionario_.Senha}. Por favor, altere sua senha após o primeiro login.";
+                            string text = $"Olá {Funcionario_.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Funcionario_.Telefone}, Senha: {senha}. Por favor, altere sua senha após o primeiro login.";
 
                             var message = new SmsMessage(text, recipients);
 
@@ -172,6 +173,7 @@ public class CadFuncViewModel : BindableObject
         {
             await App.Current.MainPage.DisplayAlert("Erro", $"{ex}","Ok");
         }
+        ButtonClicked();
     });
 
     private Pais pais {get; set;} = new Pais();
@@ -214,4 +216,28 @@ public class CadFuncViewModel : BindableObject
             OnPropertyChanged(nameof(NivelVisibilidade));
         }
     }   
+
+    /*  Propiedade para Desabilitar e Habilitar a página de login durante o processamento de dados */
+    private bool enableLoginPage = true;
+    public bool EnableLoginPage {
+        get => enableLoginPage;
+        set {
+            enableLoginPage = value;
+            OnPropertyChanged(nameof(EnableLoginPage));
+        }
+    }
+    /* Propriedade para mostrar e activar a barra de carregamento */
+    private bool activityLoginPage = false;
+    public bool ActivityLoginPage {
+        get => activityLoginPage;
+        set {
+            activityLoginPage = value;
+            OnPropertyChanged(nameof(ActivityLoginPage));
+        }
+    }
+
+    void ButtonClicked(){
+        EnableLoginPage = !EnableLoginPage;
+        ActivityLoginPage = !ActivityLoginPage;
+    }
 }

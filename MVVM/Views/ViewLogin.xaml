@@ -27,12 +27,17 @@
                     HeightRequest="110"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"/>
-                    <ActivityIndicator
+                   <!-- <ActivityIndicator
                         IsVisible="{Binding ActivityLoginPage}"
                         IsRunning="{Binding ActivityLoginPage}"
                         HeightRequest="120"
+                        WidthRequest="120"
                         Color="#ff8c00"
-                        />     
+                        />-->
+                    <Image 
+                        Source="carregar"    IsVisible="{Binding ActivityLoginPage}"
+                        HeightRequest="120" WidthRequest="120"  
+                        IsAnimationPlaying="True"/>     
                 </Grid>                       
             </Grid>             
             <Label  Margin="2"
@@ -45,7 +50,7 @@
                 FontFamily="font06"
             />
             <Label Text="IMOBILIÁRIA - APP"
-                TextColor="#000"
+                TextColor="#008000"
                 HorizontalOptions="Center"
                 FontFamily="font03"
                 FontSize="20"/>

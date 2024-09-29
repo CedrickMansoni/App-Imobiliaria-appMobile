@@ -28,5 +28,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+
+	<key>NSCameraUsageDescription</key>
+	<string>Conceder permisão para que a aplicação acesse a camera do dispositivo</string>
+	
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Conceder permisão para que a aplicação acesse a galeria do dispositivo</string>
 </dict>
 </plist>

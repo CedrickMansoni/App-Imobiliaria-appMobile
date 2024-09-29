@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#f0f2f5"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageCriarContaProprietario"
+             Title="Criar Conta - Proprietário">
+    
+    <ScrollView>
+        <Grid VerticalOptions="FillAndExpand">
+            <StackLayout VerticalOptions="FillAndExpand" IsEnabled="{Binding EnableLoginPage}">
+                <Grid VerticalOptions="Start"
+                    BackgroundColor="#f2f4f6">
+                    <Image Source="erroimg" HeightRequest="90"/>
+                    <Image>
+                        <Image.Source>
+                            <UriImageSource Uri="https://i.ibb.co/tPk29P2/blog-ibs-mfiles-contrato-financeiro.jpg"
+                            CacheValidity="24:00:00:00" />
+                        </Image.Source>
+                    </Image>
+                    <StackLayout BackgroundColor="#454545" Opacity=".4"/>
+                </Grid>
+            <StackLayout VerticalOptions="CenterAndExpand"
+                TranslationY="-15">
+                <StackLayout Padding="15"
+                    Spacing="10"
+                    VerticalOptions="FillAndExpand"
+                    MaximumWidthRequest="400">
+                        
+                    <Grid>                    
+                        <Border Padding="5, -15"
+                            Margin="5"
+                            StrokeShape="RoundRectangle 5">
+                            <Entry Placeholder="Nome do cliente"
+                                x:Name="txtNome"
+                                TextChanged="Entry_TextChanged"
+                                FontSize="18"
+                                ClearButtonVisibility="WhileEditing"
+                                HeightRequest="70"
+                                Text="{Binding Cliente.Nome}"/>
+                        </Border>
+                        <Label Text="Nome"
+                            x:Name="lblNome"                        
+                            BackgroundColor="#f0f2f5"
+                            HeightRequest="20"
+                            WidthRequest="45"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start"
+                            TranslationX="15"
+                            TranslationY="-5"
+                            IsVisible="False"/>
+                    </Grid>
+                    <Grid>                    
+                        <Border Padding="5, -15"
+                            Margin="5"
+                            StrokeShape="RoundRectangle 5">
+                            <Entry Placeholder="Telefone"
+                                x:Name="txtTelefone"
+                                TextChanged="Entry_TextChanged"
+                                Keyboard="Numeric"
+                                FontSize="18"
+                                ClearButtonVisibility="WhileEditing"
+                                HeightRequest="70"
+                                Text="{Binding Cliente.Telefone}"/>
+                        </Border>
+                        <Label Text="Telefone"
+                            x:Name="lblTelefone"
+                            BackgroundColor="#f0f2f5"
+                            HeightRequest="20"
+                            WidthRequest="65"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start"
+                            TranslationX="15"
+                            TranslationY="-5"
+                            IsVisible="False"/>
+                    </Grid>
+                    <Grid>                    
+                        <Border Padding="5, -15"
+                            Margin="5"
+                            StrokeShape="RoundRectangle 5">
+                            <Entry Placeholder="Email"
+                                x:Name="txtEmail"
+                                TextChanged="Entry_TextChanged"
+                                ClearButtonVisibility="WhileEditing"
+                                FontSize="18"
+                                HeightRequest="70"
+                                Text="{Binding Cliente.Email}"/>
+                        </Border>
+                        <Label Text="Email"
+                            x:Name="lblEmail"
+                            BackgroundColor="#f0f2f5"
+                            HeightRequest="20"
+                            WidthRequest="40"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start"
+                            TranslationX="15"
+                            TranslationY="-5"
+                            IsVisible="False"/>
+                    </Grid>             
+                    <Button 
+                        Text="Salvar"
+                        FontFamily="font03"
+                        FontSize="22"
+                        VerticalOptions="End"
+                        CornerRadius="5"
+                        BackgroundColor="#008000"
+                        HorizontalOptions="FillAndExpand" 
+                        Command="{Binding CadClienteCommand}"/>
+                </StackLayout>
+            </StackLayout>  
+        </StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0f0f0f" Opacity=".4" IsVisible="{Binding ActivityLoginPage}"/>
+        <Image Source="carregar" 
+            HeightRequest="100" 
+            IsAnimationPlaying="{Binding ActivityLoginPage}" 
+            IsVisible="{Binding ActivityLoginPage}"/>
+        </Grid>
+        
+    </ScrollView>
+    
+</ContentPage>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using DotNet.Meteor.HotReload.Plugin;
+using Plugin.Maui.SwipeCardView;
 
 namespace App_Imobiliaria_appMobile;
 
@@ -10,6 +11,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseSwipeCardView()
 			#if DEBUG
             .EnableHotReload()
 			#endif

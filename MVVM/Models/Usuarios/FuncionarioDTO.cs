@@ -9,4 +9,6 @@ public class FuncionarioDTO : Usuario
     public int IdProvincia { get; set; }
 
     public int Nivel { get; set; } 
+
+    public string Avatar { get; set; } = string.Empty;
 }

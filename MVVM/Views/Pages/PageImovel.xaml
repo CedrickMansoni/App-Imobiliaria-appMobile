@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#f0f2f5"             
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovel"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobile"
+             NavigationPage.HasNavigationBar="False">
+    
+    <ContentPage.BindingContext>
+        <vm:ImovelViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout VerticalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="CenterAndExpand"
+            Padding="20"
+            Spacing="10">
+            <Border StrokeShape="RoundRectangle 5">
+                <Button Text="Cadastrar imóvel"
+                    BackgroundColor="#008000"
+                    FontFamily="font06"
+                    FontSize="18"
+                    Command="{Binding CadastrarImovelCommand}"/>
+            </Border>
+            <Border StrokeShape="RoundRectangle 5">
+                <Button Text="Cadastrar tipo de imóvel"
+                    BackgroundColor="#008000"
+                    FontFamily="font06"
+                    FontSize="18"
+                    Command="{Binding CadastrarTipoImovelCommand}"/>
+            </Border>
+            <Border StrokeShape="RoundRectangle 5">
+                <Button Text="Cadastrar proprietário"
+                    BackgroundColor="#008000"
+                    FontFamily="font06"
+                    FontSize="18"
+                    Command="{Binding CadastrarProprietario}"/>
+            </Border>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
