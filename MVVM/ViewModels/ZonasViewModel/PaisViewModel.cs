@@ -13,7 +13,7 @@ namespace App_Imobiliaria_appMobile.MVVM.ViewModels.ZonasViewModel;
 
 public class PaisViewModel : BindableObject
 {
-     HttpClient client;
+    HttpClient client;
     JsonSerializerOptions options;
     public PaisViewModel()
     {

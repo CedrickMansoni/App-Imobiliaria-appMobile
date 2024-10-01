@@ -20,17 +20,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 
-				fonts.AddFont("Angels.ttf", "font01");
-				fonts.AddFont("MIROLES.ttf", "font02");
-				fonts.AddFont("Mondapick.ttf", "font03");
-				fonts.AddFont("celticmd.ttf",  "font04");
+				fonts.AddFont("Montserrat-Bold.ttf",  "font01");
+				fonts.AddFont("Montserrat-Light.ttf",  "font02");
+				fonts.AddFont("Montserrat-Medium.ttf",  "font03");
+				fonts.AddFont("Popping-Cute.ttf",  "font04");
+				fonts.AddFont("Poppins-Thin.ttf",  "font05");
 
-				fonts.AddFont("Birds.ttf",  "font05");
-				fonts.AddFont("MIROLS.ttf",  "font06");
-				fonts.AddFont("Ruler Stencil Bold.ttf",  "font07");
-				fonts.AddFont("Ruler Stencil Light.ttf",  "font08");
-				fonts.AddFont("Ruler Stencil Regular.ttf",  "font09"); 
-				fonts.AddFont("StretchPro.otf",  "font10");
 			});
 
 #if DEBUG

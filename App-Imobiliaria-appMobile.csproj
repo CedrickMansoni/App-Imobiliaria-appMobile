@@ -22,7 +22,7 @@
 		<Nullable>Disable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>App-Imobiliaria-appMobile</ApplicationTitle>
+		<ApplicationTitle>YULA-App</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.appimobiliariaappmobile</ApplicationId>

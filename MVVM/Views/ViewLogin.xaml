@@ -47,12 +47,12 @@
                 FontAttributes="Bold"
                 TranslationY="20"
                 HorizontalOptions="CenterAndExpand"
-                FontFamily="font06"
+                FontFamily="font01"
             />
             <Label Text="IMOBILIÁRIA - APP"
                 TextColor="#008000"
                 HorizontalOptions="Center"
-                FontFamily="font03"
+                FontFamily="font02"
                 FontSize="20"/>
             <StackLayout Padding="25"
                 MaximumWidthRequest="550"
@@ -125,6 +125,7 @@
                 StrokeShape="RoundRectangle 55 55 0 0">
                 <StackLayout>
                     <Label Text="Recuperar senha"
+                        FontFamily="font03"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"
                         TextColor="#f2f2f2"/>

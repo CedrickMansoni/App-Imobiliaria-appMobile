@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using App_Imobiliaria_appMobile.MVVM.Views.Pages;
+
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;
 
 public class ImovelViewModel : BindableObject

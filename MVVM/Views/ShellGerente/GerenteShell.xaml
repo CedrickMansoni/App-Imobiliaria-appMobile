@@ -33,7 +33,7 @@
         
         
         <Tab Title="Cadastrar" Icon="cadastrar">
-            <ShellContent Title="Cadastrar imóvel" ContentTemplate="{DataTemplate pages:PageImovel}" Route="imovel"/>   
+            <ShellContent Title="Imóvel" ContentTemplate="{DataTemplate pages:PageImovel}" Route="imovel"/>   
         </Tab>          
         <Tab Title="Fotos" Icon="dropbox">
             <ShellContent Title="Fotos" ContentTemplate="{DataTemplate pages:PageTirarFoto}" Route="foto"/>   
