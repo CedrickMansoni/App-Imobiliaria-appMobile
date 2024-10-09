@@ -20,6 +20,16 @@ public class TipoImovelViewModel : BindableObject
         _= ListarTiposImoveis();
     }
 
+    private readonly ImovelModelDTO imovelDados;
+    public TipoImovelViewModel(ImovelModelDTO imovelDados)
+    {
+        client = new HttpClient();
+        option = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+        _= ListarTiposImoveis();
+        this.imovelDados = imovelDados;
+    }
+
+    
     private ObservableCollection<TipoImovel> tipoImovel = new();
     public ObservableCollection<TipoImovel> TipoImovel
     {
@@ -61,6 +71,8 @@ public class TipoImovelViewModel : BindableObject
         await ListarTiposImoveis();
         ButtonClicked();
     } );
+
+   
 
     public ICommand CadastrarTipoImovel => new Command(async()=>
     {

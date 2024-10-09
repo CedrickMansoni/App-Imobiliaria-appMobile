@@ -2,11 +2,93 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageCadastrarImovel"
-             Title="PageCadastrarImovel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#f0f2f4"
+             Title="Cadastrar Imovel">
+    
+    <ScrollView VerticalOptions="FillAndExpand" MaximumWidthRequest="500">
+        <StackLayout VerticalOptions="CenterAndExpand">    
+            <Image Source="registro"
+                    IsAnimationPlaying="True"
+                    HeightRequest="150"
+                    TranslationY="-25"/>           
+            <StackLayout VerticalOptions="Center"
+                Padding="20, 5"
+                TranslationY="-60">
+                          
+                <Label 
+                    Text="Telefone do proprietário" 
+                    Style="{StaticResource rotulo}"/>
+                <Border Style="{StaticResource Key=minhaBorda}"
+                    Padding="5, -15">
+                   <StackLayout Orientation="Horizontal">
+                         <Entry 
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="75"
+                        FontSize="20"
+                        FontFamily="font03"
+                        ClearButtonVisibility="WhileEditing"
+                        Keyboard="Numeric"
+                        MaxLength="9"
+                        HorizontalOptions="FillAndExpand"
+                        Text="{Binding Telefone}"/>    
+                        <Image Source="getproprietario"
+                            HorizontalOptions="End"
+                            IsVisible="True"
+                            HeightRequest="40"
+                            IsAnimationPlaying="True"/>
+                    </StackLayout>    
+                </Border>
+                <Label 
+                    Text="Arrendamento / Venda" 
+                    Style="{StaticResource rotulo}"/>
+                <Border Style="{StaticResource Key=minhaBorda}">
+                    <Picker x:Name="picker"
+                        HeightRequest="75"
+                        FontSize="20"
+                        FontFamily="font03"
+                        SelectedItem="{Binding Publicidade}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                            <x:String>Arrendamento</x:String>
+                            <x:String>Venda</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>            
+                </Border>
+                 <Label 
+                    Text="Preço do imóvel" 
+                    Style="{StaticResource rotulo}"/>          
+                <Border Style="{StaticResource Key=minhaBorda}">
+                     <Entry 
+                        VerticalOptions="CenterAndExpand"
+                        HeightRequest="75"
+                        FontSize="20"
+                        FontFamily="font03"
+                        Text="{Binding Preco}"
+                        Keyboard="Numeric"/>                      
+                </Border>
+               <Label 
+                    Text="Descrição do imóvel" 
+                    Style="{StaticResource rotulo}"/>     
+                <Border Style="{StaticResource Key=minhaBorda}" Padding="0, -25" HeightRequest="180">
+                    <StackLayout Orientation="Horizontal" Padding="5,0">                                               
+                        <Editor
+                            Text="{Binding Descricao}" 
+                            Style="{StaticResource dados}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="195"/>
+                    </StackLayout>               
+                </Border> 
+                <Button Text="Salvar"
+                    Command="{Binding UploadImovelCommand}"
+                    FontSize="20"
+                    Margin="0,10"
+                    CornerRadius="2"
+                    FontFamily="font03"
+                    HeightRequest="55"
+                    BackgroundColor="#008000"/>               
+            </StackLayout>
+        </StackLayout>            
+    </ScrollView> 
 </ContentPage>

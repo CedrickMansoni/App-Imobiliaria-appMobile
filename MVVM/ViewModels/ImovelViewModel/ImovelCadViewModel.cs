@@ -23,8 +23,8 @@ public class ImovelCadViewModel : BindableObject
 
     }
 
-    private ObservableCollection<ImovelModelDTO> imovelDados = new();
-    public ObservableCollection<ImovelModelDTO> ImovelDados
+    private ImovelModelDTO imovelDados = new();
+    public ImovelModelDTO ImovelDados
     {
         get => imovelDados;
         set{
@@ -178,6 +178,72 @@ public class ImovelCadViewModel : BindableObject
     public ICommand GetRuaCommand => new Command<Rua>(async(Rua rua)=>
     {
         Rua = rua;
+    });
+
+    private TipoImovel tipoImovel = new();
+    public TipoImovel TipoImovel{
+        get => tipoImovel;
+        set{
+            tipoImovel = value;
+            OnPropertyChanged(nameof(TipoImovel));
+        }
+    }
+    public ICommand GotoTipoImovelCommand => new Command(async()=>
+    {
+        if (Pais.Id == 0)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Por favor selecione primeiro o país","Ok");
+        }else if(Provincia.Id == 0)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Por favor selecione a província antes","Ok");
+        }else if(Municipio.Id == 0)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Por favor selecione o município antes","Ok");
+        }
+        else if(Bairro.Id == 0)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Por favor selecione o bairro antes","Ok");
+        }
+        else if(Rua.Id == 0)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Por favor selecione a rua","Ok");
+        }
+        else
+        {
+            await App.Current.MainPage.Navigation.PushModalAsync(new PageImovelSelecionarTipo(this, true));
+        }
+    });
+    public ICommand GetTipoImovelCommand => new Command<TipoImovel>(async(TipoImovel tipoImovel)=>
+    {
+        TipoImovel = tipoImovel;
+    });
+
+    private NaturezaImovel naturezaImovel = new();
+    public NaturezaImovel NaturezaImovel{
+        get => naturezaImovel;
+        set{
+            naturezaImovel = value;
+            OnPropertyChanged(nameof(NaturezaImovel));
+        }
+    }
+
+    public ICommand AvancarCommand => new Command(async()=>
+    {
+        if (!string.IsNullOrEmpty(Rua.NomeRua) || !string.IsNullOrEmpty(TipoImovel.TipoImovelDesc) || !string.IsNullOrEmpty(NaturezaImovel.Caracteristica))
+        {
+            ImovelDados.Pais.Add(Pais);
+            ImovelDados.Provincia.Add(Provincia);
+            ImovelDados.Municipio.Add(Municipio);
+            ImovelDados.Bairro.Add(Bairro);
+            ImovelDados.Rua.Add(Rua);
+            ImovelDados.TipoImovel.Add(TipoImovel);
+            ImovelDados.NaturezaImovel.Add(NaturezaImovel);
+            await App.Current.MainPage.Navigation.PushAsync(new PageCadastrarImovel(ImovelDados));
+            
+        }else
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Informe os dados solicitados nos campos acima","Ok");
+        }
     });
 
 }

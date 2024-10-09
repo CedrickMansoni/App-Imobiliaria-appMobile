@@ -39,7 +39,7 @@
                 StrokeShape="RoundRectangle 5"
                 BackgroundColor="#fff">
                 <StackLayout Orientation="Horizontal"
-                    Spacing="55">
+                    Spacing="30">
                     <Image Source="fotos" HeightRequest="50" Margin="10">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AbrirGaleriaCommand}"/>

@@ -406,4 +406,77 @@ public class ImovelViewModelSelect : BindableObject
         Rua = new();   
     });
 
+
+    public ImovelViewModelSelect(ImovelCadViewModel cadImovel, bool tipo)
+    {
+        client = new HttpClient();
+        options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
+
+        this.cadImovel = cadImovel;       
+        _= CarregarTiposImoveis();
+        
+    }
+    private ObservableCollection<TipoImovel> listaTipoImovel = new();
+    public ObservableCollection<TipoImovel> ListaTipoImovel
+    {
+        get => listaTipoImovel;
+        set {
+            listaTipoImovel = value;
+            OnPropertyChanged(nameof(ListaTipoImovel));
+        }
+    }
+
+    private TipoImovel tipoImovel = new();
+    public TipoImovel TipoImovel
+    {
+        get => tipoImovel;
+        set {
+            tipoImovel = value;
+            OnPropertyChanged(nameof(TipoImovel));
+        }
+    }
+
+    private async Task CarregarTiposImoveis()
+    {
+        var url = $"{UrlBase.UriBase.URI}listar/tipo/imovel";
+        var response = await client.GetAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            using(var responseStream = await response.Content.ReadAsStreamAsync())
+            {
+                ListaTipoImovel = await JsonSerializer.DeserializeAsync<ObservableCollection<TipoImovel>>(responseStream, options);                
+            }
+        }
+    }
+
+     public ICommand TipoImovelSelecionadoCommand => new Command<TipoImovel>(async(TipoImovel tipoClique)=>
+    {
+        cadImovel.GetTipoImovelCommand.Execute(tipoClique);
+        await App.Current.MainPage.Navigation.PopModalAsync();
+    });
+
+    public ICommand CadastrarTipoImovelCommand => new Command(async ()=>
+    {  
+        if(string.IsNullOrEmpty(TipoImovel.TipoImovelDesc))
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Digite o tipo de imóvel","Ok");
+        }else
+        {
+            var url = $"{UrlBase.UriBase.URI}cadastrar/tipo/imovel";
+            string json = JsonSerializer.Serialize<TipoImovel>(TipoImovel, options);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
+            {
+                var messageResponse = await response.Content.ReadAsStringAsync();
+                await App.Current.MainPage.DisplayAlert("Mensagem de retorno", $"{messageResponse}","Ok"); 
+                await CarregarTiposImoveis();
+                TipoImovel = new();
+
+            }else
+            {
+                await App.Current.MainPage.DisplayAlert("Erro", $"Não foi possível cadastrar o tipo de imóvel {TipoImovel.TipoImovelDesc}","Ok"); 
+            }
+        }
+    });
 }

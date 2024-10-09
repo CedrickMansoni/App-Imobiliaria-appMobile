@@ -9,10 +9,9 @@ public class NaturezaImovel
 
     public int IdTipoImovel { get; set; }
 
-    public string Dimensao { get; set; } = string.Empty;
+    public string Caracteristica { get; set; } = string.Empty;
 
-    public string Tipologia { get; set; } = string.Empty;
+    public string Descricao { get; set; } = string.Empty;
 
-    public int IdLocalizacao { get; set; }
 }
 

@@ -20,4 +20,6 @@ public class Imovel
     public decimal Preco { get; set; }
 
     public int IdNaturezaImovel { get; set; }
+
+    public int IdLocalizacao { get; set; }
 }
