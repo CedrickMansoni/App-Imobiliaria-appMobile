@@ -6,14 +6,10 @@
              Title="Cadastrar Imovel">
     
     <ScrollView VerticalOptions="FillAndExpand" MaximumWidthRequest="500">
-        <StackLayout VerticalOptions="CenterAndExpand">    
-            <Image Source="registro"
-                    IsAnimationPlaying="True"
-                    HeightRequest="150"
-                    TranslationY="-25"/>           
+        <StackLayout VerticalOptions="CenterAndExpand">   
+                  
             <StackLayout VerticalOptions="Center"
-                Padding="20, 5"
-                TranslationY="-60">
+                Padding="20, 5">
                           
                 <Label 
                     Text="Telefone do proprietário" 
@@ -22,21 +18,36 @@
                     Padding="5, -15">
                    <StackLayout Orientation="Horizontal">
                          <Entry 
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="75"
+                                FontSize="20"
+                                FontFamily="font03"
+                                ClearButtonVisibility="WhileEditing"
+                                Keyboard="Numeric"
+                                MaxLength="9"
+                                HorizontalOptions="FillAndExpand"
+                                Text="{Binding Telefone}"/>                         
+                        <Image Source="getproprietario"
+                            HorizontalOptions="End"
+                            IsVisible="{Binding PesquisarProprietario}"
+                            HeightRequest="40"
+                            IsAnimationPlaying="{Binding PesquisarProprietario}"/>
+                    </StackLayout>                        
+                </Border>
+                <Label 
+                    Text="Nome do proprietário" 
+                    Style="{StaticResource rotulo}"/>
+                <Border Style="{StaticResource Key=minhaBorda}"
+                    Padding="5, -15"
+                    IsEnabled="False">
+                     <Entry 
                         VerticalOptions="CenterAndExpand"
                         HeightRequest="75"
                         FontSize="20"
                         FontFamily="font03"
                         ClearButtonVisibility="WhileEditing"
-                        Keyboard="Numeric"
-                        MaxLength="9"
                         HorizontalOptions="FillAndExpand"
-                        Text="{Binding Telefone}"/>    
-                        <Image Source="getproprietario"
-                            HorizontalOptions="End"
-                            IsVisible="True"
-                            HeightRequest="40"
-                            IsAnimationPlaying="True"/>
-                    </StackLayout>    
+                        Text="{Binding Nome}"/> 
                 </Border>
                 <Label 
                     Text="Arrendamento / Venda" 

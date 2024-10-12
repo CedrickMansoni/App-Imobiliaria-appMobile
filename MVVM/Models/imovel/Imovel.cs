@@ -7,15 +7,17 @@ public class Imovel
 {
     public int Id { get; set; }
 
+     public string Codigo { get; set; } = string.Empty;
+
     public int IdClienteProprietario { get; set; }
 
     public string Descricao { get; set; } = string.Empty;
 
     public DateTime DataSolicitacao { get; set; }
 
-    public string Estado { get; set; }
+    public string Estado { get; set; } = string.Empty;
 
-    public string TipoPublicidade { get; set; }
+    public int TipoPublicidade { get; set; } 
 
     public decimal Preco { get; set; }
 

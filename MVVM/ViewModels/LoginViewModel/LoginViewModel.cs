@@ -65,7 +65,11 @@ public class LoginViewModel : BindableObject
                         }
                         else if (data.UserType == "Gerente")
                         {
+                            await SecureStorage.Default.SetAsync("usuario_id", $"{data.Dados.Id}");
+                            await SecureStorage.Default.SetAsync("usuario_nome", $"{data.Dados.Nome}");
+
                             App.Current.MainPage = new GerenteShell();
+
                         }else
                         {
                             await App.Current.MainPage.DisplayAlert("Message", $"Página em construção","Ok");

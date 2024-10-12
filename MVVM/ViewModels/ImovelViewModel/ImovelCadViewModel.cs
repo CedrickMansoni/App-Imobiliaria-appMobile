@@ -223,7 +223,7 @@ public class ImovelCadViewModel : BindableObject
         get => naturezaImovel;
         set{
             naturezaImovel = value;
-            OnPropertyChanged(nameof(NaturezaImovel));
+            OnPropertyChanged(nameof(NaturezaImovel));            
         }
     }
 
@@ -237,7 +237,9 @@ public class ImovelCadViewModel : BindableObject
             ImovelDados.Bairro.Add(Bairro);
             ImovelDados.Rua.Add(Rua);
             ImovelDados.TipoImovel.Add(TipoImovel);
+            NaturezaImovel.IdTipoImovel = TipoImovel.Id;
             ImovelDados.NaturezaImovel.Add(NaturezaImovel);
+            
             await App.Current.MainPage.Navigation.PushAsync(new PageCadastrarImovel(ImovelDados));
             
         }else

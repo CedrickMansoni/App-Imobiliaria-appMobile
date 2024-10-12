@@ -15,8 +15,8 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		//MainPage = new ViewLogin();
-		MainPage = new GerenteShell();
+		MainPage = new ViewLogin();
+		//MainPage = new GerenteShell();
 		
 	}
 }

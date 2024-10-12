@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
-﻿using Dropbox.Api;
+using Dropbox.Api;
 using Dropbox.Api.Files;
 using App_Imobiliaria_appMobile.MVVM.Models.DropBox;
 
@@ -15,7 +15,7 @@ namespace App_Imobiliaria_appMobile.MVVM.ViewModels.DropBoxViewModel;
 public class TirarFotoViewModel : BindableObject
 {
     private string token = string.Empty;
-    string telefoneProprietario = string.Empty;
+    string codigoImovel = string.Empty;
     HttpClient client;
     JsonSerializerOptions options;
     public TirarFotoViewModel()
@@ -72,14 +72,14 @@ public class TirarFotoViewModel : BindableObject
 
     public ICommand EnviarFotoCommand => new Command (async()=>
 	{
-        telefoneProprietario = await App.Current.MainPage.DisplayPromptAsync("Informe o número de telefone do proprietário cadastrado no sistema.",
+        codigoImovel = await App.Current.MainPage.DisplayPromptAsync("Cole o código do imóvel gerado no sistema.",
                                     "DropBox",
                                     accept: "Enviar foto(s)",
                                     cancel: "Cancelar",
-                                    placeholder: "Telefone do proprietário",
+                                    placeholder: "Código do imóvel",
                                     maxLength: 9,
                                     keyboard: Keyboard.Numeric);
-        if (!string.IsNullOrEmpty(telefoneProprietario))
+        if (!string.IsNullOrEmpty(codigoImovel))
         {
             ChangeState();
             bool sending = false;
@@ -88,14 +88,14 @@ public class TirarFotoViewModel : BindableObject
                 try
                 {
                     var dbx = new DropboxClient(token);
-                    await UploadContent(dbx, "/content",$"{telefoneProprietario}-{DateTime.Now}.txt",$"Verificação da validade do Token - {DateTime.Now}");
+                    await UploadContent(dbx, "/content",$"{codigoImovel}-{DateTime.Now}.txt",$"Verificação da validade do Token - {DateTime.Now}");
                     foreach (var item in Fotos)
                     {                    
-                        await UploadFile(dbx,$"{item.ImgSource}",$"/{telefoneProprietario}");                
+                        await UploadFile(dbx,$"{item.ImgSource}",$"/{codigoImovel}");                
                     }
                     sending = true;
                     Fotos = new();
-                    telefoneProprietario = string.Empty;
+                    codigoImovel = string.Empty;
                 }
                 catch (System.Exception ex)
                 {

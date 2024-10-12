@@ -9,7 +9,7 @@ public class Publicacao
 
     public int IdCorretor { get; set; }
 
-    public int IdImovel { get; set; }
+    public string CodigoImovel { get; set; } = string.Empty;
 
     public DateTime DataPublicacao { get; set; }
 
