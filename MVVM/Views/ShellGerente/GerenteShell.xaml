@@ -38,11 +38,11 @@
         <Tab Title="Fotos" Icon="dropbox">
             <ShellContent Title="Fotos" ContentTemplate="{DataTemplate pages:PageTirarFoto}" Route="foto"/>   
         </Tab>  
-        <Tab Title="Publicar" Icon="upload">
-            <ShellContent Title="Publicar imóvel" ContentTemplate="{DataTemplate pages:PublicarImovel}" Route="publicar"/>  
+        <Tab Title="Pendentes" Icon="pendente">
+            <ShellContent Title="Pendentes" ContentTemplate="{DataTemplate pages:PublicarImovel}" Route="publicar"/>  
         </Tab>
-        <Tab Title="Solicitações" Icon="correio">
-            <ShellContent Title="Solicitações de clientes" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
+        <Tab Title="Publicados" Icon="upload">
+            <ShellContent Title="Imóveis publicados" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
         </Tab>     
     </FlyoutItem>
 

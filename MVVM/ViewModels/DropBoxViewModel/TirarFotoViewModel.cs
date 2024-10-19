@@ -1,4 +1,7 @@
 using System;
+using System.IO;
+using System.Net.Http.Headers;
+using System.Net.Http;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -6,9 +9,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Dropbox.Api;
-using Dropbox.Api.Files;
 using App_Imobiliaria_appMobile.MVVM.Models.DropBox;
+using App_Imobiliaria_appMobile.MVVM.Models.imovel;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.DropBoxViewModel;
 
@@ -21,22 +23,7 @@ public class TirarFotoViewModel : BindableObject
     public TirarFotoViewModel()
     {
         client = new HttpClient();
-        options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
-        _= PegarToken();
-    }
-
-    private async Task PegarToken()
-    {
-        var url = $"{UrlBase.UriBase.URI}pegar/token";
-        var response = await client.GetAsync(url);
-        if (response.IsSuccessStatusCode)
-        {
-            using(var responseStream = await response.Content.ReadAsStreamAsync())
-            {
-                var t = await JsonSerializer.DeserializeAsync<Token>(responseStream, options);
-                token = t.TokenAccess;                
-            }
-        }
+        options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};       
     }
 
     private ObservableCollection<FotosDropBox> fotos = new();
@@ -48,7 +35,6 @@ public class TirarFotoViewModel : BindableObject
 			OnPropertyChanged(nameof(Fotos));
 		}
 	}
-
 
     public ICommand AbrirCameraCommand => new Command(async()=>
     {
@@ -85,14 +71,14 @@ public class TirarFotoViewModel : BindableObject
             bool sending = false;
             if (Fotos.Count > 0)
             {
+                List<string> listaCaminhos = new();
                 try
-                {
-                    var dbx = new DropboxClient(token);
-                    await UploadContent(dbx, "/content",$"{codigoImovel}-{DateTime.Now}.txt",$"Verificação da validade do Token - {DateTime.Now}");
+                {                    
                     foreach (var item in Fotos)
-                    {                    
-                        await UploadFile(dbx,$"{item.ImgSource}",$"/{codigoImovel}");                
+                    {    
+                        listaCaminhos.Add(item.ImgSource);     
                     }
+                    await UploadFile(listaCaminhos, codigoImovel);
                     sending = true;
                     Fotos = new();
                     codigoImovel = string.Empty;
@@ -112,25 +98,56 @@ public class TirarFotoViewModel : BindableObject
                 await App.Current.MainPage.DisplayAlert("Erro","Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA","Ok");
             }
             ChangeState();
-        }
-        
+        } 
+               
 	});
 
-    private async Task UploadFile(DropboxClient dbx, string file, string folder)
-    {
-        var fileName = Path.GetFileName(file);
-        using( var fileStream = File.OpenRead(file))
-        {
-            var result = await dbx.Files.UploadAsync($"{folder}/{fileName}", WriteMode.Overwrite.Instance, body:fileStream);
-        }
-    }
+    private async Task UploadFile(List<string> caminhosImagens, string codigo)
+    {        
+        // URL da API
+            var url = $"{UrlBase.UriBase.URI}upload/fotos/{codigo}";
 
-    public async Task UploadContent(DropboxClient dbx, string folder, string file, string content)
+            using (var formData = new MultipartFormDataContent())
+            {
+                foreach (var caminhoImagem in caminhosImagens)
+                {
+                    var mimeType = ObterTipoMime(caminhoImagem);
+
+                    var imagemStream = new StreamContent(File.OpenRead(caminhoImagem));
+                    imagemStream.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+                    // Adicionando a imagem ao formulário
+                    formData.Add(imagemStream, "files", Path.GetFileName(caminhoImagem));
+                }
+                
+                // Enviando para a API
+                HttpResponseMessage response = await client.PostAsync(url, formData);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await App.Current.MainPage.DisplayAlert("Mensagem","Imagens enviadas com sucesso!","Ok");
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Mensagem","Falha ao enviar imagens: " + response.StatusCode, "Ok");
+                    System.Console.WriteLine($"{response.StatusCode}");
+                }
+            }       
+    }
+    // Método auxiliar para determinar o tipo MIME com base na extensão do arquivo
+    private string ObterTipoMime(string fileName)
     {
-        using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(content)))
+        var extension = Path.GetExtension(fileName).ToLowerInvariant();
+
+        return extension switch
         {
-            var result = await dbx.Files.UploadAsync($"{folder}/{file}", WriteMode.Overwrite.Instance,body:memoryStream);
-        }
+            ".jpg" or ".jpeg" => "image/jpeg",
+            ".png" => "image/png",
+            ".gif" => "image/gif",
+            ".bmp" => "image/bmp",
+            ".tiff" => "image/tiff",
+            _ => "application/octet-stream", // Padrão para tipos desconhecidos
+        };
     }
 
     private bool progressBar = false;
@@ -161,9 +178,5 @@ public class TirarFotoViewModel : BindableObject
 
     public ICommand ActualizarToken => new Command(async()=>{
         
-        ChangeState();
-        await PegarToken();
-        ChangeState();
-
     });
 }

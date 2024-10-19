@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#f0f2f4"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovelViewDetails"
+             Title="Detalhes do imóvel">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Rejeitar" IconImageSource="naoaprovado" Order="Primary" Command="{Binding RemoverImovelCommand}"/>
+        <ToolbarItem Text="Publicar" IconImageSource="aprovado" Order="Primary" Command="{Binding PublicarImovelCommand}"/>        
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
+        <CollectionView ItemsSource="{Binding ImovelDados.Fotos}"
+            x:Name="colecao"
+            VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Padding="0"
+                        BackgroundColor="#fff"
+                        StrokeShape="RoundRectangle 5">
+                        <StackLayout>
+                            <Border StrokeShape="RoundRectangle 0" StrokeThickness="0" HeightRequest="500">
+                                <Image Source="{Binding Imagem}" Aspect="AspectFill"/>
+                            </Border>                                
+                        </StackLayout>                              
+                    </Border>           
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout>
+            <Border Padding="0"
+                BackgroundColor="#fff"
+                StrokeShape="RoundRectangle 5">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                        Padding="5"
+                        BackgroundColor="#e7e7e7">
+                        <Label Text="Código do imóvel: " FontAttributes="Bold" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding ImovelDados.Imovel.Codigo}" FontAttributes="Bold" VerticalOptions="CenterAndExpand" TextColor="#029a44"/>
+                        <Image Source="{Binding ExpandidoIcone}" HorizontalOptions="EndAndExpand" HeightRequest="20" Margin="5">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ExpandirCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout> 
+                    <StackLayout Margin="5, 0"
+                        Orientation="Horizontal">
+                        <Label Text="Tipo de imóvel: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                        <Label Text="{Binding ImovelDados.NaturezaImovel.Caracteristica}"/>
+                        <Label Text=" ("/>
+                        <Label Text="{Binding ImovelDados.TipoImovel.TipoImovelDesc}"/>
+                        <Label Text=")"/>
+                    </StackLayout>
+                    <StackLayout Margin="5, 0"
+                        Orientation="Horizontal">
+                        <Label Text="Tipo de contrato: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                        <Label Text="{Binding ImovelDados.TipoPublicacao.Descricao}"/>
+                    </StackLayout>
+                    <StackLayout Margin="5, 0"
+                        Orientation="Horizontal">
+                        <Label Text="Preço: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                        <Label Text="{Binding ImovelDados.Imovel.Preco, StringFormat='{0:N2}'}"/>
+                        <Label Text=" AOA"/>
+                    </StackLayout>  
+                    <Border Margin="5, 0"/>
+                    <StackLayout IsVisible="{Binding Expandido}">
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Pais: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Pais.NomePais}"/>
+                        </StackLayout> 
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Província: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Provincia.NomeProvincia}"/>
+                        </StackLayout>
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Município: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Municipio.NomeMunicipio}"/>
+                        </StackLayout>  
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Bairro: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Bairro.NomeBairro}"/>
+                        </StackLayout>
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Rua: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Rua.NomeRua}"/>
+                        </StackLayout> 
+                         <Border Margin="5, 0"/>
+                        <StackLayout Margin="5, 0">
+                            <Label Text="Descrição: " VerticalOptions="Start" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Imovel.Descricao}" LineBreakMode="WordWrap" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout> 
+                        <Border Margin="5, 0"/>                           
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Proprietário: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.ClienteProprietario.Nome}"/>
+                        </StackLayout>
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Telefone: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.ClienteProprietario.Telefone}"/>
+                        </StackLayout>
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Corrector: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.CorretorImovel.Nome}"/>
+                        </StackLayout>
+                        <StackLayout Margin="5, 0"
+                            Orientation="Horizontal">
+                            <Label Text="Data: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                            <Label Text="{Binding ImovelDados.Imovel.DataSolicitacao, StringFormat='{0:D}'}"/>
+                        </StackLayout>
+                    </StackLayout>                     
+                </StackLayout>                              
+            </Border>  
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

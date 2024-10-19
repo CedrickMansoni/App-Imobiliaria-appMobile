@@ -33,20 +33,43 @@ public class LoginViewModel : BindableObject
         }
     }
 
+    private string telefone;
+    public string Telefone
+    {
+        get => telefone;
+        set{
+            telefone = value;
+            OnPropertyChanged(nameof(Telefone));
+        }
+    }
+    private string senha;
+    public string Senha
+    {
+        get => senha;
+        set{
+            senha = value;
+            OnPropertyChanged(nameof(Senha));
+        }
+    }
+
+
     public ICommand FazerLoginCommand => new Command(async()=>
     {
         ButtonClicked();
         try
         {
-            if (string.IsNullOrEmpty(Model.Dados.Telefone))
+            if (string.IsNullOrEmpty(Telefone))
             {
                 await App.Current.MainPage.DisplayAlert("Error message", "Informe o seu telefone","Ok");
             }
-            else if(string.IsNullOrEmpty(Model.Dados.Senha))
+            else if(string.IsNullOrEmpty(Senha))
             {
                 await App.Current.MainPage.DisplayAlert("Error message", "Digite a sua senha","Ok");
             }else
             {
+                Model.Dados.Telefone = Telefone;
+                Model.Dados.Senha = new Hash.HashPassword().CriptografarSenha(Senha);
+                System.Console.WriteLine(Model.Dados.Senha);
                 var url = $"{UrlBase.UriBase.URI}funcionario";
                 string json = JsonSerializer.Serialize<UsuarioModelRequeste>(Model, options);
                 StringContent content = new StringContent(json,Encoding.UTF8 , "application/json");
