@@ -1,8 +1,8 @@
 namespace App_Imobiliaria_appMobile.MVVM.Views.Pages;
 
-public partial class PagePublicacao : ContentPage
+public partial class PageHome : ContentPage
 {
-	public PagePublicacao()
+	public PageHome()
 	{
 		InitializeComponent();
 	}

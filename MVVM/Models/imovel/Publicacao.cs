@@ -5,10 +5,6 @@ namespace App_Imobiliaria_appMobile.MVVM.Models.imovel;
 
 public class Publicacao
 {
-    public int Id { get; set; }
-
-    public int IdCorretor { get; set; }
-
     public string CodigoImovel { get; set; } = string.Empty;
 
     public DateTime DataPublicacao { get; set; }

@@ -23,7 +23,7 @@ public class ImovelViewModelDetails : BindableObject
         client = new HttpClient();
         options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
 
-        this.ImovelDados = imovelDados;
+        ImovelDados = imovelDados;
         this.page = page;
     }
 
@@ -70,53 +70,62 @@ public class ImovelViewModelDetails : BindableObject
         }
     });
 
-    public ICommand PublicarImovelCommand => new Command<ImovelDados>(async(ImovelDados imovel)=>
+    public ICommand PublicarImovelCommand => new Command<ImovelModelResponse>(async(ImovelModelResponse imovel)=>
     {
-        var avancar = await App.Current.MainPage.DisPlayAlert("Alerta","Deseja publicar este imóvel?","Sim","Não");
+        var avancar = await App.Current.MainPage.DisplayAlert("Alerta","Deseja publicar este imóvel?","Sim","Não");
         if (avancar)
         {
-            var publicar = new Publicacao()
+            try
             {
-                IdCorretor = imovel.IdCorretor,
-                CodigoImovel = imovel.CodigoImovel,            
-            };
+                var publicar = new Publicacao
+                {
+                    CodigoImovel = imovel.Imovel.Codigo
+                };
 
-            var url = $"{UrlBase.UriBase.URI}publicar/imovel";
-            string json = JsonSerializer.Serialize<Publicacao>(publicar, options);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(url, content);
-            if (response.IsSuccessStatusCode)
-            {
-                string responseBody = await response.Content.ReadAsStringAsync();
-                await App.Current.MainPage.DisplayAlert("Erro", $"{responseBody}","Ok"); 
-                page.RemoverImovelCommand.Execute(imovel);
-                await App.Current.MainPage.Navigation.PopAsync();
-            }else
-            {
-                string errorMessage = await response.Content.ReadAsStringAsync();
-                await App.Current.MainPage.DisplayAlert("Erro", $"{errorMessage}","Ok"); 
+                var url = $"{UrlBase.UriBase.URI}publicar/imovel";
+                string json = JsonSerializer.Serialize<Publicacao>(publicar, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    await App.Current.MainPage.DisplayAlert("Mensagem", $"{responseBody}","Ok"); 
+                    page.RemoverImovelCommand.Execute(imovel);
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }else
+                {
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    await App.Current.MainPage.DisplayAlert("Erro", $"{errorMessage}","Ok"); 
+                }
             }
+            catch (System.Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Alerta",$"{ex}", "Ok");
+            }
+        }else
+        {
+            await App.Current.MainPage.DisplayAlert("Alerta","Erro","Ok");
         }
     });
 
-    public ICommand RemoverImovelCommand => new Command<ImovelDados>(async(ImovelDados imovel)=>
+    public ICommand RemoverImovelCommand => new Command<ImovelModelResponse>(async(ImovelModelResponse imovel)=>
     {
-        var avancar = await App.Current.MainPage.DisPlayAlert("Alerta","Deseja eliminar este imóvel?","Sim","Não");
+        var avancar = await App.Current.MainPage.DisplayAlert("Alerta","Deseja eliminar este imóvel?","Sim","Não");
         if (avancar)
         {
-            var url = $"{UrlBase.UriBase.URI}eliminar/imovel/{imovel.CodigoImovel}";
+            var url = $"{UrlBase.UriBase.URI}eliminar/imovel/{imovel.Imovel.Codigo}";
            
-            var response = await client.DeleteAsync(url, content);
+            var response = await client.DeleteAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
-                await App.Current.MainPage.DisplayAlert("Erro", $"{responseBody}","Ok"); 
+                await App.Current.MainPage.DisplayAlert("Mensagem", $"{responseBody}","Ok"); 
                 page.RemoverImovelCommand.Execute(imovel);
                 await App.Current.MainPage.Navigation.PopAsync();
             }else
             {
                 string errorMessage = await response.Content.ReadAsStringAsync();
-                await App.Current.MainPage.DisplayAlert("Erro", $"{errorMessage}","Ok"); 
+                await App.Current.MainPage.DisplayAlert("Erro", $"{errorMessage}\n{(int)response.StatusCode}","Ok"); 
             }
         }
     });

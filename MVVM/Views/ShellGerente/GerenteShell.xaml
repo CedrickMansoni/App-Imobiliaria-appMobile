@@ -17,7 +17,7 @@
 </Shell.FlyoutHeader>
 
     
-    <ShellContent Title="Dashboard" Icon="dashboard" ContentTemplate="{DataTemplate pages:PagePublicacao}" Route="publicacao"/>
+    <ShellContent Title="Home" Icon="dashboard" ContentTemplate="{DataTemplate pages:PageHome}" Route="home"/>
 
     <ShellContent Title="Zonas de atendimento" Icon="location" ContentTemplate="{DataTemplate pages:PageZonas}" Route="zona"/>
 
@@ -42,7 +42,7 @@
             <ShellContent Title="Pendentes" ContentTemplate="{DataTemplate pages:PublicarImovel}" Route="publicar"/>  
         </Tab>
         <Tab Title="Publicados" Icon="upload">
-            <ShellContent Title="Imóveis publicados" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
+            <ShellContent Title="Imóveis publicados" ContentTemplate="{DataTemplate pages:PageImoveisPublicados}" Route="publicados"/>   
         </Tab>     
     </FlyoutItem>
 

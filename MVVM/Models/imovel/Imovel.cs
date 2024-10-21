@@ -5,8 +5,6 @@ namespace App_Imobiliaria_appMobile.MVVM.Models.imovel;
 
 public class Imovel
 {
-    public int Id { get; set; }
-
      public string Codigo { get; set; } = string.Empty;
 
     public int IdClienteProprietario { get; set; }

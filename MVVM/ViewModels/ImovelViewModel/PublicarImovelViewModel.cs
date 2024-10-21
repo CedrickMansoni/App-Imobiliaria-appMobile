@@ -26,8 +26,8 @@ public class PublicarImovelViewModel : BindableObject
     }
 
 
-    private List<ImovelModelResponse> imovelDados = new();
-    public List<ImovelModelResponse> ImovelDados
+    private ObservableCollection<ImovelModelResponse> imovelDados = new();
+    public ObservableCollection<ImovelModelResponse> ImovelDados
     {
         get => imovelDados;
         set{
@@ -42,14 +42,20 @@ public class PublicarImovelViewModel : BindableObject
         var response = await client.GetAsync(url);
         
         if (response.IsSuccessStatusCode)
-        {
-            
+        {            
             using(var responseStream = await response.Content.ReadAsStreamAsync())
             {                             
-               ImovelDados = await JsonSerializer.DeserializeAsync<List<ImovelModelResponse>>(responseStream, options);
+               ImovelDados = await JsonSerializer.DeserializeAsync<ObservableCollection<ImovelModelResponse>>(responseStream, options);
             }
         }
     }
+
+    public ICommand ActualizarPaginaCommand => new Command(async ()=>
+    {
+        ImovelDados = new();
+        await Task.Delay(4000);
+        _= PegarImoveis("Pendente");
+    });
 
     public ICommand ImovelDetailCommand => new Command<ImovelModelResponse>(async (ImovelModelResponse imovel)=>
     {

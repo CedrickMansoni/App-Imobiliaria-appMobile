@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PublicarImovel"
-             NavigationPage.HasNavigationBar="False"
-             BackgroundColor="#f0f2f4"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImoveisPublicados"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobilel;assembly=App-Imobiliaria-appMobile"
-             Title="Imóveis pendentes">
+             
+             BackgroundColor="#f0f2f4"
+             Title="Imoveis Publicados">
 
-   <ContentPage.BindingContext>
-      <vm:PublicarImovelViewModel/>
+    <ContentPage.BindingContext>
+      <vm:ImoveisPublicadosViewModel/>
    </ContentPage.BindingContext>
 
    <ContentPage.ToolbarItems>
       <ToolbarItem Text="Actualizar" IconImageSource="atualizar" Command="{Binding ActualizarPaginaCommand}"/>
    </ContentPage.ToolbarItems>
              
-    <ScrollView VerticalOptions="FillAndExpand">
-       <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
+   <ScrollView VerticalOptions="FillAndExpand">
+      <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
+         <Border StrokeShape="RoundRectangle 5"
+            Padding="5 , -15"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="#fff">
+            <SearchBar HeightRequest="75"
+               x:Name="SearchImovel"
+               Text="{Binding Codigo}"
+               SearchButtonPressed="SearchBar_SearchButtonPressed"
+               TextChanged="SearchBarChanged"
+               Placeholder="Código do imóvel"
+               Keyboard="Numeric"
+               MaxLength="8"
+               FontFamily="font03"
+               FontSize="20"/>
+         </Border>
             <CollectionView ItemsSource="{Binding ImovelDados}"
                x:Name="colecao"
                VerticalOptions="FillAndExpand">
@@ -34,7 +49,10 @@
                                  <Label Text="{Binding Imovel.Codigo}" FontAttributes="Bold" TextColor="#029a44"/>
                               </StackLayout> 
                               <Border StrokeShape="RoundRectangle 0" StrokeThickness="0" HeightRequest="300">
+                                 <Grid>
+                                    <Image Source="carregar" HeightRequest="100" IsAnimationPlaying="True"/>
                                  <Image Source="{Binding FotoPrincipal}" Aspect="AspectFill"/>
+                                 </Grid>                                 
                               </Border>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
@@ -54,21 +72,16 @@
                                  <Label Text="Preço: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
                                  <Label Text="{Binding Imovel.Preco, StringFormat='{0:N2}'}"/>
                                  <Label Text=" AOA"/>
-                              </StackLayout>                              
-                              <StackLayout Margin="5, 0"
-                                 Orientation="Horizontal">
-                                 <Label Text="Proprietário: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
-                                 <Label Text="{Binding ClienteProprietario.Nome}"/>
-                              </StackLayout>
-                              <StackLayout Margin="5, 0"
-                                 Orientation="Horizontal">
-                                 <Label Text="Telefone: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
-                                 <Label Text="{Binding ClienteProprietario.Telefone}"/>
-                              </StackLayout>
+                              </StackLayout>    
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
                                  <Label Text="Corrector: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
                                  <Label Text="{Binding CorretorImovel.Nome}"/>
+                              </StackLayout>
+                              <StackLayout Margin="5, 0"
+                                 Orientation="Horizontal">
+                                 <Label Text="Telefone: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="{Binding CorretorImovel.Telefone}"/>
                               </StackLayout>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
@@ -83,18 +96,16 @@
                                     </StackLayout.GestureRecognizers>
                                     <Image Source="vermais" HorizontalOptions="Center" HeightRequest="15"/>
                                     <Label Text="Ver mais" TextColor="#522cd3" HorizontalOptions="Center" />
-                                 </StackLayout>
+                                 </StackLayout>                                 
                               </StackLayout>
                            </StackLayout>                              
                         </Border>                        
                      </Grid>
                   </DataTemplate>
                </CollectionView.ItemTemplate>
-              <CollectionView.EmptyView>
+               <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="CenterAndExpand">
-                        <Image Source="carregar.gif"
-                            IsAnimationPlaying="True"
-                            WidthRequest="100"/>
+                        <Image Source="carregar" HeightRequest="100" IsAnimationPlaying="True"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
             </CollectionView>
