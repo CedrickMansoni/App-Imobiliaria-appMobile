@@ -5,11 +5,7 @@
              xmlns:swipe="clr-namespace:Plugin.Maui.SwipeCardView;assembly=Plugin.Maui.SwipeCardView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              BackgroundColor="#f0f2f4">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding ActualizarToken}" Order="Secondary" Text="Actualizar Token"/>
-    </ContentPage.ToolbarItems>
-    
+   
     <Grid VerticalOptions="FillAndExpand">
         <StackLayout VerticalOptions="FillAndExpand" 
             Padding="15" 
@@ -33,30 +29,44 @@
                     </CollectionView.EmptyView>
                 </CollectionView>
             </Border>
-            <Border HorizontalOptions="CenterAndExpand" 
-                VerticalOptions="End" 
-                Margin="5" 
-                StrokeShape="RoundRectangle 5"
-                BackgroundColor="#fff">
-                <StackLayout Orientation="Horizontal"
-                    Spacing="30">
-                    <Image Source="fotos" HeightRequest="50" Margin="10">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding AbrirGaleriaCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
+            <StackLayout HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="End"
+                Spacing="30" 
+                Orientation ="Horizontal"
+                Margin="0, 5,0,0" >
+                <Border HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    Padding="5"
+                    StrokeShape="RoundRectangle 50"
+                    BackgroundColor="#fff">                        
+                        <Image Source="fotos" HeightRequest="50" Margin="10">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AbrirGaleriaCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>                           
+                </Border>
+                <Border HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    StrokeShape="RoundRectangle 50"
+                    BackgroundColor="#fff">                             
                     <Image Source="camera" HeightRequest="50" Margin="20">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AbrirCameraCommand}"/>
                         </Image.GestureRecognizers>
-                    </Image>
-                    <Image Source="enviar" HeightRequest="50" Margin="10">
+                    </Image> 
+                </Border>
+                <Border HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    Padding="5"
+                    StrokeShape="RoundRectangle 50"
+                    BackgroundColor="#fff">                
+                    <Image Source="send" HeightRequest="50" Margin="10">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EnviarFotoCommand}"/>
                         </Image.GestureRecognizers>    
-                    </Image> 
-                </StackLayout>
-            </Border>
+                    </Image>                 
+                </Border>
+            </StackLayout>            
         </StackLayout>
         <Image Source="carregar" IsAnimationPlaying="True" IsVisible="{Binding ProgressBar}" HeightRequest="200"/>
     </Grid>

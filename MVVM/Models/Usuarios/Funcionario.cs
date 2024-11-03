@@ -9,5 +9,5 @@ public class Funcionario : Usuario
     public int IdProvincia { get; set; }
 
     public string Nivel { get; set; } = string.Empty;
-    public string? Avatar {get; set;}
+    public string Avatar {get; set;} = string.Empty;
 }

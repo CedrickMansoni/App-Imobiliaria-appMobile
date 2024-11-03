@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarios"
-             BackgroundColor="#f0f2f5"
+             
+             BackgroundImageSource ="appbg"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel"
              NavigationPage.HasNavigationBar="False">
 

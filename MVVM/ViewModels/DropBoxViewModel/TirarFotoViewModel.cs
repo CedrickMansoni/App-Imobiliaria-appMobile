@@ -58,48 +58,53 @@ public class TirarFotoViewModel : BindableObject
 
     public ICommand EnviarFotoCommand => new Command (async()=>
 	{
-        codigoImovel = await App.Current.MainPage.DisplayPromptAsync("Cole o código do imóvel gerado no sistema.",
+        if (Fotos.Count == 0)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
+        }else
+        {
+            codigoImovel = await App.Current.MainPage.DisplayPromptAsync("Cole o código do imóvel gerado no sistema.",
                                     "DropBox",
                                     accept: "Enviar foto(s)",
                                     cancel: "Cancelar",
                                     placeholder: "Código do imóvel",
                                     maxLength: 9,
                                     keyboard: Keyboard.Numeric);
-        if (!string.IsNullOrEmpty(codigoImovel))
-        {
-            ChangeState();
-            bool sending = false;
-            if (Fotos.Count > 0)
+            if (!string.IsNullOrEmpty(codigoImovel))
             {
-                List<string> listaCaminhos = new();
-                try
-                {                    
-                    foreach (var item in Fotos)
-                    {    
-                        listaCaminhos.Add(item.ImgSource);     
-                    }
-                    await UploadFile(listaCaminhos, codigoImovel);
-                    sending = true;
-                    Fotos = new();
-                    codigoImovel = string.Empty;
-                }
-                catch (System.Exception ex)
+                ChangeState();
+                bool sending = false;
+                if (Fotos.Count > 0)
                 {
-                    await App.Current.MainPage.DisplayAlert("Erro",$"Falha na conexão com o servidor de arquivos, por favor abra um ticket para o sector de comunicação e imagem.","Ok");
+                    List<string> listaCaminhos = new();
+                    try
+                    {                    
+                        foreach (var item in Fotos)
+                        {    
+                            listaCaminhos.Add(item.ImgSource);     
+                        }
+                        await UploadFile(listaCaminhos, codigoImovel);
+                        sending = true;
+                        Fotos = new();
+                        codigoImovel = string.Empty;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Erro",$"Falha na conexão com o servidor de arquivos, por favor abra um ticket para o sector de comunicação e imagem.","Ok");
+                    }
+                }else
+                {
+                    await App.Current.MainPage.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
                 }
-            }else
-            {
-                await App.Current.MainPage.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
-            }
-            if (sending)
-            {
-                await App.Current.MainPage.DisplayAlert("Sucesso","As fotos foram enviadas para a storage YULA-IMOBILIÁRIA","Ok");
-            }else{
-                await App.Current.MainPage.DisplayAlert("Erro","Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA","Ok");
-            }
-            ChangeState();
-        } 
-               
+                if (sending)
+                {
+                    await App.Current.MainPage.DisplayAlert("Sucesso","As fotos foram enviadas para a storage YULA-IMOBILIÁRIA","Ok");
+                }else{
+                    await App.Current.MainPage.DisplayAlert("Erro","Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA","Ok");
+                }
+                ChangeState();
+            } 
+        }               
 	});
 
     private async Task UploadFile(List<string> caminhosImagens, string codigo)

@@ -79,7 +79,7 @@ public class ImovelViewModelDetails : BindableObject
             {
                 var publicar = new Publicacao
                 {
-                    CodigoImovel = imovel.Imovel.Codigo
+                    Codigo_Publicacao = imovel.Imovel.Codigo
                 };
 
                 var url = $"{UrlBase.UriBase.URI}publicar/imovel";

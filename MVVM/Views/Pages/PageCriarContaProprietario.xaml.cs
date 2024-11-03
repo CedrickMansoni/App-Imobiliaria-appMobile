@@ -1,3 +1,5 @@
+using App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;
+
 namespace App_Imobiliaria_appMobile.MVVM.Views.Pages;
 
 public partial class PageCriarContaProprietario : ContentPage

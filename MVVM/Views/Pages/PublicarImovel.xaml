@@ -12,7 +12,7 @@
    </ContentPage.BindingContext>
 
    <ContentPage.ToolbarItems>
-      <ToolbarItem Text="Actualizar" IconImageSource="atualizar" Command="{Binding ActualizarPaginaCommand}"/>
+      <ToolbarItem Text="Actualizar" IconImageSource="update" Command="{Binding ActualizarPaginaCommand}"/>
    </ContentPage.ToolbarItems>
              
     <ScrollView VerticalOptions="FillAndExpand">
@@ -90,13 +90,11 @@
                      </Grid>
                   </DataTemplate>
                </CollectionView.ItemTemplate>
-              <CollectionView.EmptyView>
-                    <StackLayout VerticalOptions="CenterAndExpand">
-                        <Image Source="carregar.gif"
-                            IsAnimationPlaying="True"
-                            WidthRequest="100"/>
-                    </StackLayout>
-                </CollectionView.EmptyView>
+               <CollectionView.EmptyView>
+                  <StackLayout VerticalOptions="Center">
+                     <Image Source="emptygalery"/>
+                  </StackLayout>
+               </CollectionView.EmptyView>
             </CollectionView>
        </StackLayout>
     </ScrollView>

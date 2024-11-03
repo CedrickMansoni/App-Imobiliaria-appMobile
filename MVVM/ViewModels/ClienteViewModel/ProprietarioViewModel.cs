@@ -9,6 +9,7 @@ using Microsoft.Maui.Controls;
 using App_Imobiliaria_appMobile.MVVM.Models;
 using App_Imobiliaria_appMobile.MVVM.Models.Usuarios;
 using App_Imobiliaria_appMobile.MVVM.ViewModels.Hash;
+using App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.ClienteViewModel;
 
@@ -38,11 +39,11 @@ public class ProprietarioViewModel : BindableObject
         {   
             if(string.IsNullOrEmpty(Cliente.Nome))
             {
-                await App.Current.MainPage.DisplayAlert("Erro", "Informe o nome do cliente","Ok"); 
+                await App.Current!.MainPage!.DisplayAlert("Erro", "Informe o nome do cliente","Ok"); 
             }
             else if(string.IsNullOrEmpty(Cliente.Telefone))
             {
-                await App.Current.MainPage.DisplayAlert("Erro", "Informe o telefone do cliente","Ok"); 
+                await App.Current!.MainPage!.DisplayAlert("Erro", "Informe o telefone do cliente","Ok"); 
             }
             else
             {
@@ -60,35 +61,34 @@ public class ProprietarioViewModel : BindableObject
                 var response = await client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    await App.Current.MainPage.DisplayAlert("Mensagem", "Cliente cadastrado com sucesso","Ok"); 
                     try
                     {
                         if (Sms.Default.IsComposeSupported)
                         {
                             string[] recipients = new[] { $"{Cliente.Telefone}" };
                             string text = $"Olá {Cliente.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Cliente.Telefone}, Senha: {senha}. Por favor, altere sua senha após o primeiro login.";
-
+                            
                             var message = new SmsMessage(text, recipients);
 
                             await Sms.Default.ComposeAsync(message);
                         }
-                        await App.Current.MainPage.Navigation.PopAsync();
+                        await App.Current!.MainPage!.Navigation.PopAsync();
                     }
                     catch 
                     {
-                        await App.Current.MainPage.DisplayAlert("Erro","Não foi possivel acessar o SmsMessage para envio dos dados da fatura para o cliente","Ok");
+                        await App.Current!.MainPage!.DisplayAlert("Erro","Não foi possivel acessar o SmsMessage para envio dos dados da fatura para o cliente","Ok");
                     }
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Erro", "Não foi possível cadastrar o Funcionário","Ok"); 
+                    await App.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível cadastrar o Funcionário","Ok"); 
                 } 
                 ButtonClicked();  
             }                  
         }
         catch (System.Exception ex)
         {
-            await App.Current.MainPage.DisplayAlert("Erro", $"{ex}","Ok");
+            await App.Current!.MainPage!.DisplayAlert("Erro", $"{ex}","Ok");
         }
     });
 

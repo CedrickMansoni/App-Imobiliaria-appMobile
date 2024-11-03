@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarioCad"
              NavigationPage.HasNavigationBar="True"
-             BackgroundColor="#f0f2f5"
+             BackgroundImageSource = "appbg"
              Title="Novo funcionário">
 
     <ContentPage.Resources>
@@ -44,7 +44,7 @@
                                 </Border>
                                 <Label Text="Nome"
                                     x:Name="lblNome"                        
-                                    BackgroundColor="#f0f2f5"
+                                    BackgroundColor="#fceddf"
                                     HeightRequest="20"
                                     WidthRequest="45"
                                     VerticalOptions="Start"
@@ -69,7 +69,7 @@
                                 </Border>
                                 <Label Text="Telefone"
                                     x:Name="lblTelefone"
-                                    BackgroundColor="#f0f2f5"
+                                    BackgroundColor="#fceddf"
                                     HeightRequest="20"
                                     WidthRequest="65"
                                     VerticalOptions="Start"
@@ -92,7 +92,7 @@
                                 </Border>
                                 <Label Text="Email"
                                     x:Name="lblEmail"
-                                    BackgroundColor="#f0f2f5"
+                                    BackgroundColor="#fceddf"
                                     HeightRequest="20"
                                     WidthRequest="40"
                                     VerticalOptions="Start"
@@ -113,7 +113,7 @@
                                         SelectedItem="{Binding NivelSelected}"/>
                                 </Border>
                                 <Label Text="Nível de acesso"
-                                    BackgroundColor="#f0f2f5"
+                                    BackgroundColor="#fceddf"
                                     HeightRequest="20"
                                     WidthRequest="105"
                                     VerticalOptions="Start"

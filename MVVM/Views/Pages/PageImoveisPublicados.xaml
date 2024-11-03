@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImoveisPublicados"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobilel;assembly=App-Imobiliaria-appMobile"
-             
-             BackgroundColor="#f0f2f4"
+             BackgroundImageSource = "appbg"
              Title="Imoveis Publicados">
 
     <ContentPage.BindingContext>
@@ -12,26 +11,29 @@
    </ContentPage.BindingContext>
 
    <ContentPage.ToolbarItems>
-      <ToolbarItem Text="Actualizar" IconImageSource="atualizar" Command="{Binding ActualizarPaginaCommand}"/>
+      <ToolbarItem Text="Actualizar" IconImageSource="update" Command="{Binding ActualizarPaginaCommand}"/>
    </ContentPage.ToolbarItems>
-             
-   <ScrollView VerticalOptions="FillAndExpand">
-      <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
+   
+   <StackLayout>
+      <StackLayout Padding="13, 2">
          <Border StrokeShape="RoundRectangle 5"
-            Padding="5 , -15"
-            HorizontalOptions="FillAndExpand"
-            BackgroundColor="#fff">
-            <SearchBar HeightRequest="75"
-               x:Name="SearchImovel"
-               Text="{Binding Codigo}"
-               SearchButtonPressed="SearchBar_SearchButtonPressed"
-               TextChanged="SearchBarChanged"
-               Placeholder="Código do imóvel"
-               Keyboard="Numeric"
-               MaxLength="8"
-               FontFamily="font03"
-               FontSize="20"/>
-         </Border>
+         Padding="5 , -15"
+         HorizontalOptions="FillAndExpand"
+         BackgroundColor="#fff">
+         <SearchBar HeightRequest="75"
+            x:Name="SearchImovel"
+            Text="{Binding Codigo}"
+            SearchButtonPressed="SearchBar_SearchButtonPressed"
+            TextChanged="SearchBarChanged"
+            Placeholder="Código do imóvel"
+            Keyboard="Numeric"
+            MaxLength="8"
+            FontFamily="font03"
+            FontSize="20"/>
+      </Border>
+      </StackLayout>
+      <ScrollView VerticalOptions="FillAndExpand">
+         <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">         
             <CollectionView ItemsSource="{Binding ImovelDados}"
                x:Name="colecao"
                VerticalOptions="FillAndExpand">
@@ -39,6 +41,7 @@
                   <DataTemplate>
                      <Grid>
                         <Border Padding="0"
+                           Margin="5"
                            VerticalOptions="FillAndExpand"
                            BackgroundColor="#fff"
                            StrokeShape="RoundRectangle 5">
@@ -90,12 +93,12 @@
                               </StackLayout>
                               <StackLayout>
                                  <Border Margin="5"/>
-                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5" Spacing="5">
+                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5" Spacing="5" HeightRequest="25" TranslationY="-4">
                                     <StackLayout.GestureRecognizers>
                                        <TapGestureRecognizer Command="{Binding BindingContext.ImovelDetailCommand, Source={x:Reference Name = colecao}}" CommandParameter="{Binding .}"/>
                                     </StackLayout.GestureRecognizers>
-                                    <Image Source="vermais" HorizontalOptions="Center" HeightRequest="15"/>
-                                    <Label Text="Ver mais" TextColor="#522cd3" HorizontalOptions="Center" />
+                                    <Image Source="vermais" HorizontalOptions="Center" HeightRequest="15" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="Ver mais" TextColor="#522cd3" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
                                  </StackLayout>                                 
                               </StackLayout>
                            </StackLayout>                              
@@ -104,11 +107,12 @@
                   </DataTemplate>
                </CollectionView.ItemTemplate>
                <CollectionView.EmptyView>
-                    <StackLayout VerticalOptions="CenterAndExpand">
-                        <Image Source="carregar" HeightRequest="100" IsAnimationPlaying="True"/>
-                    </StackLayout>
-                </CollectionView.EmptyView>
+                  <StackLayout VerticalOptions="CenterAndExpand">
+                     <Image Source="carregar" HeightRequest="100" IsAnimationPlaying="True"/>
+                  </StackLayout>
+               </CollectionView.EmptyView>
             </CollectionView>
-       </StackLayout>
-    </ScrollView>
+         </StackLayout>
+      </ScrollView>
+   </StackLayout>   
 </ContentPage>

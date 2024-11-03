@@ -77,8 +77,10 @@ public class ImovelUploadViewModel : BindableObject
                     PesquisarProprietario = false;
                 }else
                 {
+                    await Task.Delay(4000);
                     PesquisarProprietario = false;
-                    await App.Current.MainPage.DisplayAlert("Erro","Este número de telefone não corresponde a nenhuma conta cadastrada na YULA-IMOBILIÁRIA ", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Erro","Este número de telefone não corresponde a nenhuma conta cadastrada na YULA-IMOBILIÁRIA.\nCrie uma conta cliente proprietário", "Ok");
+                    await App.Current.MainPage.Navigation.PushModalAsync(new PageCriarContaProprietario());
                 }
             }
         }else
