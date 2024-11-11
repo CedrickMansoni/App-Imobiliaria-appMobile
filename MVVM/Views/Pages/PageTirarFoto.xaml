@@ -4,7 +4,7 @@
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageTirarFoto"
              xmlns:swipe="clr-namespace:Plugin.Maui.SwipeCardView;assembly=Plugin.Maui.SwipeCardView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             BackgroundColor="#f0f2f4">
+             BackgroundImageSource="appbg">
    
     <Grid VerticalOptions="FillAndExpand">
         <StackLayout VerticalOptions="FillAndExpand" 

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarioUpdate"
+             NavigationPage.HasNavigationBar="True"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundImageSource = "appbg"            
+             Title="Editar funcionário">
+   
+   <ContentPage.Resources>
+        <Style TargetType="Border">
+            <Setter Property="StrokeThickness" Value="1"/>
+        </Style>
+        <Style TargetType="Label"> 
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="IsVisible" Value="False"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+        <Style TargetType="Entry"> 
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="ClearButtonVisibility" Value="WhileEditing"/>
+            <Setter Property="HeightRequest" Value="70"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*" VerticalOptions="FillAndExpand" Margin="0, 20">
+        <Grid Grid.Row="0">
+            <Image Source="erroimg" HeightRequest="90"/>
+            <toolkit:AvatarView ImageSource="{Binding Funcionario_.Avatar}" HeightRequest="120" WidthRequest="120" CornerRadius="60"/>         
+        </Grid>
+        <StackLayout Grid.Row="1" Padding="10" Spacing="10">
+
+            <StackLayout Orientation="Horizontal">
+                <Switch IsToggled="{Binding Activo}" OnColor="#008000"/>
+                <Label Text="{Binding Activo_}" VerticalOptions="Center" FontFamily="font03" FontSize="17" IsVisible="True"/>
+            </StackLayout>
+
+            <StackLayout> 
+                <Label Text="Nome" x:Name="lblNome" WidthRequest="45"/>                   
+                <Border Padding="5, -15" BackgroundColor ="#fff" StrokeShape="RoundRectangle 5">
+                    <Entry Placeholder="Nome do funcionário" x:Name="txtNome" TextChanged="Entry_TextChanged" Text="{Binding Funcionario_.Nome}"/>
+                </Border>                                
+            </StackLayout>
+
+            <StackLayout> 
+                <Label Text="Telefone" x:Name="lblTelefone" WidthRequest="65"/>                 
+                <Border Padding="5, -15" BackgroundColor ="#fff" StrokeShape="RoundRectangle 5">
+                    <Entry Placeholder="Telefone" x:Name="txtTelefone"
+                        TextChanged="Entry_TextChanged" Keyboard="Numeric" MaxLength="9"
+                        Text="{Binding Funcionario_.Telefone}"/>
+                </Border>                                
+            </StackLayout>
+
+            <StackLayout> 
+                <Label Text="Email" x:Name="lblEmail" WidthRequest="40"/>                   
+                <Border Padding="5, -15" BackgroundColor ="#fff" StrokeShape="RoundRectangle 5">
+                    <Entry Placeholder="Email" x:Name="txtEmail" TextChanged="Entry_TextChanged" Text="{Binding Funcionario_.Email}"/>
+                </Border>                                
+            </StackLayout>   
+
+            <StackLayout > 
+                <Label Text="Nível de acesso" WidthRequest="105" IsVisible="{Binding NivelVisibilidade}"/>                   
+                <Border Padding="5, -15"
+                    BackgroundColor ="#fff" StrokeShape="RoundRectangle 5">
+                    <Picker Title="Nível de acesso" FontSize="18" HeightRequest="70"
+                        ItemsSource="{Binding Niveis}" ItemDisplayBinding="{Binding NivelAcesso}"
+                        SelectedItem="{Binding NivelSelected}"/>
+                </Border>                               
+            </StackLayout>          
+
+            <Button 
+                Text="Editar"
+                FontFamily="font03"
+                FontSize="22"
+                VerticalOptions="End"
+                CornerRadius="5"
+                BackgroundColor="#008000"
+                HorizontalOptions="FillAndExpand" 
+                Command="{Binding EditFuncCommand}"/>
+        </StackLayout>
+        <Image Source="carregar" 
+            HeightRequest="100" 
+            IsVisible="{Binding ActivityLoginPage}" 
+            IsEnabled="{Binding ActivityLoginPage}"/>
+    </Grid>  
+</ContentPage>

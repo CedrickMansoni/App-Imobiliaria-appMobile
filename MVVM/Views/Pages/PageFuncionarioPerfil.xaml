@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarioPerfil"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel;assembly=App-Imobiliaria-appMobile"
+             x:DataType="vm:PerfilViewModel"
+             Title="Meu Perfil">
+
+    <ContentPage.BindingContext>
+        <vm:PerfilViewModel/>
+    </ContentPage.BindingContext>
+
+    <Border StrokeShape="RoundRectangle 0"
+                            BackgroundColor="#64ad9b"
+                            StrokeThickness="0"
+                            Padding="10">
+                            <StackLayout>
+                                <Grid BackgroundColor="#64ad9b" HorizontalOptions="CenterAndExpand" Margin="0, 30">
+                                    <toolkit:AvatarView ImageSource="user2" HeightRequest="80" WidthRequest="80" CornerRadius="10"/>
+                                    <toolkit:AvatarView ImageSource="{Binding Model.Avatar}" HeightRequest="120" WidthRequest="120" CornerRadius="60" BorderWidth="3" BorderColor="#FFF"/>                                     
+                                </Grid>
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding Model.Dados.Nome, StringFormat= 'Nome: {0}'}"
+                                        TextColor="#fff"
+                                        FontSize="18"
+                                        FontFamily="font03"/>
+                                    <Label Text="{Binding Model.Dados.Telefone, StringFormat='Telefone: {0}'}"
+                                        TextColor="#fff"
+                                        FontSize="18"
+                                        FontFamily="font03"/>
+                                    <Label Text="{Binding Model.UserType, StringFormat='Nível: {0}'}"
+                                        TextColor="#fff"
+                                        FontSize="18"
+                                        FontFamily="font03"/>
+                                    <Label Text="{Binding Model.Mensagem, StringFormat='Província: {0}'}"
+                                        TextColor="#fff"
+                                        FontSize="18"
+                                        FontFamily="font03"/>
+                                    <Label Text="{Binding Model.Estado, StringFormat='Estado: {0}'}"
+                                        TextColor="#fff"
+                                        FontSize="18"
+                                        FontFamily="font03"/>
+                                </StackLayout>
+                                
+                               
+                            </StackLayout>
+                        </Border>
+</ContentPage>

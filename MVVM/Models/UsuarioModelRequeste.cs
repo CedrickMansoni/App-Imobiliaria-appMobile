@@ -10,4 +10,5 @@ public class UsuarioModelRequeste
     public string Mensagem {get; set;} = string.Empty;
     public string UserType {get;set;} = string.Empty;
     public string Estado {get; set;} = string.Empty;
+    public string Avatar {get; set;} = string.Empty;
 }

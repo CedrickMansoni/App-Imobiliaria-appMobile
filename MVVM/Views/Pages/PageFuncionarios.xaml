@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarios"
-             
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              BackgroundImageSource ="appbg"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel"
              NavigationPage.HasNavigationBar="False">
@@ -11,8 +11,9 @@
     <vm:FuncionarioViewModel/>
 </ContentPage.BindingContext>
 
-<ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cadastrar funcionário" IconImageSource="add" Order="Primary" Command="{Binding CadFuncCommand}"/>
+
+<ContentPage.ToolbarItems>     
+    <ToolbarItem Text="Cadastrar funcionário" IconImageSource="add" Order="Primary" Command="{Binding CadFuncCommand}"/>
 </ContentPage.ToolbarItems>
 
 <ContentPage.Resources>
@@ -34,54 +35,54 @@
     </ContentPage.Resources>
     
     <StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
+            <RadioButton Content="Todos" FontFamily="font03" IsChecked="{Binding Todos}"/>
+            <RadioButton Content="Gerentes" FontFamily="font03" IsChecked="{Binding Gerentes}"/>
+            <RadioButton Content="Corretores" FontFamily="font03" IsChecked="{Binding Corretores}"/>
+        </StackLayout>
         <CollectionView ItemsSource="{Binding Model}"
-            VerticalOptions="FillAndExpand">
+            VerticalOptions="FillAndExpand"
+            x:Name="colecao">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="10"> 
                         <Border StrokeShape="RoundRectangle 5"
-                            BackgroundColor="#fff"
+                            BackgroundColor="#64ad9b"
                             StrokeThickness="0"
                             Padding="10">
                             <StackLayout Orientation="Horizontal">
                                 <StackLayout HorizontalOptions="StartAndExpand">
                                     <Label Text="{Binding Dados.Nome, StringFormat= 'Nome: {0}'}"
-                                        TextColor="#0c1b2c"
+                                        TextColor="#fff"
                                         FontSize="18"
-                                        FontFamily="font06"/>
+                                        FontFamily="font03"/>
                                     <Label Text="{Binding Dados.Telefone, StringFormat='Telefone: {0}'}"
-                                        TextColor="#0c1b2c"
+                                        TextColor="#fff"
                                         FontSize="18"
-                                        FontFamily="font06"/>
+                                        FontFamily="font03"/>
                                     <Label Text="{Binding UserType, StringFormat='Nível: {0}'}"
-                                        TextColor="#0c1b2c"
+                                        TextColor="#fff"
                                         FontSize="18"
-                                        FontFamily="font06"/>
+                                        FontFamily="font03"/>
                                     <Label Text="{Binding Mensagem, StringFormat='Província: {0}'}"
-                                        TextColor="#0c1b2c"
+                                        TextColor="#fff"
                                         FontSize="18"
-                                        FontFamily="font06"/>
+                                        FontFamily="font03"/>
                                     <Label Text="{Binding Estado, StringFormat='Estado: {0}'}"
-                                        TextColor="#0c1b2c"
+                                        TextColor="#fff"
                                         FontSize="18"
-                                        FontFamily="font06"/>
+                                        FontFamily="font03"/>
                                 </StackLayout>
-                                <Border HorizontalOptions="End"
-                                    VerticalOptions="End"
-                                    BackgroundColor="#0c1b2c"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 45">
-                                    <Image Source="edit"
-                                        HeightRequest="25"
-                                        WidthRequest="25" 
-                                        VerticalOptions="EndAndExpand"
-                                        HorizontalOptions="End"
-                                        Margin="5">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding .}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
-                                </Border>
+                                
+                               <Grid HorizontalOptions="End"
+                                    VerticalOptions="CenterAndExpand"
+                                    BackgroundColor="#64ad9b">
+                                    <toolkit:AvatarView ImageSource="user2" HeightRequest="80" WidthRequest="80" CornerRadius="10"/>
+                                    <toolkit:AvatarView ImageSource="{Binding Avatar}" HeightRequest="120" WidthRequest="120" CornerRadius="60" BorderWidth="3" BorderColor="#FFF"/>   
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.EditFuncCommand, Source={x:Reference Name = colecao}}" CommandParameter = "{Binding .}"/>
+                                    </Grid.GestureRecognizers>                                     
+                                </Grid>
                             </StackLayout>
                         </Border>
                     </Grid>

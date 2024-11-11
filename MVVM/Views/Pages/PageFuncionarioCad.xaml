@@ -30,9 +30,15 @@
                             VerticalOptions="FillAndExpand"
                             MaximumWidthRequest="400">
                             
-                            <Grid>                    
+                            <StackLayout> 
+                                <Label Text="Nome"
+                                    x:Name="lblNome" 
+                                    HeightRequest="20"
+                                    WidthRequest="45"
+                                    HorizontalOptions="Start"
+                                    IsVisible="False"/>                   
                                 <Border Padding="5, -15"
-                                    Margin="5"
+                                    BackgroundColor ="#fff"
                                     StrokeShape="RoundRectangle 5">
                                     <Entry Placeholder="Nome do funcionário"
                                         x:Name="txtNome"
@@ -41,21 +47,17 @@
                                         ClearButtonVisibility="WhileEditing"
                                         HeightRequest="70"
                                         Text="{Binding Funcionario_.Nome}"/>
-                                </Border>
-                                <Label Text="Nome"
-                                    x:Name="lblNome"                        
-                                    BackgroundColor="#fceddf"
+                                </Border>                                
+                            </StackLayout>
+                            <StackLayout> 
+                                <Label Text="Telefone"
+                                    x:Name="lblTelefone"
                                     HeightRequest="20"
-                                    WidthRequest="45"
-                                    VerticalOptions="Start"
+                                    WidthRequest="65"
                                     HorizontalOptions="Start"
-                                    TranslationX="15"
-                                    TranslationY="-5"
-                                    IsVisible="False"/>
-                            </Grid>
-                            <Grid>                    
+                                    IsVisible="False"/>                 
                                 <Border Padding="5, -15"
-                                    Margin="5"
+                                    BackgroundColor ="#fff"
                                     StrokeShape="RoundRectangle 5">
                                     <Entry Placeholder="Telefone"
                                         x:Name="txtTelefone"
@@ -66,21 +68,17 @@
                                         ClearButtonVisibility="WhileEditing"
                                         HeightRequest="70"
                                         Text="{Binding Funcionario_.Telefone}"/>
-                                </Border>
-                                <Label Text="Telefone"
-                                    x:Name="lblTelefone"
-                                    BackgroundColor="#fceddf"
+                                </Border>                                
+                            </StackLayout>
+                            <StackLayout> 
+                                <Label Text="Email"
+                                    x:Name="lblEmail"
                                     HeightRequest="20"
-                                    WidthRequest="65"
-                                    VerticalOptions="Start"
+                                    WidthRequest="40"
                                     HorizontalOptions="Start"
-                                    TranslationX="15"
-                                    TranslationY="-5"
-                                    IsVisible="False"/>
-                            </Grid>
-                            <Grid>                    
+                                    IsVisible="False"/>                   
                                 <Border Padding="5, -15"
-                                    Margin="5"
+                                    BackgroundColor ="#fff"
                                     StrokeShape="RoundRectangle 5">
                                     <Entry Placeholder="Email"
                                         x:Name="txtEmail"
@@ -89,21 +87,16 @@
                                         FontSize="18"
                                         HeightRequest="70"
                                         Text="{Binding Funcionario_.Email}"/>
-                                </Border>
-                                <Label Text="Email"
-                                    x:Name="lblEmail"
-                                    BackgroundColor="#fceddf"
+                                </Border>                                
+                            </StackLayout>                
+                            <StackLayout > 
+                                 <Label Text="Nível de acesso"
                                     HeightRequest="20"
-                                    WidthRequest="40"
-                                    VerticalOptions="Start"
+                                    WidthRequest="105"
                                     HorizontalOptions="Start"
-                                    TranslationX="15"
-                                    TranslationY="-5"
-                                    IsVisible="False"/>
-                            </Grid>                
-                            <Grid>                    
+                                    IsVisible="{Binding NivelVisibilidade}"/>                   
                                 <Border Padding="5, -15"
-                                    Margin="5"
+                                    BackgroundColor ="#fff"
                                     StrokeShape="RoundRectangle 5">
                                     <Picker Title="Nível de acesso"
                                         FontSize="18"
@@ -111,17 +104,8 @@
                                         ItemsSource="{Binding Niveis}"
                                         ItemDisplayBinding="{Binding NivelAcesso}"
                                         SelectedItem="{Binding NivelSelected}"/>
-                                </Border>
-                                <Label Text="Nível de acesso"
-                                    BackgroundColor="#fceddf"
-                                    HeightRequest="20"
-                                    WidthRequest="105"
-                                    VerticalOptions="Start"
-                                    HorizontalOptions="Start"
-                                    TranslationX="15"
-                                    TranslationY="-5"
-                                    IsVisible="{Binding NivelVisibilidade}"/>
-                            </Grid>
+                                </Border>                               
+                            </StackLayout>
                             <Button 
                                 Text="Salvar"
                                 FontFamily="font03"

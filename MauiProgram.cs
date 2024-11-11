@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Plugin.Maui.SwipeCardView;
 using DotNet.Meteor.HotReload.Plugin;
+using CommunityToolkit.Maui;
 
 namespace App_Imobiliaria_appMobile;
 
@@ -13,6 +14,7 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			#if DEBUG
             .EnableHotReload()
+			.UseMauiCommunityToolkit()
 			#endif
 			.UseSwipeCardView()			
 			.ConfigureFonts(fonts =>
