@@ -10,6 +10,9 @@
     <ContentPage.BindingContext>
         <vm:PerfilViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="camera"/>
+    </ContentPage.ToolbarItems>
 
     <Border StrokeShape="RoundRectangle 0"
                             BackgroundColor="#64ad9b"

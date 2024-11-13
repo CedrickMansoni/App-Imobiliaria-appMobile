@@ -88,19 +88,19 @@ public class TirarFotoViewModel : BindableObject
                         Fotos = new();
                         codigoImovel = string.Empty;
                     }
-                    catch (System.Exception ex)
+                    catch 
                     {
-                        await App.Current.MainPage.DisplayAlert("Erro",$"Falha na conexão com o servidor de arquivos, por favor abra um ticket para o sector de comunicação e imagem.","Ok");
+                        await App.Current!.MainPage!.DisplayAlert("Erro",$"Falha na conexão com o servidor de arquivos, por favor abra um ticket para o sector de comunicação e imagem.","Ok");
                     }
                 }else
                 {
-                    await App.Current.MainPage.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
+                    await App.Current!.MainPage!.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
                 }
                 if (sending)
                 {
-                    await App.Current.MainPage.DisplayAlert("Sucesso","As fotos foram enviadas para a storage YULA-IMOBILIÁRIA","Ok");
+                    await App.Current!.MainPage!.DisplayAlert("Sucesso","As fotos foram enviadas para a storage YULA-IMOBILIÁRIA","Ok");
                 }else{
-                    await App.Current.MainPage.DisplayAlert("Erro","Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA","Ok");
+                    await App.Current!.MainPage!.DisplayAlert("Erro","Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA","Ok");
                 }
                 ChangeState();
             } 

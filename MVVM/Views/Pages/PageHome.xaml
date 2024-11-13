@@ -11,13 +11,138 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary" Text="Meu perfil" Command="{Binding PerfilCommand}"/>
-        <ToolbarItem Order="Secondary" Text="Trocar senha"/>
+        <ToolbarItem Order="Secondary" Text="Trocar senha" Command="{Binding EditarSenhaCommand}"/>
         <ToolbarItem Order="Secondary" Text="Terminar sessão" Command="{Binding LogoutCommand}"/>
     </ContentPage.ToolbarItems>
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <StackLayout Padding="15" Spacing="20">
+            <Border BackgroundColor="#F3F3F3">                
+               <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+                    ColumnDefinitions=".8*,1, .2*"
+                    Padding="2">
+                    <Label Text="Funcionários" FontFamily="font01" Grid.Row="0" Grid.ColumnSpan="3" HorizontalTextAlignment="Center"/>
+                    <Border Grid.Row="1" HeightRequest="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Total" FontFamily="font03" Grid.Row="2"/>
+                    <Border Grid.Row="2" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.FuncionarioTotal}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="2" Grid.Column="2"/>
+                    <Border Grid.Row="3" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Activos" FontFamily="font03" Grid.Row="4"/>
+                    <Border Grid.Row="4" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.FuncionarioActivos}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="4" Grid.Column="2"/>
+                    <Border Grid.Row="5" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Inactivos" FontFamily="font03" Grid.Row="6"/>
+                    <Border Grid.Row="6" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.FuncionarioInactivos}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="6" Grid.Column="2"/>
+                    <Border Grid.Row="7" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Gerentes" FontFamily="font03" Grid.Row="8"/>
+                    <Border Grid.Row="8" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.FuncionarioGerentes}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="8" Grid.Column="2"/>
+                    <Border Grid.Row="9" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Corretores" FontFamily="font03" Grid.Row="10"/>
+                    <Border Grid.Row="10" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.FuncionarioCorretores}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="10" Grid.Column="2"/>
+                    
+               </Grid>
+            </Border>
+            <Border BackgroundColor="#F3F3F3">                
+               <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+                    ColumnDefinitions=".8*,1, .2*"
+                    Padding="2">
+                    <Label Text="Clientes" FontFamily="font01" Grid.Row="0" Grid.ColumnSpan="3" HorizontalTextAlignment="Center"/>
+                    <Border Grid.Row="1" HeightRequest="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Total" FontFamily="font03" Grid.Row="2"/>
+                    <Border Grid.Row="2" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ClienteTotal}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="2" Grid.Column="2"/>
+                    <Border Grid.Row="3" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Proprietários" FontFamily="font03" Grid.Row="4"/>
+                    <Border Grid.Row="4" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ClienteProprietarios}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="4" Grid.Column="2"/>
+                    <Border Grid.Row="5" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Consumidores" FontFamily="font03" Grid.Row="6"/>
+                    <Border Grid.Row="6" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ClienteConsumidores}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="6" Grid.Column="2"/>
+             
+                    
+               </Grid>
+            </Border>
+            <Border BackgroundColor="#F3F3F3">                
+               <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+                    ColumnDefinitions=".8*,1, .2*"
+                    Padding="2">
+                    <Label Text="Imóveis" FontFamily="font01" Grid.Row="0" Grid.ColumnSpan="3" HorizontalTextAlignment="Center"/>
+                    <Border Grid.Row="1" HeightRequest="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Cadastrados" FontFamily="font03" Grid.Row="2"/>
+                    <Border Grid.Row="2" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisCadastrados}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="2" Grid.Column="2"/>
+                    <Border Grid.Row="3" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Pendentes" FontFamily="font03" Grid.Row="4"/>
+                    <Border Grid.Row="4" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisPendentes}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="4" Grid.Column="2"/>
+                    <Border Grid.Row="5" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Disponíveis" FontFamily="font03" Grid.Row="6"/>
+                    <Border Grid.Row="6" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisDisponiveis}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="6" Grid.Column="2"/>
+                    <Border Grid.Row="7" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Publicados" FontFamily="font03" Grid.Row="8"/>
+                    <Border Grid.Row="8" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisPublicados}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="8" Grid.Column="2"/>
+                </Grid>
+            </Border>
+            <Border BackgroundColor="#F3F3F3">                
+               <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+                    ColumnDefinitions=".8*,1, .2*"
+                    Padding="2">
+                    
+                    <Label Text="Para arrendamento" FontFamily="font03" Grid.Row="2"/>
+                    <Border Grid.Row="2" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisParaArrendamento}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="2" Grid.Column="2"/>
+                    <Border Grid.Row="3" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Para venda" FontFamily="font03" Grid.Row="4"/>
+                    <Border Grid.Row="4" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisParaVenda}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="4" Grid.Column="2"/>
+                    <Border Grid.Row="5" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Total arrendados" FontFamily="font03" Grid.Row="6"/>
+                    <Border Grid.Row="6" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisTotalArrendados}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="6" Grid.Column="2"/>
+                    <Border Grid.Row="7" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Total vendidos" FontFamily="font03" Grid.Row="8"/>
+                    <Border Grid.Row="8" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ImoveisTotalVendidos}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="8" Grid.Column="2"/>
+                    
+               </Grid>
+            </Border>
+            <Border BackgroundColor="#F3F3F3">                
+               <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+                    ColumnDefinitions=".6*,1, .4*"
+                    Padding="2">
+                    <Label Text="Valores esperados (AOA)" FontFamily="font01" Grid.Row="0" Grid.ColumnSpan="3" HorizontalTextAlignment="Center"/>
+                    <Border Grid.Row="1" HeightRequest="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Arrendamentos" FontFamily="font03" Grid.Row="2"/>
+                    <Border Grid.Row="2" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ValorArrendamento, StringFormat='{0:N2}'}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="2" Grid.Column="2"/>
+                    <Border Grid.Row="3" HeightRequest="1" Grid.ColumnSpan="3"/>
+
+                    <Label Text="Vendas" FontFamily="font03" Grid.Row="4"/>
+                    <Border Grid.Row="4" Grid.Column="1" WidthRequest="1" />
+                    <Label Text="{Binding HomePage.ValorVendas, StringFormat='{0:N2}'}" HorizontalTextAlignment="Center" FontFamily="font03" Grid.Row="4" Grid.Column="2"/>
+                </Grid>
+            </Border>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

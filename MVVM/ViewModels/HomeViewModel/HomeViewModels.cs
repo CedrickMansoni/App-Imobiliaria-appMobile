@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Input;
+using App_Imobiliaria_appMobile.MVVM.Models.HomePage;
 using App_Imobiliaria_appMobile.MVVM.Models.Usuarios;
 using App_Imobiliaria_appMobile.MVVM.ViewModels.Hash;
 using App_Imobiliaria_appMobile.MVVM.Views;
@@ -17,6 +18,7 @@ public class HomeViewModels : BindableObject
     {
         client = new HttpClient();
         options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
+        _= GetHomePage();
     }
     
 
@@ -63,6 +65,27 @@ public class HomeViewModels : BindableObject
         App.Current.MainPage = new ViewLogin();
     });
 
-
+    private HomePageModels homePage = new();
+    public HomePageModels HomePage
+    {
+        get => homePage;
+        set{
+            homePage = value;
+            OnPropertyChanged(nameof(HomePage));
+        }
+    }
+    private async Task GetHomePage()
+    {
+        var url = $"{UrlBase.UriBase.URI}home";
+        
+        var response = await client.GetAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            using(var responseStream = await response.Content.ReadAsStreamAsync())
+            {                             
+               HomePage = await JsonSerializer.DeserializeAsync<HomePageModels>(responseStream, options);
+            }
+        }             
+    }
 
 }
