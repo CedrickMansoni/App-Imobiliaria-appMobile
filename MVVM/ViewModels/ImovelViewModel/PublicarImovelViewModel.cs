@@ -62,7 +62,7 @@ public class PublicarImovelViewModel : BindableObject
         await App.Current.MainPage.Navigation.PushAsync(new PageImovelViewDetails(imovel, this));
     });
 
-    public ICommand RemoverImovelCommand => new Command<ImovelModelResponse>(async(ImovelModelResponse imovel) => 
+    public ICommand RemoverImovelCommand => new Command<ImovelModelResponse>((ImovelModelResponse imovel) => 
     {
         ImovelDados.Remove(imovel);
     });

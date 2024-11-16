@@ -71,8 +71,8 @@ public class PaisViewModel : BindableObject
                 using(var responseStream = await response.Content.ReadAsStreamAsync())
                 {
                     var data = await JsonSerializer.DeserializeAsync<Pais>(responseStream, options);
-                    await App.Current.MainPage.DisplayAlert("Sucesso",$"País {data.NomePais}, foi cadastrado com sucesso","Ok");
-                    CarregarZonas();
+                    await App.Current!.MainPage!.DisplayAlert("Sucesso",$"País {data.NomePais}, foi cadastrado com sucesso","Ok");
+                    await CarregarZonas();
                 }
             }else
             {
@@ -133,7 +133,7 @@ public class PaisViewModel : BindableObject
                 if (response.IsSuccessStatusCode)
                 {
                     await App.Current.MainPage.DisplayAlert("Mensagem", "Província cadastrada com sucesso","Ok"); 
-                    CarregarZonas();
+                    await CarregarZonas();
                 }else
                 {
                     await App.Current.MainPage.DisplayAlert("Erro", "Não foi possível cadastrar a Província","Ok"); 
@@ -213,7 +213,7 @@ public class PaisViewModel : BindableObject
             if (response.IsSuccessStatusCode)
             {
                 await App.Current.MainPage.DisplayAlert("Mensagem", "Município cadastrado com sucesso","Ok"); 
-                CarregarZonas();
+                await CarregarZonas();
             }else
             {
                 await App.Current.MainPage.DisplayAlert("Erro", "Não foi possível cadastrar o município","Ok"); 
@@ -318,7 +318,7 @@ public class PaisViewModel : BindableObject
                         if (response.IsSuccessStatusCode)
                         {
                             await App.Current.MainPage.DisplayAlert("Mensagem","Bairro cadastrado com sucesso", "Ok");
-                            CarregarZonas();
+                            await CarregarZonas();
                         }
                     }
                 }
