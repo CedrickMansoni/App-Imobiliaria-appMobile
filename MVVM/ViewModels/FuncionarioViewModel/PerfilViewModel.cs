@@ -36,6 +36,14 @@ public class PerfilViewModel : BindableObject
 		}
 	}
 
+    private string avatar = string.Empty;
+    public string Avatar{
+        get => avatar;
+        set {
+            avatar = value;
+            OnPropertyChanged(nameof(Avatar));
+        } 
+    }
     public ICommand AbrirCameraCommand => new Command(async()=>
     {
         var foto = await MediaPicker.CapturePhotoAsync();
@@ -44,6 +52,7 @@ public class PerfilViewModel : BindableObject
 			var memoryStream = await foto.OpenReadAsync();
             FotoPerfil.Id = Convert.ToInt32(await SecureStorage.GetAsync("usuario_id"));
             FotoPerfil.ImgSource = foto.FullPath;
+            Avatar = foto.FullPath;
 		}
     });
 
@@ -55,12 +64,13 @@ public class PerfilViewModel : BindableObject
 			var memoryStream = await foto.OpenReadAsync();
 			FotoPerfil.Id = Convert.ToInt32(await SecureStorage.GetAsync("usuario_id"));
             FotoPerfil.ImgSource = foto.FullPath;
+            Avatar = foto.FullPath;
 		}
     });
 
     public ICommand EnviarFotoCommand => new Command (async()=>
 	{
-        if (FotoPerfil is null)
+        if (FotoPerfil.ImgSource is null)
         {
             await App.Current!.MainPage!.DisplayAlert("Erro","Tire ou carregue  a sua foto de perfil para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
         }else
@@ -89,17 +99,19 @@ public class PerfilViewModel : BindableObject
             imagemStream.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
 
             // Adicionando a imagem ao formulário
-            formData.Add(imagemStream, "files", Path.GetFileName(caminhoImagem));
+            formData.Add(imagemStream, "perfil", Path.GetFileName(caminhoImagem));
             // Enviando para a API
             HttpResponseMessage response = await client.PostAsync(url, formData);
 
             if (response.IsSuccessStatusCode)
             {
                 await App.Current!.MainPage!.DisplayAlert("Mensagem","A sua foto de perfil foi adicionado com sucesso!","Ok");
+                CurrentePage();
             }
             else
             {
-                await App.Current!.MainPage!.DisplayAlert("Mensagem","Falha ao enviar a sua foto de perfil: " + response.StatusCode, "Ok");
+                var messageError = await response.Content.ReadAsStringAsync();
+                await App.Current!.MainPage!.DisplayAlert("Mensagem","Falha ao enviar a sua foto de perfil: \n" + messageError, "Ok");
             }
         }       
     }
@@ -141,6 +153,43 @@ public class PerfilViewModel : BindableObject
             {
                 Model = await JsonSerializer.DeserializeAsync<UsuarioModelRequeste>(responseStream, options);
             }
+        }
+    }
+
+    private bool editarPerfil = false;
+    public bool EditarPerfil
+    {
+        get => editarPerfil;
+        set{
+            editarPerfil = value;
+            OnPropertyChanged(nameof(EditarPerfil));
+        }
+    }
+
+    private void CurrentePage()
+    {
+        EditarPerfil = !EditarPerfil;
+        if (EditarPerfil)
+        {
+            FotoCamera = "cancelar";
+        }else
+        {
+            FotoCamera = "camera";
+        }
+    }
+
+    public ICommand ActivePageCommand => new Command( () =>
+    {
+        CurrentePage();
+    });
+
+    private string fotoCamera = "camera";
+    public string FotoCamera
+    {
+        get => fotoCamera;
+        set{
+            fotoCamera = value;
+            OnPropertyChanged(nameof(FotoCamera));
         }
     }
 }

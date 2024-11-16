@@ -11,42 +11,89 @@
         <vm:PerfilViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="camera"/>
+        <ToolbarItem IconImageSource="{Binding FotoCamera}" Command="{Binding ActivePageCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <Border StrokeShape="RoundRectangle 0"
-                            BackgroundColor="#64ad9b"
-                            StrokeThickness="0"
-                            Padding="10">
-                            <StackLayout>
-                                <Grid BackgroundColor="#64ad9b" HorizontalOptions="CenterAndExpand" Margin="0, 30">
-                                    <toolkit:AvatarView ImageSource="user2" HeightRequest="80" WidthRequest="80" CornerRadius="10"/>
-                                    <toolkit:AvatarView ImageSource="{Binding Model.Avatar}" HeightRequest="120" WidthRequest="120" CornerRadius="60" BorderWidth="3" BorderColor="#FFF"/>                                     
-                                </Grid>
-                                <StackLayout HorizontalOptions="StartAndExpand">
-                                    <Label Text="{Binding Model.Dados.Nome, StringFormat= 'Nome: {0}'}"
-                                        TextColor="#fff"
-                                        FontSize="18"
-                                        FontFamily="font03"/>
-                                    <Label Text="{Binding Model.Dados.Telefone, StringFormat='Telefone: {0}'}"
-                                        TextColor="#fff"
-                                        FontSize="18"
-                                        FontFamily="font03"/>
-                                    <Label Text="{Binding Model.UserType, StringFormat='Nível: {0}'}"
-                                        TextColor="#fff"
-                                        FontSize="18"
-                                        FontFamily="font03"/>
-                                    <Label Text="{Binding Model.Mensagem, StringFormat='Província: {0}'}"
-                                        TextColor="#fff"
-                                        FontSize="18"
-                                        FontFamily="font03"/>
-                                    <Label Text="{Binding Model.Estado, StringFormat='Estado: {0}'}"
-                                        TextColor="#fff"
-                                        FontSize="18"
-                                        FontFamily="font03"/>
-                                </StackLayout>
-                                
-                               
-                            </StackLayout>
-                        </Border>
+    <Grid BackgroundColor="#64ad9b" >
+        <StackLayout Padding="20">      
+            <toolkit:AvatarView ImageSource="{Binding Model.Avatar}" 
+                HeightRequest="120" 
+                WidthRequest="120" 
+                CornerRadius="60" 
+                BorderWidth="3" 
+                BorderColor="#FFF" 
+                Margin="0,30,0,0"/>      
+            <StackLayout Margin="10, 30" HorizontalOptions="Fill">
+                <Border/>
+                <Label Text="{Binding Model.Dados.Nome, StringFormat= 'Nome: {0}'}"
+                    TextColor="#fff"
+                    FontSize="18"
+                    FontFamily="font03"/>
+                <Label Text="{Binding Model.Dados.Telefone, StringFormat='Telefone: {0}'}"
+                    TextColor="#fff"
+                    FontSize="18"
+                    FontFamily="font03"/>
+                <Label Text="{Binding Model.UserType, StringFormat='Nível: {0}'}"
+                    TextColor="#fff"
+                    FontSize="18"
+                    FontFamily="font03"/>
+                <Label Text="{Binding Model.Mensagem, StringFormat='Província: {0}'}"
+                    TextColor="#fff"
+                    FontSize="18"
+                    FontFamily="font03"/>
+                <Label Text="{Binding Model.Estado, StringFormat='Estado: {0}'}"
+                    TextColor="#fff"
+                    FontSize="18"
+                    FontFamily="font03"/>
+                    <Border/>
+            </StackLayout>   
+        </StackLayout>
+        <StackLayout VerticalOptions="Fill" BackgroundColor="#64ad9b" IsVisible="{Binding EditarPerfil}">
+            <toolkit:AvatarView ImageSource="{Binding Avatar}" 
+                HeightRequest="120" 
+                WidthRequest="120" 
+                CornerRadius="60" 
+                BorderWidth="3" 
+                BorderColor="#FFF" 
+                Margin="0,100,0,60"/>  
+            <StackLayout HorizontalOptions="CenterAndExpand" 
+                VerticalOptions="End"
+                Spacing="30" 
+                Orientation ="Horizontal"
+                Margin="0, 5,0,0" >
+                <Border HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    Padding="5"
+                    StrokeShape="RoundRectangle 50"
+                    BackgroundColor="#fff">                        
+                        <Image Source="fotos" HeightRequest="50" Margin="10">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AbrirGaleriaCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>                           
+                </Border>
+                <Border HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    StrokeShape="RoundRectangle 50"
+                    BackgroundColor="#fff">                             
+                    <Image Source="camera" HeightRequest="50" Margin="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AbrirCameraCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image> 
+                </Border>
+                <Border HorizontalOptions="CenterAndExpand" 
+                    VerticalOptions="CenterAndExpand" 
+                    Padding="5"
+                    StrokeShape="RoundRectangle 50"
+                    BackgroundColor="#fff">                
+                    <Image Source="send" HeightRequest="50" Margin="10">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EnviarFotoCommand}"/>
+                        </Image.GestureRecognizers>    
+                    </Image>                 
+                </Border>
+            </StackLayout>         
+        </StackLayout>
+    </Grid>
 </ContentPage>
