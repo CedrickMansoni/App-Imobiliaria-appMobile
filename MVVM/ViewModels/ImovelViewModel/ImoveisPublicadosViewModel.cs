@@ -60,9 +60,9 @@ public class ImoveisPublicadosViewModel : BindableObject
 
     public ICommand ActualizarPaginaCommand => new Command(async ()=>
     {
-        ImovelDados = new();
+        ImovelDados = [];
         Codigo = string.Empty;
-        _= PegarImoveis("Disponível");
+        await PegarImoveis("Disponível");
     });
 
     public ICommand ImovelDetailCommand => new Command<ImovelModelResponse>(async (ImovelModelResponse imovel)=>

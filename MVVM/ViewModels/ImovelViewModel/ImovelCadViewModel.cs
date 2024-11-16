@@ -46,7 +46,7 @@ public class ImovelCadViewModel : BindableObject
     {
         await App.Current.MainPage.Navigation.PushModalAsync(new PageImovelSelecionarPais(this));
     });
-    public ICommand GetPaisCommand => new Command<Pais>(async(Pais paisSelecionado)=>
+    public ICommand GetPaisCommand => new Command<Pais>((Pais paisSelecionado)=>
     {
         Pais = paisSelecionado;
         Provincia = new();
@@ -75,7 +75,7 @@ public class ImovelCadViewModel : BindableObject
         }
         
     });
-    public ICommand GetProvinciaCommand => new Command<Provincia>(async(Provincia provincia)=>
+    public ICommand GetProvinciaCommand => new Command<Provincia>((Provincia provincia)=>
     {
         Provincia = provincia;
         Municipio = new();
@@ -106,7 +106,7 @@ public class ImovelCadViewModel : BindableObject
             await App.Current.MainPage.Navigation.PushModalAsync(new PageImovelSelecionarMunicipio(this, Pais.Id, Provincia.Id));
         }
     });
-    public ICommand GetMunicipioCommand => new Command<Municipio>(async(Municipio municipio)=>
+    public ICommand GetMunicipioCommand => new Command<Municipio>((Municipio municipio)=>
     {
         Municipio = municipio;
         Bairro = new();
@@ -139,7 +139,7 @@ public class ImovelCadViewModel : BindableObject
             await App.Current.MainPage.Navigation.PushModalAsync(new PageImovelSelecionarBairro(this, Pais.Id, Provincia.Id, Municipio.Id));
         }
     });
-    public ICommand GetBairroCommand => new Command<Bairro>(async(Bairro bairro)=>
+    public ICommand GetBairroCommand => new Command<Bairro>((Bairro bairro)=>
     {
         Bairro = bairro;
         Rua = new();
@@ -175,7 +175,7 @@ public class ImovelCadViewModel : BindableObject
             await App.Current.MainPage.Navigation.PushModalAsync(new PageImovelSelecionarRua(this, Pais.Id, Provincia.Id, Municipio.Id, Bairro.Id));
         }
     });
-    public ICommand GetRuaCommand => new Command<Rua>(async(Rua rua)=>
+    public ICommand GetRuaCommand => new Command<Rua>((Rua rua)=>
     {
         Rua = rua;
     });
@@ -213,7 +213,7 @@ public class ImovelCadViewModel : BindableObject
             await App.Current.MainPage.Navigation.PushModalAsync(new PageImovelSelecionarTipo(this, true));
         }
     });
-    public ICommand GetTipoImovelCommand => new Command<TipoImovel>(async(TipoImovel tipoImovel)=>
+    public ICommand GetTipoImovelCommand => new Command<TipoImovel>((TipoImovel tipoImovel)=>
     {
         TipoImovel = tipoImovel;
     });
