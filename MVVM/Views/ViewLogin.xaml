@@ -4,6 +4,7 @@
      xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.LoginViewModel"
      x:Class="App_Imobiliaria_appMobile.MVVM.Views.ViewLogin"
      BackgroundColor="#f5f5f5"
+     NavigationPage.HasNavigationBar="False"
      IsEnabled="{Binding EnableLoginPage}"
      Shell.NavBarIsVisible="False">
 
@@ -14,7 +15,7 @@
     <ScrollView>
         <StackLayout            
             Spacing="25">                
-            <Grid HorizontalOptions="FillAndExpand"
+            <Grid HorizontalOptions="Fill"
                 HeightRequest="200"
                 >
                 <Image Source = "bgloginyula"
@@ -25,8 +26,8 @@
                     Source="user4.png"
                     Aspect="AspectFit"
                     HeightRequest="110"
-                    VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand"/>
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"/>
                    <!-- <ActivityIndicator
                         IsVisible="{Binding ActivityLoginPage}"
                         IsRunning="{Binding ActivityLoginPage}"
@@ -46,7 +47,7 @@
                 FontSize="50"
                 FontAttributes="Bold"
                 TranslationY="20"
-                HorizontalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
                 FontFamily="font01"
             />
             <Label Text="IMOBILIÁRIA - APP"
@@ -105,10 +106,10 @@
                 <StackLayout Orientation="Horizontal">
                     <CheckBox Color="#64ad9b"
                         IsChecked="{Binding Logado}"
-                        VerticalOptions="CenterAndExpand"/>
+                        VerticalOptions="Center"/>
                     <Label Text="Manter-me logado"
                         FontFamily="font03"
-                        VerticalOptions="CenterAndExpand"
+                        VerticalOptions="Center"
                         FontSize="18"/>
                 </StackLayout>
                 <Button Text="Entrar"

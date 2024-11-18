@@ -68,8 +68,4 @@
 		<PackageReference Include="Plugin.Maui.SwipeCardView" Version="1.0.0-preview1" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="MVVM/Views/ShellCorretor/" />
-	</ItemGroup>
-
 </Project>

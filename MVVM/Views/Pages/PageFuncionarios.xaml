@@ -77,7 +77,6 @@
                                <Grid HorizontalOptions="End"
                                     VerticalOptions="CenterAndExpand"
                                     BackgroundColor="#64ad9b">
-                                    <toolkit:AvatarView ImageSource="user2" HeightRequest="80" WidthRequest="80" CornerRadius="10"/>
                                     <toolkit:AvatarView ImageSource="{Binding Avatar}" HeightRequest="120" WidthRequest="120" CornerRadius="60" BorderWidth="3" BorderColor="#FFF"/>   
                                     <Grid.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding BindingContext.EditFuncCommand, Source={x:Reference Name = colecao}}" CommandParameter = "{Binding .}"/>

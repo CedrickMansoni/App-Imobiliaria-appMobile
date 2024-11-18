@@ -9,6 +9,8 @@ using App_Imobiliaria_appMobile.MVVM.Models;
 using App_Imobiliaria_appMobile.MVVM.Models.Usuarios;
 using App_Imobiliaria_appMobile.MVVM.Views.ShellGerente;
 using App_Imobiliaria_appMobile.MVVM.Views.Pages;
+using App_Imobiliaria_appMobile.MVVM.Views.ShellCorretor;
+using App_Imobiliaria_appMobile.MVVM.Views.ShellCliente;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.LoginViewModel;
 
@@ -76,7 +78,8 @@ public class LoginViewModel : BindableObject
                 var response = await client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    using(var responseStream = await response.Content.ReadAsStreamAsync()){
+                    using(var responseStream = await response.Content.ReadAsStreamAsync())
+                    {
                         var data = await JsonSerializer.DeserializeAsync<UsuarioModelRequeste>(responseStream, options);
                         if (data.Dados is null)
                         {
@@ -93,9 +96,22 @@ public class LoginViewModel : BindableObject
 
                             App.Current.MainPage = new GerenteShell();
 
-                        }else
+                        }
+                        else if (data.UserType == "Corrector")
                         {
-                            await App.Current.MainPage.DisplayAlert("Message", $"Página em construção","Ok");
+                            await SecureStorage.Default.SetAsync("usuario_id", $"{data.Dados.Id}");
+                            await SecureStorage.Default.SetAsync("usuario_nome", $"{data.Dados.Nome}");
+
+                            App.Current.MainPage = new CorrectorShell();
+
+                        }
+                        else if (data.UserType == "Comprador")
+                        {
+                            await SecureStorage.Default.SetAsync("usuario_id", $"{data.Dados.Id}");
+                            await SecureStorage.Default.SetAsync("usuario_nome", $"{data.Dados.Nome}");
+
+                            App.Current.MainPage = new ClienteShell();
+
                         }
                     }
                 }else

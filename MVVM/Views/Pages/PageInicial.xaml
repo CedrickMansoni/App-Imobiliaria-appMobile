@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageInicial"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.InicialViewModel"
+             BackgroundImageSource="appbg"
+             Title="PageInicial">
+
+    <ContentPage.BindingContext>
+        <vm:InicialViewModels/>
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20">
+        <Border StrokeShape="RoundRectangle 60" 
+            StrokeThickness="3"
+            HeightRequest="200" 
+            WidthRequest="200"
+            BackgroundColor="#fff"
+            TranslationY="100"
+            Margin="0, 30">
+
+            <Image Source="logo3"
+                HeightRequest="200" 
+                WidthRequest="200"/>
+        </Border>
+        
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Border StrokeShape="RoundRectangle 60" Margin="0, 10">
+            <Button Text="Entrar" BackgroundColor="#008000" FontSize="22" FontFamily="font03"   HeightRequest="65" Command="{Binding LoginCommand}"/>
+        </Border>
+
+        <Border Grid.Row="4" StrokeShape="RoundRectangle 60">
+            <Button Text="Criar conta" BackgroundColor="#008000" FontSize="22" FontFamily="font03" HeightRequest="65" Command="{Binding CriarContaCommand}"/>
+        </Border>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
