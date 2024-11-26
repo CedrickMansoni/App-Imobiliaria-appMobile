@@ -7,6 +7,11 @@ public partial class PageImovelPublicadosCliente : ContentPage
 	public PageImovelPublicadosCliente()
 	{
 		InitializeComponent();
+		this.Appearing += (sender, args) =>
+		{
+			var p = (ImoveisPublicadosViewModel)BindingContext;
+			p.ActualizarPaginaCommand.Execute(null);
+		};
 	}
 
 	private void SearchBar_SearchButtonPressed(object sender, EventArgs e)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundImageSource = "appbg"          
+             BackgroundImageSource = "bgleft"          
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovel"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobile"
              NavigationPage.HasNavigationBar="False">
@@ -10,11 +10,12 @@
         <vm:ImovelViewModel/>
     </ContentPage.BindingContext>
 
-    <StackLayout VerticalOptions="FillAndExpand">
+    <Grid VerticalOptions="FillAndExpand">
+        <BoxView BackgroundColor="#000000" Opacity=".7"/>
         <StackLayout VerticalOptions="CenterAndExpand"
             Padding="20"
             Spacing="10">
-            <Border StrokeShape="RoundRectangle 5">
+            <Border StrokeShape="RoundRectangle 5" StrokeThickness="0">
                 <Button Text="Novo imóvel"
                     CornerRadius="0"
                     HeightRequest="70"
@@ -24,5 +25,5 @@
                     Command="{Binding CadastrarImovelCommand}"/>
             </Border>                 
         </StackLayout>
-    </StackLayout>
+    </Grid>
 </ContentPage>

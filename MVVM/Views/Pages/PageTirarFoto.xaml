@@ -4,11 +4,12 @@
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageTirarFoto"
              xmlns:swipe="clr-namespace:Plugin.Maui.SwipeCardView;assembly=Plugin.Maui.SwipeCardView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             BackgroundImageSource="appbg">
+             BackgroundImageSource="bgleft">
    
     <Grid VerticalOptions="FillAndExpand">
-        <StackLayout VerticalOptions="FillAndExpand" 
-            Padding="15" 
+        <BoxView BackgroundColor="#000000" Opacity=".6"/>
+        <Grid VerticalOptions="FillAndExpand" 
+            Padding="0" 
             IsEnabled="{Binding ViewPage}">       
             <Border VerticalOptions="FillAndExpand" 
                 HorizontalOptions="FillAndExpand" 
@@ -33,12 +34,13 @@
                 VerticalOptions="End"
                 Spacing="30" 
                 Orientation ="Horizontal"
-                Margin="0, 5,0,0" >
+                Margin="0, 5" >
                 <Border HorizontalOptions="CenterAndExpand" 
                     VerticalOptions="CenterAndExpand" 
                     Padding="5"
                     StrokeShape="RoundRectangle 50"
-                    BackgroundColor="#fff">                        
+                    StrokeThickness="0"
+                    BackgroundColor="#e6e6e6">                        
                         <Image Source="fotos" HeightRequest="50" Margin="10">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding AbrirGaleriaCommand}"/>
@@ -48,7 +50,8 @@
                 <Border HorizontalOptions="CenterAndExpand" 
                     VerticalOptions="CenterAndExpand" 
                     StrokeShape="RoundRectangle 50"
-                    BackgroundColor="#fff">                             
+                    StrokeThickness="0"
+                    BackgroundColor="#e6e6e6">                             
                     <Image Source="camera" HeightRequest="50" Margin="20">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AbrirCameraCommand}"/>
@@ -59,7 +62,8 @@
                     VerticalOptions="CenterAndExpand" 
                     Padding="5"
                     StrokeShape="RoundRectangle 50"
-                    BackgroundColor="#fff">                
+                    StrokeThickness="0"
+                    BackgroundColor="#e6e6e6">                
                     <Image Source="send" HeightRequest="50" Margin="10">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EnviarFotoCommand}"/>
@@ -67,7 +71,7 @@
                     </Image>                 
                 </Border>
             </StackLayout>            
-        </StackLayout>
+        </Grid>
         <Image Source="carregar" IsAnimationPlaying="True" IsVisible="{Binding ProgressBar}" HeightRequest="200"/>
     </Grid>
     

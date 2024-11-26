@@ -2,16 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovelPublicadoDetails"
-             BackgroundImageSource = "appbg"
+             BackgroundImageSource = "bgleft"
              Title="Imóvel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Favoritos" IconImageSource="favorito" Order="Primary"/>
+        <ToolbarItem Text="Favoritos" IconImageSource="favorito" Order="Primary" Command="{Binding AdicionarFavoritoCommand}" CommandParameter="{Binding ImovelDados}"/>
         <ToolbarItem Text="Chat" IconImageSource="sms" Order="Primary" Command="{Binding EnviarSMSCommand}" CommandParameter="{Binding ImovelDados}"/>
         <ToolbarItem Text="Chamada" IconImageSource="call" Order="Primary" Command="{Binding FazerChamadaCommand}" CommandParameter="{Binding ImovelDados}"/>        
     </ContentPage.ToolbarItems>
 
-    <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
+    <Grid>
+        <BoxView BackgroundColor="#000000" Opacity=".7"/>
+        <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
         <CollectionView ItemsSource="{Binding ImovelDados.Fotos}"
             x:Name="colecao"
             VerticalOptions="FillAndExpand">
@@ -125,4 +127,5 @@
             </Border>  
         </StackLayout>
     </StackLayout>
+    </Grid>
 </ContentPage>

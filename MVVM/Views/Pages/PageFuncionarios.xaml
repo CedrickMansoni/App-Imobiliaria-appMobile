@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarios"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             BackgroundImageSource ="appbg"
+             BackgroundImageSource ="bgleft"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel"
              NavigationPage.HasNavigationBar="False">
 
@@ -33,12 +33,14 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-    
-    <StackLayout>
+    <Grid>
+        <BoxView BackgroundColor="#000000" Opacity=".7"/>
+        <StackLayout>
+        
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">
-            <RadioButton Content="Todos" FontFamily="font03" IsChecked="{Binding Todos}"/>
-            <RadioButton Content="Gerentes" FontFamily="font03" IsChecked="{Binding Gerentes}"/>
-            <RadioButton Content="Corretores" FontFamily="font03" IsChecked="{Binding Corretores}"/>
+            <RadioButton Content="Todos" FontFamily="font03" IsChecked="{Binding Todos}" TextColor="#ffffff"/>
+            <RadioButton Content="Gerentes" FontFamily="font03" IsChecked="{Binding Gerentes}" TextColor="#ffffff"/>
+            <RadioButton Content="Corretores" FontFamily="font03" IsChecked="{Binding Corretores}" TextColor="#ffffff"/>
         </StackLayout>
         <CollectionView ItemsSource="{Binding Model}"
             VerticalOptions="FillAndExpand"
@@ -89,4 +91,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </StackLayout>
+    </Grid>    
 </ContentPage>

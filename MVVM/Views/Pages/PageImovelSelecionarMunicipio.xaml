@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundImageSource = "appbg"
+             BackgroundImageSource = "bgleft"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovelSelecionarMunicipio"
              Title="Selecione o município">
     
-    <StackLayout VerticalOptions="FillAndExpand" 
+    <Grid>
+        <BoxView BackgroundColor="#000000" Opacity=".7"/>
+        <StackLayout VerticalOptions="FillAndExpand" 
         Padding="15"
         MaximumWidthRequest="500">  
         <Label Text="Selecione um município"
+            TextColor="#ffffff"
             FontSize="20"
             HorizontalTextAlignment="Center"
             HorizontalOptions="CenterAndExpand"/>
@@ -58,4 +61,5 @@
                 Command="{Binding CadastrarMunicipioCommand}"/>
         </StackLayout>
     </StackLayout>
+    </Grid>
 </ContentPage>

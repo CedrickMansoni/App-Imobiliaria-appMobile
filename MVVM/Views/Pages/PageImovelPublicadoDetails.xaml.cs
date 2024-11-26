@@ -10,4 +10,5 @@ public partial class PageImovelPublicadoDetails : ContentPage
 		InitializeComponent();
 		BindingContext = new ImoveisPublicadosViewModelDetails(imovelDados, page);
 	}
+	
 }

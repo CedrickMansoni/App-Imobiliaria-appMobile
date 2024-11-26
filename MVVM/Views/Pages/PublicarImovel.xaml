@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PublicarImovel"
              NavigationPage.HasNavigationBar="False"
-              BackgroundImageSource = "appbg"  
+              BackgroundImageSource = "bgleft"  
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobilel;assembly=App-Imobiliaria-appMobile"
              Title="Imóveis pendentes">
 
@@ -16,7 +16,9 @@
    </ContentPage.ToolbarItems>
              
     <ScrollView VerticalOptions="FillAndExpand">
-       <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
+      <Grid>
+         <BoxView BackgroundColor="#000000" Opacity=".7"/>
+         <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">
             <CollectionView ItemsSource="{Binding ImovelDados}"
                x:Name="colecao"
                VerticalOptions="FillAndExpand">
@@ -97,5 +99,6 @@
                </CollectionView.EmptyView>
             </CollectionView>
        </StackLayout>
+      </Grid>       
     </ScrollView>
 </ContentPage>

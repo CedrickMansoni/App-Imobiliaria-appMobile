@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundImageSource = "appbg"
+             BackgroundImageSource = "bgleft"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovelCad"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel"
              Title="Localização do imóvel">
@@ -11,7 +11,9 @@
     
                          
     <ScrollView VerticalOptions="FillAndExpand" MaximumWidthRequest="500">
-        <StackLayout>    
+        <Grid>
+            <BoxView BackgroundColor="#000000" Opacity=".7"/>
+            <StackLayout>    
             <Image Source="map2"
                     IsAnimationPlaying="True"
                     HeightRequest="150"
@@ -21,7 +23,7 @@
                 TranslationY="-60">
                           
                 <Label 
-                    Text="País" 
+                    Text="País" TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <StackLayout Orientation="Horizontal">                        
@@ -34,7 +36,7 @@
                     </Border.GestureRecognizers>                
                 </Border>
                 <Label 
-                    Text="Província" 
+                    Text="Província" TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <StackLayout Orientation="Horizontal">     
@@ -47,7 +49,7 @@
                     </Border.GestureRecognizers>                    
                 </Border>
                      <Label 
-                        Text="Município" 
+                        Text="Município" TextColor="#ffffff"
                         Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <StackLayout Orientation="Horizontal">  
@@ -60,7 +62,7 @@
                     </Border.GestureRecognizers>                
                 </Border>
                  <Label 
-                    Text="Bairro" 
+                    Text="Bairro" TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>          
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <StackLayout Orientation="Horizontal">                                     
@@ -73,7 +75,7 @@
                     </Border.GestureRecognizers>                  
                 </Border>
                 <Label 
-                    Text="Rua" 
+                    Text="Rua" TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <StackLayout Orientation="Horizontal">   
@@ -86,7 +88,7 @@
                     </Border.GestureRecognizers>                   
                 </Border>
                 <Label 
-                    Text="Tipo de imóvel" 
+                    Text="Tipo de imóvel" TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <StackLayout Orientation="Horizontal">   
@@ -99,7 +101,7 @@
                     </Border.GestureRecognizers>                   
                 </Border>
                <Label 
-                    Text="Característica" 
+                    Text="Característica" TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>     
                 <Border Style="{StaticResource Key=minhaBorda}" Padding="0, -15">
                     <StackLayout Orientation="Horizontal" Padding="5,0">                                               
@@ -119,7 +121,8 @@
                     HeightRequest="55"
                     BackgroundColor="#008000"/>               
             </StackLayout>
-        </StackLayout>            
+        </StackLayout> 
+        </Grid>                   
     </ScrollView>  
        
 </ContentPage>

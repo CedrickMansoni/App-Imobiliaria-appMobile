@@ -4,6 +4,7 @@
      xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.LoginViewModel"
      x:Class="App_Imobiliaria_appMobile.MVVM.Views.ViewLogin"
      BackgroundColor="#f5f5f5"
+     BackgroundImageSource="bgleft"
      NavigationPage.HasNavigationBar="False"
      IsEnabled="{Binding EnableLoginPage}"
      Shell.NavBarIsVisible="False">
@@ -12,126 +13,129 @@
     <vm:LoginViewModel/>
 </ContentPage.BindingContext>
 
-    <ScrollView>
-        <StackLayout            
-            Spacing="25">                
-            <Grid HorizontalOptions="Fill"
-                HeightRequest="200"
-                >
-                <Image Source = "bgloginyula"
-                    VerticalOptions="Center"
-                    Aspect="AspectFill"/>
-                <Grid TranslationY="95">
-                    <Image Margin="0, 10"
-                    Source="user4.png"
-                    Aspect="AspectFit"
-                    HeightRequest="110"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Fill"/>
-                   <!-- <ActivityIndicator
-                        IsVisible="{Binding ActivityLoginPage}"
-                        IsRunning="{Binding ActivityLoginPage}"
-                        HeightRequest="120"
-                        WidthRequest="120"
-                        Color="#ff8c00"
-                        />-->
-                    <Image 
-                        Source="carregar"    IsVisible="{Binding ActivityLoginPage}"
-                        HeightRequest="120" WidthRequest="120"  
-                        IsAnimationPlaying="True"/>     
-                </Grid>                       
-            </Grid>             
-            <Label  Margin="2"
-                Text="YULA" 
-                TextColor="#64ad9b"
-                FontSize="50"
-                FontAttributes="Bold"
-                TranslationY="20"
-                HorizontalOptions="Center"
-                FontFamily="font01"
-            />
-            <Label Text="IMOBILIÁRIA - APP"
-                TextColor="#008000"
-                HorizontalOptions="Center"
-                FontFamily="font02"
-                FontSize="20"/>
-            <StackLayout Padding="25"
-                MaximumWidthRequest="550"
-                VerticalOptions="Center"                
-                Spacing="10">
-                
-                <Border Padding="15, -15"
-                    StrokeShape="RoundRectangle 5">
-                    <Grid ColumnDefinitions="40,Auto, *"
-                        ColumnSpacing="10">
-                        <Image Source="phone.gif"
-                            WidthRequest="28"
-                            IsAnimationPlaying="True"/>
-                        <Border Grid.Column="1"
-                            WidthRequest="2"/>
-                        <Entry Placeholder="Telefone"
-                            Text="{Binding Telefone}"
-                            MaxLength="9"
-                            FontSize="21"
-                            Grid.Column="2"
-                            HeightRequest="70"
-                            Keyboard="Numeric"
-                            ClearButtonVisibility="WhileEditing"/>
-                    </Grid>
-                </Border>
-                <Border Padding="15, -15"
-                    StrokeShape="RoundRectangle 5">
-                    <Grid ColumnDefinitions="40,Auto, *, 40"
-                        ColumnSpacing="10">
-                        <Image Source="pwd"
-                            WidthRequest="28"/>
-                        <Border Grid.Column="1"
-                            WidthRequest="2"/>
-                        <Entry Placeholder="Senha"
-                            Text="{Binding Senha}"
-                            Grid.Column="2"
-                            FontSize="21"
-                            ClearButtonVisibility="WhileEditing"
-                            HeightRequest="70"
-                            IsPassword="{Binding ShowPassword}"/>
-                            <Image Source="{Binding EyePassword}"
-                                WidthRequest="28"
-                                Grid.Column="3">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding PasswordCommand}"/>
-                                </Image.GestureRecognizers>
-                            </Image>
-                    </Grid>                    
-                </Border>
-                <StackLayout Orientation="Horizontal">
-                    <CheckBox Color="#64ad9b"
-                        IsChecked="{Binding Logado}"
-                        VerticalOptions="Center"/>
-                    <Label Text="Manter-me logado"
-                        FontFamily="font03"
+    <Grid>
+        <BoxView BackgroundColor="#454545" Opacity=".6"/>
+        <ScrollView>
+            <StackLayout            
+                Spacing="25">                
+                <Grid HorizontalOptions="Fill"
+                    HeightRequest="200"
+                    >
+                    
+                    <Image Source = "logo3"
                         VerticalOptions="Center"
-                        FontSize="18"/>
-                </StackLayout>
-                <Button Text="Entrar"
-                    BackgroundColor="#008000"
-                    HeightRequest="55"
-                    FontSize="25"
-                    FontFamily="font03"
-                    Command="{Binding FazerLoginCommand}"/>
-            </StackLayout>
-            <Border VerticalOptions="EndAndExpand"
-                MaximumWidthRequest="550"
-                HeightRequest="50"
-                BackgroundColor="#64ad9b"
-                StrokeShape="RoundRectangle 55 55 0 0">
-                <StackLayout>
-                    <Label Text="Recuperar senha"
+                        Aspect="AspectFill"/>
+                        <Image Source="back" HeightRequest="50" WidthRequest="60" HorizontalOptions="Start" VerticalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding VoltarCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    <Grid TranslationY="95">
+                        <Border BackgroundColor="#ffffff"
+                            HeightRequest="120"
+                            WidthRequest="120"
+                            StrokeShape="RoundRectangle 60"
+                            StrokeThickness="0">
+                            <Image Margin="0, 10"
+                            Source="yula2.png"
+                            Aspect="AspectFit"
+                            HeightRequest="110"
+                            VerticalOptions="Fill"
+                            HorizontalOptions="Fill"/>
+                        </Border>
+                        <Image 
+                            Source="carregar"    IsVisible="{Binding ActivityLoginPage}"
+                            HeightRequest="120" WidthRequest="120"  
+                            IsAnimationPlaying="True"/>     
+                    </Grid>                       
+                </Grid>             
+                <Label  Margin="2"
+                    Text="YULA" 
+                    TextColor="#ffffff"
+                    FontSize="50"
+                    FontAttributes="Bold"
+                    TranslationY="20"
+                    HorizontalOptions="Center"
+                    FontFamily="font01"
+                />
+                <Label Text="IMOBILIÁRIA - APP"
+                    TextColor="#ffffff"
+                    HorizontalOptions="Center"
+                    FontFamily="font02"
+                    FontSize="20"/>
+                <StackLayout Padding="25"
+                    MaximumWidthRequest="550"
+                    VerticalOptions="Center"                
+                    Spacing="10">
+                    
+                    <Border Padding="15, -15"
+                        BackgroundColor="#ffffff"
+                        StrokeShape="RoundRectangle 5">
+                        <Grid ColumnDefinitions="40,Auto, *"
+                            ColumnSpacing="10">
+                            <Image Source="phone.gif"
+                                WidthRequest="28"
+                                IsAnimationPlaying="True"/>
+                            <Border Grid.Column="1"
+                                WidthRequest="2"/>
+                            <Entry Placeholder="Telefone"
+                                Text="{Binding Telefone}"
+                                MaxLength="9"
+                                FontSize="21"
+                                Grid.Column="2"
+                                HeightRequest="70"
+                                Keyboard="Numeric"
+                                ClearButtonVisibility="WhileEditing"/>
+                        </Grid>
+                    </Border>
+                    <Border Padding="15, -15"
+                        BackgroundColor="#ffffff"
+                        StrokeShape="RoundRectangle 5">
+                        <Grid ColumnDefinitions="40,Auto, *, 40"
+                            ColumnSpacing="10">
+                            <Image Source="pwd"
+                                WidthRequest="28"/>
+                            <Border Grid.Column="1"
+                                WidthRequest="2"/>
+                            <Entry Placeholder="Senha"
+                                Text="{Binding Senha}"
+                                Grid.Column="2"
+                                FontSize="21"
+                                ClearButtonVisibility="WhileEditing"
+                                HeightRequest="70"
+                                IsPassword="{Binding ShowPassword}"/>
+                                <Image Source="{Binding EyePassword}"
+                                    WidthRequest="28"
+                                    Grid.Column="3">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PasswordCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                        </Grid>                    
+                    </Border>
+                    
+                    <Button Text="Entrar"
+                        BackgroundColor="#FF265026"
+                        HeightRequest="55"
+                        FontSize="25"
                         FontFamily="font03"
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="CenterAndExpand"
-                        TextColor="#f2f2f2"/>
+                        Command="{Binding FazerLoginCommand}"/>
                 </StackLayout>
-            </Border>
-        </StackLayout>
-    </ScrollView>
+                <Border VerticalOptions="EndAndExpand"
+                    MaximumWidthRequest="550"
+                    HeightRequest="50"
+                    BackgroundColor="#FF265026"
+                    StrokeShape="RoundRectangle 55 55 0 0"
+                    StrokeThickness="0">
+                    <StackLayout>
+                        <Label Text="Recuperar senha"
+                            FontFamily="font03"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="#f2f2f2"/>
+                    </StackLayout>
+                </Border>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

@@ -54,6 +54,10 @@ public class LoginViewModel : BindableObject
         }
     }
 
+    public ICommand VoltarCommand => new Command(async()=>
+    {
+        await App.Current!.MainPage!.Navigation.PopModalAsync(); 
+    });
 
     public ICommand FazerLoginCommand => new Command(async()=>
     {

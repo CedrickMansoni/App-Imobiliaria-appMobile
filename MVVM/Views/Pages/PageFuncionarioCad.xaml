@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageFuncionarioCad"
              NavigationPage.HasNavigationBar="True"
-             BackgroundImageSource = "appbg"
+             BackgroundImageSource = "bgleft"
              Title="Novo funcionário">
 
     <ContentPage.Resources>
@@ -11,8 +11,9 @@
             <Setter Property="StrokeThickness" Value="1"/>
         </Style>
     </ContentPage.Resources>
-
-    <StackLayout VerticalOptions="FillAndExpand">
+    <Grid>
+        <BoxView BackgroundColor="#000000" Opacity=".7"/>
+        <StackLayout VerticalOptions="FillAndExpand">
         <ScrollView VerticalOptions="FillAndExpand">
             <Grid>
                 <StackLayout VerticalOptions="FillAndExpand"
@@ -35,6 +36,7 @@
                                     x:Name="lblNome" 
                                     HeightRequest="20"
                                     WidthRequest="45"
+                                    TextColor="#ffffff"
                                     HorizontalOptions="Start"
                                     IsVisible="False"/>                   
                                 <Border Padding="5, -15"
@@ -55,7 +57,8 @@
                                     HeightRequest="20"
                                     WidthRequest="65"
                                     HorizontalOptions="Start"
-                                    IsVisible="False"/>                 
+                                    IsVisible="False"
+                                    TextColor="#ffffff"/>                 
                                 <Border Padding="5, -15"
                                     BackgroundColor ="#fff"
                                     StrokeShape="RoundRectangle 5">
@@ -76,7 +79,8 @@
                                     HeightRequest="20"
                                     WidthRequest="40"
                                     HorizontalOptions="Start"
-                                    IsVisible="False"/>                   
+                                    IsVisible="False"
+                                    TextColor="#ffffff"/>                   
                                 <Border Padding="5, -15"
                                     BackgroundColor ="#fff"
                                     StrokeShape="RoundRectangle 5">
@@ -91,6 +95,7 @@
                             </StackLayout>                
                             <StackLayout > 
                                  <Label Text="Nível de acesso"
+                                    TextColor="#ffffff"
                                     HeightRequest="20"
                                     WidthRequest="105"
                                     HorizontalOptions="Start"
@@ -125,4 +130,5 @@
             </Grid>                     
         </ScrollView>              
     </StackLayout>
+    </Grid>    
 </ContentPage>

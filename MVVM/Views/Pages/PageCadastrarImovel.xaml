@@ -2,17 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageCadastrarImovel"
-             BackgroundImageSource = "appbg"
+             BackgroundImageSource = "bgleft"
              Title="Cadastrar Imovel">
     
     <ScrollView VerticalOptions="FillAndExpand" MaximumWidthRequest="500">
-        <StackLayout VerticalOptions="CenterAndExpand">   
+        <Grid>
+            <BoxView BackgroundColor="#000000" Opacity=".7"/>
+            <StackLayout VerticalOptions="CenterAndExpand">   
                   
             <StackLayout VerticalOptions="Center"
                 Padding="20, 5">
                           
                 <Label 
                     Text="Telefone do proprietário" 
+                    TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}"
                     Padding="5, -15">
@@ -36,6 +39,7 @@
                 </Border>
                 <Label 
                     Text="Nome do proprietário" 
+                    TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}"
                     Padding="5, -15"
@@ -51,6 +55,7 @@
                 </Border>
                 <Label 
                     Text="Arrendamento / Venda" 
+                    TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>
                 <Border Style="{StaticResource Key=minhaBorda}">
                     <Picker x:Name="picker"
@@ -68,6 +73,7 @@
                 </Border>
                  <Label 
                     Text="Preço do imóvel" 
+                    TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>          
                 <Border Style="{StaticResource Key=minhaBorda}">
                      <Entry 
@@ -80,6 +86,7 @@
                 </Border>
                <Label 
                     Text="Descrição do imóvel" 
+                    TextColor="#ffffff"
                     Style="{StaticResource rotulo}"/>     
                 <Border Style="{StaticResource Key=minhaBorda}" Padding="0, -25" HeightRequest="180">
                     <StackLayout Orientation="Horizontal" Padding="5,0">                                               
@@ -100,6 +107,7 @@
                     HeightRequest="55"
                     BackgroundColor="#008000"/>               
             </StackLayout>
-        </StackLayout>            
+        </StackLayout>  
+        </Grid>                  
     </ScrollView> 
 </ContentPage>

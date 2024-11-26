@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using App_Imobiliaria_appMobile.MVVM.Views.Pages;
 using App_Imobiliaria_appMobile.MVVM.Models.imovel;
+
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;
 
-public class ImoveisPublicadosViewModel : BindableObject
+public class ImoveisFavoritosViewModel : BindableObject
 {
     HttpClient client;
     JsonSerializerOptions options;
-    public ImoveisPublicadosViewModel()
+    public ImoveisFavoritosViewModel()
     {
         client = new HttpClient();
         options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
@@ -44,9 +45,10 @@ public class ImoveisPublicadosViewModel : BindableObject
         }
     }
 
-    public async Task PegarImoveis(string estado)
+    public async Task PegarImoveis()
     {
-        var url = $"{UrlBase.UriBase.URI}listar/imoveis/{estado}";
+        int clienteId = Convert.ToInt32(await SecureStorage.GetAsync("usuario_id"));
+        var url = $"{UrlBase.UriBase.URI}listar/favoritos/{clienteId}";
         var response = await client.GetAsync(url);
         
         if (response.IsSuccessStatusCode)
@@ -61,46 +63,12 @@ public class ImoveisPublicadosViewModel : BindableObject
     public ICommand ActualizarPaginaCommand => new Command(async ()=>
     {
         ImovelDados = [];
-        Codigo = string.Empty;
-        await PegarImoveis("Disponível");
+        await PegarImoveis();
     });
 
     public ICommand ImovelDetailCommand => new Command<ImovelModelResponse>(async (ImovelModelResponse imovel)=>
     {
-        await App.Current.MainPage.Navigation.PushAsync(new PageImovelPublicadoDetails(imovel, this));
+        await App.Current.MainPage.Navigation.PushAsync(new PageImovelPublicadoDetailsFavorito(imovel, this));
     });
 
-     public ICommand PesquisarImovelCommand => new Command<string>(async(string codigo)=>
-    {
-        try
-        {
-            if (!string.IsNullOrEmpty(codigo))
-            {
-                var url = $"{UrlBase.UriBase.URI}pesquisar/imovel/{codigo}";
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {  
-                    using(var responseStream = await response.Content.ReadAsStreamAsync())
-                    {                             
-                        ImovelDados = await JsonSerializer.DeserializeAsync<ObservableCollection<ImovelModelResponse>>(responseStream, options);                            
-                    }
-                }
-            }  
-        }
-        catch (System.Exception ex)
-        {
-            await App.Current.MainPage.DisplayAlert("Erro",$"{ex}", "Ok");
-        }
-    });
-
-    private string codigo;
-    public string Codigo
-    {
-        get => codigo;
-        set{
-            codigo = value;
-            OnPropertyChanged(nameof(Codigo));
-        }
-    }
-       
 }

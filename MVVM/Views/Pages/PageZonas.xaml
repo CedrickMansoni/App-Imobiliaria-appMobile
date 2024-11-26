@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageZonas"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ZonasViewModel"
-             BackgroundImageSource = "appbg"
+             BackgroundImageSource = "bgleft"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
@@ -37,6 +37,7 @@
 
     <StackLayout>
         <Grid VerticalOptions="FillAndExpand">
+            <BoxView BackgroundColor="#000000" Opacity=".7"/>
             <CollectionView ItemsSource="{Binding PaisLista}"
                 VerticalOptions="CenterAndExpand"
                 SelectionMode="None">

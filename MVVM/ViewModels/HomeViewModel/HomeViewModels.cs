@@ -62,7 +62,7 @@ public class HomeViewModels : BindableObject
     public ICommand LogoutCommand => new Command( ()=>
     {
         SecureStorage.Default.RemoveAll();
-        App.Current.MainPage = new ViewLogin();
+        App.Current.MainPage = new NavigationPage(new PageInicial());
     });
 
     private HomePageModels homePage = new();

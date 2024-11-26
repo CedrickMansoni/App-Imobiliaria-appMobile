@@ -1,32 +1,26 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using App_Imobiliaria_appMobile.MVVM.Views.Pages;
 using App_Imobiliaria_appMobile.MVVM.Models.imovel;
-using Java.Net;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;
 
-public class ImoveisPublicadosViewModelDetails : BindableObject
+public class ImoveisPublicadosViewModelDetailsFavorito : BindableObject
 {
     HttpClient client;
     JsonSerializerOptions options;
-  
-    private ImoveisPublicadosViewModel page;
-    public ImoveisPublicadosViewModelDetails(ImovelModelResponse imovelDados, ImoveisPublicadosViewModel page)
+    private ImoveisFavoritosViewModel page;
+    
+    public ImoveisPublicadosViewModelDetailsFavorito(ImovelModelResponse imovelDados, ImoveisFavoritosViewModel page)
     {
+        
         client = new HttpClient();
         options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
 
         ImovelDados = imovelDados;
         this.page = page;
+    
     }
 
     private ImovelModelResponse imovelDados = new();
@@ -59,7 +53,7 @@ public class ImoveisPublicadosViewModelDetails : BindableObject
         }
     }
 
-    public ICommand ExpandirCommand => new Command(()=>
+     public ICommand ExpandirCommand => new Command(()=>
     {
         Expandido = !Expandido;
         if (Expandido)
@@ -72,9 +66,10 @@ public class ImoveisPublicadosViewModelDetails : BindableObject
         }
     });
 
-    public ICommand AdicionarFavoritoCommand => new Command<ImovelModelResponse>(async(imovel)=>
+   
+    public ICommand RemoverFavoritoCommand => new Command<ImovelModelResponse>(async(imovel)=>
     {
-        var pergunta = await App.Current!.MainPage!.DisplayAlert("Alerta","Deseja adicionar este imóvel à sua lista de favoritos","Sim","Não");
+        var pergunta = await App.Current!.MainPage!.DisplayAlert("Alerta","Deseja remover este imóvel da sua lista de favoritos?","Sim","Não");
         if(pergunta)
         {
             var favorito = new Favorito()
@@ -82,7 +77,7 @@ public class ImoveisPublicadosViewModelDetails : BindableObject
                 CodigoImovel = imovel.Imovel.Codigo,
                 ClienteId = Convert.ToInt32(await SecureStorage.GetAsync("usuario_id")),
             };
-            var url = $"{UrlBase.UriBase.URI}cadastrar/favorito";
+            var url = $"{UrlBase.UriBase.URI}remover/favorito";
 
             string json = JsonSerializer.Serialize<Favorito>(favorito, options);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -90,6 +85,8 @@ public class ImoveisPublicadosViewModelDetails : BindableObject
             if (response.IsSuccessStatusCode)
             {
                 await App.Current!.MainPage!.DisplayAlert("Mensagem",$"{await response.Content.ReadAsStringAsync()}", "Ok");
+                page.ActualizarPaginaCommand.Execute(null);
+                await App.Current!.MainPage!.Navigation.PopAsync();
             }
             else
             {
@@ -124,6 +121,4 @@ public class ImoveisPublicadosViewModelDetails : BindableObject
         }
     });
 
-
-   
 }

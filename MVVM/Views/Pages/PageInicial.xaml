@@ -4,35 +4,39 @@
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageInicial"
              NavigationPage.HasNavigationBar="False"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.InicialViewModel"
-             BackgroundImageSource="appbg"
+            
+             BackgroundImageSource="bgleft"
              Title="PageInicial">
 
     <ContentPage.BindingContext>
         <vm:InicialViewModels/>
     </ContentPage.BindingContext>
-
-    <StackLayout Padding="20">
-        <Border StrokeShape="RoundRectangle 60" 
-            StrokeThickness="3"
-            HeightRequest="200" 
-            WidthRequest="200"
+    <Grid>
+        <BoxView BackgroundColor="#000000" Opacity=".6"/>
+        <StackLayout Padding="20">
+        <Border StrokeShape="RoundRectangle 20" 
+            StrokeThickness="2"
+            HeightRequest="140" 
+            WidthRequest="140"
             BackgroundColor="#fff"
             TranslationY="100"
             Margin="0, 30">
 
             <Image Source="logo3"
-                HeightRequest="200" 
-                WidthRequest="200"/>
-        </Border>
-        
-        <StackLayout VerticalOptions="CenterAndExpand">
-            <Border StrokeShape="RoundRectangle 60" Margin="0, 10">
-            <Button Text="Entrar" BackgroundColor="#008000" FontSize="22" FontFamily="font03"   HeightRequest="65" Command="{Binding LoginCommand}"/>
-        </Border>
+                HeightRequest="140" 
+                WidthRequest="140"/>
+            </Border>
+            
+            <StackLayout VerticalOptions="Center" TranslationY="150">
+                <Border StrokeShape="RoundRectangle 50" Margin="0, 10" StrokeThickness="0">
+                    <Button Text="Entrar" BackgroundColor="#FF265026" FontSize="19" FontFamily="font03"   HeightRequest="55" Command="{Binding LoginCommand}"/>
+                </Border>
 
-        <Border Grid.Row="4" StrokeShape="RoundRectangle 60">
-            <Button Text="Criar conta" BackgroundColor="#008000" FontSize="22" FontFamily="font03" HeightRequest="65" Command="{Binding CriarContaCommand}"/>
-        </Border>
+                <Border Grid.Row="4" StrokeShape="RoundRectangle 50" StrokeThickness="0">
+                    <Button Text="Criar conta" BackgroundColor="#FF265026" FontSize="19" FontFamily="font03" HeightRequest="55" Command="{Binding CriarContaCommand}"/>
+                </Border>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
+    </Grid>
+    
 </ContentPage>

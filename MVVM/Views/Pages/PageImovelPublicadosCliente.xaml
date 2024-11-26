@@ -3,34 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobile"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             BackgroundImageSource="appbg"
+             BackgroundImageSource="bgleft"
              NavigationPage.HasNavigationBar="False"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovelPublicadosCliente">
 
     <ContentPage.BindingContext>
         <vm:ImoveisPublicadosViewModel/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>    
    
-   <StackLayout>
+   <StackLayout VerticalOptions="Fill">
       <StackLayout Padding="13, 2">
          <Border StrokeShape="RoundRectangle 5"
-         Padding="5 , -15"
-         Margin="0,10,0,0"
-         HorizontalOptions="Fill"
-         BackgroundColor="#fff">
-         <SearchBar HeightRequest="75"
-            x:Name="SearchImovel"
-            Text="{Binding Codigo}"
-            SearchButtonPressed="SearchBar_SearchButtonPressed"
-            TextChanged="SearchBarChanged"
-            Placeholder="Código do imóvel"
-            Keyboard="Numeric"
-            MaxLength="8"
-            FontFamily="font03"
-            FontSize="20"/>
-      </Border>
+            Padding="5 , -15"
+            Margin="0,10,0,0"
+            HorizontalOptions="Fill"
+            BackgroundColor="#fff">
+            <SearchBar HeightRequest="75"
+               x:Name="SearchImovel"
+               Text="{Binding Codigo}"
+               SearchButtonPressed="SearchBar_SearchButtonPressed"
+               TextChanged="SearchBarChanged"
+               Placeholder="Código do imóvel"
+               Keyboard="Numeric"
+               MaxLength="8"
+               FontFamily="font03"
+               FontSize="20"/>
+         </Border>
       </StackLayout>
-      <ScrollView VerticalOptions="Fill">
+      <ScrollView VerticalOptions="FillAndExpand">
          <StackLayout Padding="10" Spacing="5" VerticalOptions="Fill">         
             <CollectionView ItemsSource="{Binding ImovelDados}"
                x:Name="colecao"

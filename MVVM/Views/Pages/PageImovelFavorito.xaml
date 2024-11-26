@@ -1,56 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImoveisPublicados"
-             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobilel;assembly=App-Imobiliaria-appMobile"
-             BackgroundImageSource = "bgleft"
-             Title="Imoveis Publicados">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ImovelViewModel;assembly=App-Imobiliaria-appMobile"
+             BackgroundImageSource="bgleft"
+             x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageImovelFavorito">
 
     <ContentPage.BindingContext>
-      <vm:ImoveisPublicadosViewModel/>
-   </ContentPage.BindingContext>
+        <vm:ImoveisFavoritosViewModel/>
+    </ContentPage.BindingContext>    
 
-   <ContentPage.ToolbarItems>
-      <ToolbarItem Text="Actualizar" IconImageSource="update" Command="{Binding ActualizarPaginaCommand}"/>
-   </ContentPage.ToolbarItems>
-   
-   <Grid VerticalOptions="FillAndExpand">
-      <BoxView BackgroundColor="#000000" Opacity=".7"/>
-      <StackLayout VerticalOptions="FillAndExpand">
-         <StackLayout VerticalOptions="FillAndExpand">      
-      <StackLayout Padding="13, 2">
-         <Border StrokeShape="RoundRectangle 5"
-         Padding="5 , -15"
-         HorizontalOptions="FillAndExpand"
-         BackgroundColor="#fff">
-         <SearchBar HeightRequest="75"
-            x:Name="SearchImovel"
-            Text="{Binding Codigo}"
-            SearchButtonPressed="SearchBar_SearchButtonPressed"
-            TextChanged="SearchBarChanged"
-            Placeholder="Código do imóvel"
-            Keyboard="Numeric"
-            MaxLength="8"
-            FontFamily="font03"
-            FontSize="20"/>
-      </Border>
-      </StackLayout>
-      <ScrollView VerticalOptions="FillAndExpand">
-         <StackLayout Padding="10" Spacing="5" VerticalOptions="FillAndExpand">         
+    <StackLayout VerticalOptions="FillAndExpand">
+        <ScrollView VerticalOptions="FillAndExpand">
+         <StackLayout Padding="10" Spacing="5" VerticalOptions="Fill">         
             <CollectionView ItemsSource="{Binding ImovelDados}"
                x:Name="colecao"
                VerticalOptions="FillAndExpand">
                <CollectionView.ItemTemplate>
                   <DataTemplate>
-                     <Grid>
+                     <Grid>                        
                         <Border Padding="0"
                            Margin="5"
-                           VerticalOptions="FillAndExpand"
+                           VerticalOptions="Fill"
                            BackgroundColor="#fff"
                            StrokeShape="RoundRectangle 5">
                            <StackLayout>
-                              <StackLayout Orientation="Horizontal"
-                                 Margin="5">
+                              <StackLayout Orientation="Horizontal" Margin="5">
                                  <Label Text="Código do imóvel: " FontAttributes="Bold"/>
                                  <Label Text="{Binding Imovel.Codigo}" FontAttributes="Bold" TextColor="#029a44"/>
                               </StackLayout> 
@@ -62,7 +37,7 @@
                               </Border>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
-                                 <Label Text="Tipo de imóvel: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="Tipo de imóvel: " VerticalOptions="Center" FontAttributes="Bold"/>
                                  <Label Text="{Binding NaturezaImovel.Caracteristica}"/>
                                  <Label Text=" ("/>
                                  <Label Text="{Binding TipoImovel.TipoImovelDesc}"/>
@@ -70,28 +45,28 @@
                               </StackLayout>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
-                                 <Label Text="Tipo de contrato: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="Tipo de contrato: " VerticalOptions="Center" FontAttributes="Bold"/>
                                  <Label Text="{Binding TipoPublicacao.Descricao}"/>
                               </StackLayout>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
-                                 <Label Text="Preço: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="Preço: " VerticalOptions="Center" FontAttributes="Bold"/>
                                  <Label Text="{Binding Imovel.Preco, StringFormat='{0:N2}'}"/>
                                  <Label Text=" AOA"/>
                               </StackLayout>    
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
-                                 <Label Text="Corrector: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="Corrector: " VerticalOptions="Center" FontAttributes="Bold"/>
                                  <Label Text="{Binding CorretorImovel.Nome}"/>
                               </StackLayout>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
-                                 <Label Text="Telefone: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="Telefone: " VerticalOptions="Center" FontAttributes="Bold"/>
                                  <Label Text="{Binding CorretorImovel.Telefone}"/>
                               </StackLayout>
                               <StackLayout Margin="5, 0"
                                  Orientation="Horizontal">
-                                 <Label Text="Data: " VerticalOptions="CenterAndExpand" FontAttributes="Bold"/>
+                                 <Label Text="Data: " VerticalOptions="Center" FontAttributes="Bold"/>
                                  <Label Text="{Binding Imovel.DataSolicitacao, StringFormat='{0:D}'}"/>
                               </StackLayout>
                               <StackLayout>
@@ -100,24 +75,29 @@
                                     <StackLayout.GestureRecognizers>
                                        <TapGestureRecognizer Command="{Binding BindingContext.ImovelDetailCommand, Source={x:Reference Name = colecao}}" CommandParameter="{Binding .}"/>
                                     </StackLayout.GestureRecognizers>
-                                    <Image Source="vermais" HorizontalOptions="Center" HeightRequest="15" VerticalOptions="CenterAndExpand"/>
-                                    <Label Text="Ver mais" TextColor="#522cd3" HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                                    <Image Source="vermais" HorizontalOptions="Center" HeightRequest="15" VerticalOptions="Center"/>
+                                    <Label Text="Ver mais" TextColor="#522cd3" HorizontalOptions="Center" VerticalOptions="Center"/>
                                  </StackLayout>                                 
                               </StackLayout>
                            </StackLayout>                              
                         </Border>                        
+                        <Grid HorizontalOptions="End"
+                            VerticalOptions="End"
+                            TranslationY="-175"
+                            TranslationX="-10"
+                            BackgroundColor="Transparent">
+                            <toolkit:AvatarView ImageSource="{Binding CorretorImovel.Avatar}" HeightRequest="100" WidthRequest="100" CornerRadius="60" BorderWidth="5" BorderColor="#fff"/>                                       
+                        </Grid>
                      </Grid>
                   </DataTemplate>
                </CollectionView.ItemTemplate>
                <CollectionView.EmptyView>
-                  <StackLayout VerticalOptions="CenterAndExpand">
+                  <StackLayout VerticalOptions="Center">
                      <Image Source="carregar" HeightRequest="100" IsAnimationPlaying="True"/>
                   </StackLayout>
                </CollectionView.EmptyView>
             </CollectionView>
          </StackLayout>
       </ScrollView>
-   </StackLayout>   
-      </StackLayout>
-   </Grid>
+    </StackLayout>
 </ContentPage>
