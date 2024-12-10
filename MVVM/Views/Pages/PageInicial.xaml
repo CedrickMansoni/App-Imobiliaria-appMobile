@@ -12,7 +12,7 @@
         <vm:InicialViewModels/>
     </ContentPage.BindingContext>
     <Grid>
-        <BoxView BackgroundColor="#000000" Opacity=".6"/>
+        <BoxView BackgroundColor="#000000" Opacity=".1"/>
         <StackLayout Padding="20">
         <Border StrokeShape="RoundRectangle 20" 
             StrokeThickness="2"

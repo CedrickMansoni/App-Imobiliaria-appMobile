@@ -34,7 +34,7 @@
         </Style>
     </ContentPage.Resources>
     <Grid>
-        <BoxView BackgroundColor="#000000" Opacity=".7"/>
+        <BoxView BackgroundColor="#000000" Opacity=".4"/>
         <StackLayout>
         
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="10">

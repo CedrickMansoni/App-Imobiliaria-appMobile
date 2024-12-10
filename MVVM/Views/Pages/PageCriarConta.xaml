@@ -13,21 +13,21 @@
 
 
     <Grid>
-        <BoxView BackgroundColor="#454545" Opacity=".9"/>
+        <BoxView BackgroundColor="#454545" Opacity=".4"/>
         <Grid RowDefinitions=".1*, .1*,.1*, .6*, .1*" ColumnDefinitions="*,*" Padding="30, 0" IsEnabled="{Binding EnablePage}">
 
-            <Image Source="voltar" HeightRequest="50" HorizontalOptions="Start">
+            <Image Source="voltar" HeightRequest="40" HorizontalOptions="Start">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}"/>
                 </Image.GestureRecognizers>
             </Image>
 
-            <Border StrokeShape="RoundRectangle 40" StrokeThickness="2" Stroke="#e6e6e6" Grid.RowSpan="2" Grid.ColumnSpan="2" HeightRequest="150" WidthRequest="150" TranslationY="190" BackgroundColor="#ffffff">
-                <Image Source="employees" Aspect="Fill" HeightRequest="150"/>
+            <Border StrokeShape="RoundRectangle 10" StrokeThickness="2" Stroke="#ffffff" Grid.RowSpan="2" Grid.ColumnSpan="2" HeightRequest="120" WidthRequest="120" TranslationY="180" BackgroundColor="#ffffff">
+                <Image Source="employees" Aspect="Fill" HeightRequest="120" WidthRequest="120"/>
             </Border>        
 
             <StackLayout Grid.Row="3" Grid.ColumnSpan="2" Spacing="8" VerticalOptions="Center">
-                <Border BackgroundColor="#fff" StrokeShape="RoundRectangle 5" Padding="5, -15">
+                <Border BackgroundColor="#ffffff" StrokeShape="RoundRectangle 5" Padding="5, -15">
                     <Entry Placeholder="Nome" FontFamily="font03" FontSize="20" HeightRequest="70" Text="{Binding Cliente.Nome}"/>
                 </Border>
 
