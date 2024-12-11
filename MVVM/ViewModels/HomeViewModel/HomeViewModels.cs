@@ -17,22 +17,22 @@ public class HomeViewModels : BindableObject
     public HomeViewModels()
     {
         client = new HttpClient();
-        options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
-        _= GetHomePage();
+        options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        _ = GetHomePage();
     }
-    
 
-    public ICommand PerfilCommand => new Command( async ()=>
+
+    public ICommand PerfilCommand => new Command(async () =>
     {
         await App.Current.MainPage.Navigation.PushAsync(new PageFuncionarioPerfil());
     });
 
-    public ICommand EditarSenhaCommand => new Command(async()=>
+    public ICommand EditarSenhaCommand => new Command(async () =>
     {
         bool pergunta = await App.Current.MainPage.DisplayAlert("Alerta?", "Deseja realmente alterar a sua senha?", "Sim", "Não");
         if (pergunta)
         {
-            string senhaNova = await App.Current.MainPage.DisplayPromptAsync("Digite a nova senha", ""); 
+            string senhaNova = await App.Current.MainPage.DisplayPromptAsync("Digite a nova senha", "");
             if (!string.IsNullOrEmpty(senhaNova))
             {
                 try
@@ -48,28 +48,33 @@ public class HomeViewModels : BindableObject
                     if (response.IsSuccessStatusCode)
                     {
                         var Message = await response.Content.ReadAsStringAsync();
-                        await App.Current.MainPage.DisplayAlert("Mensagem", $"{Message}","Ok"); 
-                    }             
+                        await App.Current.MainPage.DisplayAlert("Mensagem", $"{Message}", "Ok");
+                    }
                 }
                 catch (System.Exception ex)
                 {
-                    await App.Current.MainPage.DisplayAlert("Erro", $"{ex}","Ok");
+                    await App.Current.MainPage.DisplayAlert("Erro", $"{ex}", "Ok");
                 }
-            }           
-        }        
+            }
+        }
     });
 
-    public ICommand LogoutCommand => new Command( ()=>
+    public ICommand LogoutCommand => new Command(async () =>
     {
-        SecureStorage.Default.RemoveAll();
-        App.Current.MainPage = new NavigationPage(new PageInicial());
+        var resposta = await App.Current.MainPage.DisplayAlert("Alerta", "Deseja realmente sair da aplicação?", "Sim", "Não");
+        if (resposta)
+        {
+            SecureStorage.Default.RemoveAll();
+            App.Current.MainPage = new NavigationPage(new PageInicial());
+        }
     });
 
     private HomePageModels homePage = new();
     public HomePageModels HomePage
     {
         get => homePage;
-        set{
+        set
+        {
             homePage = value;
             OnPropertyChanged(nameof(HomePage));
         }
@@ -77,15 +82,15 @@ public class HomeViewModels : BindableObject
     private async Task GetHomePage()
     {
         var url = $"{UrlBase.UriBase.URI}home";
-        
+
         var response = await client.GetAsync(url);
         if (response.IsSuccessStatusCode)
         {
-            using(var responseStream = await response.Content.ReadAsStreamAsync())
-            {                             
-               HomePage = await JsonSerializer.DeserializeAsync<HomePageModels>(responseStream, options);
+            using (var responseStream = await response.Content.ReadAsStreamAsync())
+            {
+                HomePage = await JsonSerializer.DeserializeAsync<HomePageModels>(responseStream, options);
             }
-        }             
+        }
     }
 
 }

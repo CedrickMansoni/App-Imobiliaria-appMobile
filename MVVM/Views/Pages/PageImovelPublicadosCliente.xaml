@@ -9,7 +9,11 @@
 
     <ContentPage.BindingContext>
         <vm:ImoveisPublicadosViewModel/>
-    </ContentPage.BindingContext>    
+    </ContentPage.BindingContext> 
+
+    <ContentPage.ToolbarItems>
+      <ToolbarItem IconImageSource="cancelar" Order="Primary" Clicked="ToolbarItem_Clicked"/>
+   </ContentPage.ToolbarItems>   
    
    <Grid>
       <BoxView BackgroundColor="#000000" Opacity=".3"/>

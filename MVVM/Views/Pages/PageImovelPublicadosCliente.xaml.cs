@@ -34,4 +34,14 @@ public partial class PageImovelPublicadosCliente : ContentPage
 			p.ActualizarPaginaCommand.Execute(null);
 		}
 	}
+
+    private async void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+		var resposta = await App.Current.MainPage.DisplayAlert("Alerta", "Deseja realmente sair da aplicação?","Sim","Não");
+		if(resposta)
+		{
+			SecureStorage.Default.RemoveAll();
+        	App.Current.MainPage = new NavigationPage(new PageInicial());
+		}
+    }
 }

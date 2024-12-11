@@ -23,7 +23,7 @@ public class PerfilViewModel : BindableObject
     {
         client = new HttpClient();
         options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};
-        _= GetPerfil();
+        //_= GetPerfil();
     }
 
     private FotosDropBox fotoPerfil = new();
@@ -155,6 +155,12 @@ public class PerfilViewModel : BindableObject
             }
         }
     }
+
+    public ICommand GetPerfilCommand => new Command(async () =>
+    {
+        await GetPerfil();
+    });
+
 
     private bool editarPerfil = false;
     public bool EditarPerfil

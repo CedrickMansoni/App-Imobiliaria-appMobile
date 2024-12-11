@@ -6,16 +6,25 @@
              Shell.BackgroundColor="#64ad9b"
              Shell.TitleColor="#fff"
              Shell.ForegroundColor="#fff"
-             Shell.FlyoutBehavior="Disabled">
+             Shell.FlyoutBehavior="Disabled"
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.HomeViewModel">
+
+    <Shell.BindingContext>
+        <vm:HomeViewModels/>
+    </Shell.BindingContext>
     
+    <Shell.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Meu perfil" Command="{Binding PerfilCommand}"/>
+        <ToolbarItem Order="Secondary" Text="Trocar senha" Command="{Binding EditarSenhaCommand}"/>
+        <ToolbarItem Order="Secondary" Text="Terminar sessão" Command="{Binding LogoutCommand}"/>
+    </Shell.ToolbarItems>
     
     <FlyoutItem Title="Imóveis" Icon="houses"
         Shell.TabBarTitleColor="#008000"
         Shell.TabBarForegroundColor = "#008000"
         Shell.TabBarUnselectedColor="#64ad9b"        
         Shell.TabBarBackgroundColor="#e6e6e6">
-        
-        
+
         <Tab Title="Cadastrar" Icon="cadastrar">
             <ShellContent Title="Imóvel" ContentTemplate="{DataTemplate pages:PageImovel}" Route="imovel"/>   
         </Tab>          
