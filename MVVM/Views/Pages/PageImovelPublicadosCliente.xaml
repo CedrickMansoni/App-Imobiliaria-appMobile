@@ -12,7 +12,7 @@
     </ContentPage.BindingContext> 
 
     <ContentPage.ToolbarItems>
-      <ToolbarItem IconImageSource="cancelar" Order="Primary" Clicked="ToolbarItem_Clicked"/>
+      <ToolbarItem IconImageSource="sair" Order="Primary" Clicked="ToolbarItem_Clicked"/>
    </ContentPage.ToolbarItems>   
    
    <Grid>

@@ -12,6 +12,8 @@ using App_Imobiliaria_appMobile.MVVM.Models;
 using App_Imobiliaria_appMobile.MVVM.Views.Pages;
 using App_Imobiliaria_appMobile.MVVM.Models.Usuarios;
 using App_Imobiliaria_appMobile.MVVM.Models.DropBox;
+using App_Imobiliaria_appMobile.MVVM.Views.ShellGerente;
+using App_Imobiliaria_appMobile.MVVM.Views.ShellCorretor;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel;
 
@@ -159,6 +161,17 @@ public class PerfilViewModel : BindableObject
     public ICommand GetPerfilCommand => new Command(async () =>
     {
         await GetPerfil();
+    });
+
+    public ICommand BackCommand => new Command(async () =>
+    {
+        if ("Gerente".Equals(Model.UserType))
+        {
+            App.Current.MainPage = new GerenteShell();
+        }else
+        {
+            App.Current.MainPage = new CorrectorShell();
+        }
     });
 
 

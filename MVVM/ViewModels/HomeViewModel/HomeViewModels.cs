@@ -22,9 +22,9 @@ public class HomeViewModels : BindableObject
     }
 
 
-    public ICommand PerfilCommand => new Command(async () =>
+    public ICommand PerfilCommand => new Command(() =>
     {
-        await App.Current.MainPage.Navigation.PushAsync(new PageFuncionarioPerfil());
+        App.Current.MainPage = new PageFuncionarioPerfil();
     });
 
     public ICommand EditarSenhaCommand => new Command(async () =>
