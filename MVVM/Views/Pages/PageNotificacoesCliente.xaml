@@ -2,11 +2,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.Pages.PageNotificacoesCliente"
-             Title="PageNotificacoesCliente">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:vm="clr-namespace:App_Imobiliaria_appMobile.MVVM.ViewModels.ClienteViewModel"
+             BackgroundImageSource="bgleft">
+
+    <ContentPage.BindingContext>
+        <vm:NotificacoesClienteViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <BoxView Opacity=".5"/>
+        <StackLayout>
+
+        </StackLayout>
+        <Button Text="+" 
+            HeightRequest ="60" 
+            WidthRequest="80" 
+            CornerRadius="80" 
+            FontFamily="font08" 
+            FontSize="30" 
+            BackgroundColor="#008000"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="10"
+            BorderWidth="2"
+            BorderColor="#fff"
+            Command="{Binding SolicitarImovelCommand}"/>
+    </Grid>
 </ContentPage>

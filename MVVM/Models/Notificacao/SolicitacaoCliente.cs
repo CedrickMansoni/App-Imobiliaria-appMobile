@@ -14,5 +14,5 @@ public class SolicitacaoCliente
 
     public int IdTipoImovel { get; set; }
 
-    public int Localizacao { get; set; }
+    public string Localizacao { get; set; } = string.Empty;
 }

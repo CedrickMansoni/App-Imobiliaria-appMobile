@@ -23,14 +23,11 @@
 
     <ShellContent Title="Funcionários" Icon="employees" ContentTemplate="{DataTemplate pages:PageFuncionarios}" Route="funcionario"/>
 
-    <ShellContent Title="Leads" Icon="conexoes" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>
-
     <FlyoutItem Title="Imóveis" Icon="houses"
         Shell.TabBarTitleColor="#008000"
         Shell.TabBarForegroundColor = "#008000"
         Shell.TabBarUnselectedColor="#64ad9b"        
-        Shell.TabBarBackgroundColor="#e6e6e6">
-        
+        Shell.TabBarBackgroundColor="#e6e6e6">        
         
         <Tab Title="Cadastrar" Icon="cadastrar">
             <ShellContent Title="Imóvel" ContentTemplate="{DataTemplate pages:PageImovel}" Route="imovel"/>   
@@ -44,26 +41,6 @@
         <Tab Title="Publicados" Icon="upload">
             <ShellContent Title="Imóveis publicados" ContentTemplate="{DataTemplate pages:PageImoveisPublicados}" Route="publicados"/>   
         </Tab>     
-    </FlyoutItem>
-
-    <FlyoutItem Title="Tickets" Icon="tickets"
-        Shell.TabBarTitleColor="#008000"
-        Shell.TabBarForegroundColor = "#008000"
-        Shell.TabBarUnselectedColor="#64ad9b"        
-        Shell.TabBarBackgroundColor="#e6e6e6">
-        
-        <Tab Title="Funcionário" Icon="employees">
-            <ShellContent Title="Funcionário" ContentTemplate="{DataTemplate pages:PublicarImovel}" Route="publicar"/>  
-        </Tab>
-        <Tab Title="Clientes" Icon="clientes">
-            <ShellContent Title="Clientes" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
-        </Tab>   
-        <Tab Title="Fotos" Icon="dropbox">
-            <ShellContent Title="Fotos" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
-        </Tab> 
-        <Tab Title="Desenvolvedores" Icon="dev">
-            <ShellContent Title="Desenvolvedores" ContentTemplate="{DataTemplate pages:PageTipoImovel}" Route="tipoimovel"/>   
-        </Tab>             
-    </FlyoutItem>
+    </FlyoutItem>    
 </Shell>
 

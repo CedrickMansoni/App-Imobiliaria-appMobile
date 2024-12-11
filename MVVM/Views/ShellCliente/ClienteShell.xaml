@@ -6,20 +6,38 @@
     Shell.BackgroundColor="#64ad9b"
     Shell.TitleColor="#fff"
     Shell.ForegroundColor="#fff"
-    Shell.FlyoutBehavior="Disabled">    
-
+    Shell.FlyoutBehavior="Disabled">  
     
-
-    
-    <TabBar Shell.TabBarTitleColor="#008000" Shell.TabBarForegroundColor="#008000" Shell.TabBarBackgroundColor="#fff" Shell.TabBarDisabledColor="#bdbdbd">
-        <Tab Title="Inicio" Icon="home" >
-            <ShellContent Title="Inicio" Icon="home" ContentTemplate="{DataTemplate pages:PageImovelPublicadosCliente}" Route="home"/>
+    <TabBar Shell.TabBarTitleColor="#008000" 
+        Shell.TabBarForegroundColor="#008000" 
+        Shell.TabBarBackgroundColor="#fff" 
+        Shell.TabBarDisabledColor="#bdbdbd">
+        <Tab 
+            Title="Inicio" 
+            Icon="home" >
+            <ShellContent 
+                Title="Inicio" 
+                Icon="home" 
+                ContentTemplate="{DataTemplate pages:PageImovelPublicadosCliente}" 
+                Route="home"/>
         </Tab>
-        <Tab Title="Notificações" Icon="notification">
-            <ShellContent Title="Notificações" Icon="notification" ContentTemplate="{DataTemplate pages:PageImovelPublicadosCliente}" Route="home"/>
+        <Tab 
+            Title="Notificações" 
+            Icon="notification">
+            <ShellContent 
+                Title="Notificações" 
+                Icon="notification" 
+                ContentTemplate="{DataTemplate pages:PageNotificacoesCliente}" 
+                Route="notificacao"/>
         </Tab>
-        <Tab Title="Favoritos" Icon="favoritos">
-            <ShellContent Title="Favoritos" Icon="favoritos" ContentTemplate="{DataTemplate pages:PageImovelFavorito}" Route="favorito"/>
+        <Tab 
+            Title="Favoritos" 
+            Icon="favoritos">
+            <ShellContent 
+                Title="Favoritos" 
+                Icon="favoritos" 
+                ContentTemplate="{DataTemplate pages:PageImovelFavorito}" 
+                Route="favorito"/>
         </Tab>
     </TabBar>
 

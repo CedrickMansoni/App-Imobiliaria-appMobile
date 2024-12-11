@@ -101,7 +101,7 @@ public class LoginViewModel : BindableObject
                             App.Current.MainPage = new GerenteShell();
 
                         }
-                        else if (data.UserType == "Corrector")
+                        else if (data.UserType == "Corretor")
                         {
                             await SecureStorage.Default.SetAsync("usuario_id", $"{data.Dados.Id}");
                             await SecureStorage.Default.SetAsync("usuario_nome", $"{data.Dados.Nome}");

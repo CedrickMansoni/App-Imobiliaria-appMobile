@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:App_Imobiliaria_appMobile.MVVM.Views.Pages"
+            xmlns:pages="clr-namespace:App_Imobiliaria_appMobile.MVVM.Views.Pages"
              x:Class="App_Imobiliaria_appMobile.MVVM.Views.ShellCorretor.CorrectorShell"
              Shell.BackgroundColor="#64ad9b"
              Shell.TitleColor="#fff"
              Shell.ForegroundColor="#fff"
-             Shell.FlyoutBehavior="Flyout">
+             Shell.FlyoutBehavior="Disabled">
     
     
-    
+    <FlyoutItem Title="Imóveis" Icon="houses"
+        Shell.TabBarTitleColor="#008000"
+        Shell.TabBarForegroundColor = "#008000"
+        Shell.TabBarUnselectedColor="#64ad9b"        
+        Shell.TabBarBackgroundColor="#e6e6e6">
+        
+        
+        <Tab Title="Cadastrar" Icon="cadastrar">
+            <ShellContent Title="Imóvel" ContentTemplate="{DataTemplate pages:PageImovel}" Route="imovel"/>   
+        </Tab>          
+        <Tab Title="Fotos" Icon="dropbox">
+            <ShellContent Title="Fotos" ContentTemplate="{DataTemplate pages:PageTirarFoto}" Route="foto"/>   
+        </Tab>  
+        <Tab Title="Publicados" Icon="upload">
+            <ShellContent Title="Imóveis publicados" ContentTemplate="{DataTemplate pages:PageImoveisPublicados}" Route="publicados"/>   
+        </Tab>     
+    </FlyoutItem>
 
 </Shell>

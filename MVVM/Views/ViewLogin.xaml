@@ -17,38 +17,25 @@
         <BoxView BackgroundColor="#454545" Opacity=".6"/>
         <ScrollView>
             <StackLayout            
-                Spacing="25">                
-                <Grid HorizontalOptions="Fill"
-                    HeightRequest="220"
-                    >
-                    
-                    <Image Source = "logo3"
-                        VerticalOptions="Start"
-                        Aspect="AspectFill"/>
+                Spacing="25"> 
+                <Border StrokeShape="RoundRectangle 0 0 50 50" BackgroundColor="#fff">
+                    <Grid HeightRequest="220">                    
+                        <Image Source = "logo3"
+                            VerticalOptions="Start"
+                            Aspect="AspectFill"/>
                         <Image Source="back" HeightRequest="50" WidthRequest="60" HorizontalOptions="Start" VerticalOptions="Start">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding VoltarCommand}"/>
                             </Image.GestureRecognizers>
-                        </Image>
-                    <Grid TranslationY="80">
-                        <Border BackgroundColor="#ffffff"
-                            HeightRequest="110"
-                            WidthRequest="110"
-                            StrokeShape="RoundRectangle 10"
-                            StrokeThickness="0">
-                            <Image Margin="0, 10"
-                                Source="yula2.png"
-                                Aspect="AspectFit"
-                                HeightRequest="110"
-                                VerticalOptions="Fill"
-                                HorizontalOptions="Fill"/>
-                        </Border>
+                        </Image>                        
                         <Image 
-                            Source="carregar"    IsVisible="{Binding ActivityLoginPage}"
+                            Source="carregar"
+                            IsVisible="{Binding ActivityLoginPage}"
                             HeightRequest="120" WidthRequest="120"  
-                            IsAnimationPlaying="True"/>     
-                    </Grid>                       
-                </Grid>             
+                            IsAnimationPlaying="True"/>                      
+                    </Grid>     
+                </Border>               
+                        
                 <Label  Margin="2"
                     Text="YULA" 
                     TextColor="#ffffff"
