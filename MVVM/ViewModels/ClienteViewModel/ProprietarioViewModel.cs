@@ -63,7 +63,7 @@ public class ProprietarioViewModel : BindableObject
                 {
                     try
                     {
-                        if (Sms.Default.IsComposeSupported)
+                        /*if (Sms.Default.IsComposeSupported)
                         {
                             string[] recipients = new[] { $"{Cliente.Telefone}" };
                             string text = $"Olá {Cliente.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Cliente.Telefone}, Senha: {senha}. Por favor, altere sua senha após o primeiro login.";
@@ -71,7 +71,7 @@ public class ProprietarioViewModel : BindableObject
                             var message = new SmsMessage(text, recipients);
 
                             await Sms.Default.ComposeAsync(message);
-                        }
+                        }*/
                         await App.Current!.MainPage!.Navigation.PopAsync();
                     }
                     catch 

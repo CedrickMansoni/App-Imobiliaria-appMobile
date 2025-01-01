@@ -11,6 +11,7 @@ using App_Imobiliaria_appMobile.MVVM.Views.Pages;
 using App_Imobiliaria_appMobile.MVVM.Models.Usuarios;
 using App_Imobiliaria_appMobile.MVVM.Models.localizacao;
 using App_Imobiliaria_appMobile.MVVM.ViewModels.Hash;
+using App_Imobiliaria_appMobile.MVVM.Models.Notificacao;
 
 namespace App_Imobiliaria_appMobile.MVVM.ViewModels.FuncionarioViewModel;
 
@@ -175,25 +176,18 @@ public class CadFuncViewModel : BindableObject
                 var response = await client.PostAsync(url, content);
                 if (response.IsSuccessStatusCode)
                 {
-                    await App.Current.MainPage.DisplayAlert("Mensagem", "Funcionário cadastrado com sucesso","Ok"); 
-                    try
+                    var mensagem = new Mensagem()
                     {
-                        if (Sms.Default.IsComposeSupported)
-                        {
-                            string[] recipients = new[] { $"{Funcionario_.Telefone}" };
-                            string text = $"Olá {Funcionario_.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Funcionario_.Telefone}, Senha: {senha}. Por favor, altere sua senha após o primeiro login.";
-
-                            var message = new SmsMessage(text, recipients);
-
-                            await Sms.Default.ComposeAsync(message);
-                        }
-                        await page.ListarFuncionarios();
-                        await App.Current.MainPage.Navigation.PopAsync();
-                    }
-                    catch 
-                    {
-                        await App.Current.MainPage.DisplayAlert("Erro","Não foi possivel acessar o SmsMessage para envio dos dados da fatura para o cliente","Ok");
-                    }
+                        Destinatario = Funcionario_.Telefone,
+                        DescricaoSms = $"Olá {Funcionario_.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Funcionario_.Telefone}, Senha: {senha}. Por favor, altere sua senha após o primeiro login."
+                    };
+                    
+                    var urlsms = $"{UrlBase.UriBase.URI}enviar/sms";
+                    string jsonsms = JsonSerializer.Serialize<Mensagem>(mensagem, option);
+                    StringContent contentsms = new StringContent(jsonsms, Encoding.UTF8, "application/json");
+                    var responsesms = await client.PostAsync(urlsms, content);
+                   await App.Current.MainPage.DisplayAlert("Mensagem", "Funcionário cadastrado com sucesso","Ok");                     
+                   
                 }else
                 {
                     await App.Current.MainPage.DisplayAlert("Erro", "Não foi possível cadastrar o Funcionário","Ok"); 
