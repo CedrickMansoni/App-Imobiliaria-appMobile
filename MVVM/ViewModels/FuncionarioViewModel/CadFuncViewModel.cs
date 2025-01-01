@@ -182,11 +182,26 @@ public class CadFuncViewModel : BindableObject
                         DescricaoSms = $"Olá {Funcionario_.Nome}, sua conta foi criada na YULA Imobiliária. Suas credenciais são: Telefone: {Funcionario_.Telefone}, Senha: {senha}. Por favor, altere sua senha após o primeiro login."
                     };
                     
-                    var urlsms = $"{UrlBase.UriBase.URI}enviar/sms";
-                    string jsonsms = JsonSerializer.Serialize<Mensagem>(mensagem, option);
-                    StringContent contentsms = new StringContent(jsonsms, Encoding.UTF8, "application/json");
-                    var responsesms = await client.PostAsync(urlsms, content);
-                   await App.Current.MainPage.DisplayAlert("Mensagem", "Funcionário cadastrado com sucesso","Ok");                     
+                   try
+                   {
+                        var urlsms = $"{UrlBase.UriBase.URI}enviar/sms";
+
+                        string jsonsms = JsonSerializer.Serialize<Mensagem>(mensagem, option);
+
+                        StringContent contentsms = new StringContent(jsonsms, Encoding.UTF8, "application/json");
+
+                        var responsesms = await client.PostAsync(urlsms, contentsms);
+
+                        await App.Current.MainPage.DisplayAlert("Mensagem", "Funcionário cadastrado com sucesso","Ok");
+
+                        await page.ListarFuncionarios();
+
+                        await App.Current.MainPage.Navigation.PopAsync();
+                   }
+                   catch (System.Exception ex)
+                   {
+                        await App.Current.MainPage.DisplayAlert("Erro", $"{ex}","Ok");
+                   }                     
                    
                 }else
                 {
