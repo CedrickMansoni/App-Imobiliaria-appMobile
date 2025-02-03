@@ -23,45 +23,47 @@ public class TirarFotoViewModel : BindableObject
     public TirarFotoViewModel()
     {
         client = new HttpClient();
-        options = new JsonSerializerOptions{ PropertyNameCaseInsensitive = true};       
+        options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
     private ObservableCollection<FotosDropBox> fotos = new();
-	public ObservableCollection<FotosDropBox> Fotos
-	{
-		get => fotos;
-		set{
-			fotos = value;
-			OnPropertyChanged(nameof(Fotos));
-		}
-	}
+    public ObservableCollection<FotosDropBox> Fotos
+    {
+        get => fotos;
+        set
+        {
+            fotos = value;
+            OnPropertyChanged(nameof(Fotos));
+        }
+    }
 
-    public ICommand AbrirCameraCommand => new Command(async()=>
+    public ICommand AbrirCameraCommand => new Command(async () =>
     {
         var foto = await MediaPicker.CapturePhotoAsync();
-		if (foto is not null)
-		{
-			var memoryStream = await foto.OpenReadAsync();
-			Fotos.Add(new FotosDropBox{ Id = Fotos.Count + 1, ImgSource = foto.FullPath});
-		}
+        if (foto is not null)
+        {
+            var memoryStream = await foto.OpenReadAsync();
+            Fotos.Add(new FotosDropBox { Id = Fotos.Count + 1, ImgSource = foto.FullPath });
+        }
     });
 
-    public ICommand AbrirGaleriaCommand => new Command(async()=>
+    public ICommand AbrirGaleriaCommand => new Command(async () =>
     {
         var foto = await MediaPicker.PickPhotoAsync();
-		if (foto is not null)
-		{
-			var memoryStream = await foto.OpenReadAsync();
-			Fotos.Add(new FotosDropBox{ Id = Fotos.Count + 1, ImgSource = foto.FullPath});
-		}
+        if (foto is not null)
+        {
+            var memoryStream = await foto.OpenReadAsync();
+            Fotos.Add(new FotosDropBox { Id = Fotos.Count + 1, ImgSource = foto.FullPath });
+        }
     });
 
-    public ICommand EnviarFotoCommand => new Command (async()=>
-	{
+    public ICommand EnviarFotoCommand => new Command(async () =>
+    {
         if (Fotos.Count == 0)
         {
-            await App.Current.MainPage.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
-        }else
+            await App.Current.MainPage.DisplayAlert("Erro", "Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA", "Ok");
+        }
+        else
         {
             codigoImovel = await App.Current.MainPage.DisplayPromptAsync("Cole o código do imóvel gerado no sistema.",
                                     "DropBox",
@@ -78,66 +80,69 @@ public class TirarFotoViewModel : BindableObject
                 {
                     List<string> listaCaminhos = new();
                     try
-                    {                    
+                    {
                         foreach (var item in Fotos)
-                        {    
-                            listaCaminhos.Add(item.ImgSource);     
+                        {
+                            listaCaminhos.Add(item.ImgSource);
                         }
                         await UploadFile(listaCaminhos, codigoImovel);
                         sending = true;
                         Fotos = new();
                         codigoImovel = string.Empty;
                     }
-                    catch 
+                    catch
                     {
-                        await App.Current!.MainPage!.DisplayAlert("Erro",$"Falha na conexão com o servidor de arquivos, por favor abra um ticket para o sector de comunicação e imagem.","Ok");
+                        await App.Current!.MainPage!.DisplayAlert("Erro", $"Falha na conexão com o servidor de arquivos, por favor abra um ticket para o sector de comunicação e imagem.", "Ok");
                     }
-                }else
-                {
-                    await App.Current!.MainPage!.DisplayAlert("Erro","Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA","Ok");
-                }
-                if (sending)
-                {
-                    await App.Current!.MainPage!.DisplayAlert("Sucesso","As fotos foram enviadas para a storage YULA-IMOBILIÁRIA","Ok");
-                }else{
-                    await App.Current!.MainPage!.DisplayAlert("Erro","Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA","Ok");
-                }
-                ChangeState();
-            } 
-        }               
-	});
-
-    private async Task UploadFile(List<string> caminhosImagens, string codigo)
-    {        
-        // URL da API
-            var url = $"{UrlBase.UriBase.URI}upload/fotos/{codigo}";
-
-            using (var formData = new MultipartFormDataContent())
-            {
-                foreach (var caminhoImagem in caminhosImagens)
-                {
-                    var mimeType = ObterTipoMime(caminhoImagem);
-
-                    var imagemStream = new StreamContent(File.OpenRead(caminhoImagem));
-                    imagemStream.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
-
-                    // Adicionando a imagem ao formulário
-                    formData.Add(imagemStream, "files", Path.GetFileName(caminhoImagem));
-                }
-                
-                // Enviando para a API
-                HttpResponseMessage response = await client.PostAsync(url, formData);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    await App.Current.MainPage.DisplayAlert("Mensagem","Imagens enviadas com sucesso!","Ok");
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Mensagem","Falha ao enviar imagens: " + response.StatusCode, "Ok");
-                    System.Console.WriteLine($"{response.StatusCode}");
+                    await App.Current!.MainPage!.DisplayAlert("Erro", "Tire ou carregue fotos para podermos enviar para a storage YULA-IMOBILIÁRIA", "Ok");
                 }
-            }       
+                if (sending)
+                {
+                    await App.Current!.MainPage!.DisplayAlert("Sucesso", "As fotos foram enviadas para a storage YULA-IMOBILIÁRIA", "Ok");
+                }
+                else
+                {
+                    await App.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível enviar as fotos para a storage YULA-IMOBILIÁRIA", "Ok");
+                }
+                ChangeState();
+            }
+        }
+    });
+
+    private async Task UploadFile(List<string> caminhosImagens, string codigo)
+    {
+        // URL da API
+        var url = $"{UrlBase.UriBase.URI}upload/fotos/{codigo}";
+
+        using (var formData = new MultipartFormDataContent())
+        {
+            foreach (var caminhoImagem in Fotos)
+            {
+                var mimeType = ObterTipoMime(caminhoImagem.ImgSource);
+
+                var imagemStream = new StreamContent(File.OpenRead(caminhoImagem.ImgSource));
+                imagemStream.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+
+                // Adicionando a imagem ao formulário
+                formData.Add(imagemStream, "files", Path.GetFileName(caminhoImagem.ImgSource));
+            }
+
+            // Enviando para a API
+            HttpResponseMessage response = await client.PostAsync(url, formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await App.Current.MainPage.DisplayAlert("Mensagem", "Imagens enviadas com sucesso!", "Ok");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Mensagem", "Falha ao enviar imagens: " + response.StatusCode, "Ok");
+                System.Console.WriteLine($"{response.StatusCode}");
+            }
+        }
     }
     // Método auxiliar para determinar o tipo MIME com base na extensão do arquivo
     private string ObterTipoMime(string fileName)
@@ -151,6 +156,7 @@ public class TirarFotoViewModel : BindableObject
             ".gif" => "image/gif",
             ".bmp" => "image/bmp",
             ".tiff" => "image/tiff",
+            ".pdf" => "application/pdf",
             _ => "application/octet-stream", // Padrão para tipos desconhecidos
         };
     }
@@ -159,7 +165,8 @@ public class TirarFotoViewModel : BindableObject
     public bool ProgressBar
     {
         get => progressBar;
-        set{
+        set
+        {
             progressBar = value;
             OnPropertyChanged(nameof(ProgressBar));
         }
@@ -169,7 +176,8 @@ public class TirarFotoViewModel : BindableObject
     public bool ViewPage
     {
         get => viewPage;
-        set{
+        set
+        {
             viewPage = value;
             OnPropertyChanged(nameof(ViewPage));
         }
@@ -181,7 +189,8 @@ public class TirarFotoViewModel : BindableObject
         ViewPage = !ViewPage;
     }
 
-    public ICommand ActualizarToken => new Command(async()=>{
-        
+    public ICommand ActualizarToken => new Command(async () =>
+    {
+
     });
 }
