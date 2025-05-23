@@ -5,15 +5,13 @@ namespace App_Imobiliaria_appMobile.MVVM.Models.Notificacao;
 
 public class Mensagem
 {
-     [JsonPropertyName("accao")]
-    public string Accao { get; set; } = string.Empty;
 
-    [JsonPropertyName("chave_entidade")]
+    [JsonPropertyName("api_key_app")]
     public string ChaveEntidade { get; set; } = string.Empty;
 
-    [JsonPropertyName("destinatario")]
+    [JsonPropertyName("phone_number")]
     public string Destinatario { get; set; } = string.Empty;
 
-    [JsonPropertyName("descricao_sms")]
+    [JsonPropertyName("message_body")]
     public string DescricaoSms { get; set; } = string.Empty;
 }
